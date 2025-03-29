@@ -1,16 +1,20 @@
 "use client";
-
+import { useState } from "react";
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
+  }),
+  password: z.string().min(8, {
+    message: "Le mot de passe doit contenir au moins 8 caractères",
   }),
 });
 
@@ -20,13 +24,15 @@ export function LoginForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      password: "",
     },
   });
+  // console.log(form);
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    // console.log(values);
   }
 
   return (
@@ -48,21 +54,28 @@ export function LoginForm() {
         />
         <FormField
           control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-preset-5 text-grey-500">Password</FormLabel>
-              <FormControl>
-                <Input placeholder="" {...field}>
-                  <img src="/images/icons/icon-show-password.svg" alt="icon show password" />
-                </Input>
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+          name="password"
+          render={({ field }) => {
+            const [showPassword, setShowPassword] = useState(false);
+
+            return (
+              <FormItem>
+                <FormLabel className="text-preset-5 text-grey-500">Password</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input type={showPassword ? "text" : "password"} placeholder="" {...field} />
+                    <button type="button" className="absolute right-3 top-1/2 transform -translate-y-1/2" onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}
+                    </button>
+                  </div>
+                </FormControl>
+                <FormDescription></FormDescription>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
         />
-        <Button type="submit" variant="primary" className="w-full py-4 mb-8 ">
+        <Button type="submit" variant="primary" className="w-full py-4 mb-8 cursor-pointer">
           Login
         </Button>
       </form>
