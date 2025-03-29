@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Login from "@/app/_components/Login";
+import Login from "@/components/Login";
 
 export const metadata: Metadata = {
   title: "Login",
-  
 };
 
 function Page() {
