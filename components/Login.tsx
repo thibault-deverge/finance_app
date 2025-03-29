@@ -73,7 +73,7 @@ export function LoginForm() {
 function Login() {
   return (
     <div className="my-6 mx-5">
-      <h1 className="text-preset1 mb-8">Login</h1>
+      <h1 className="text-preset-1 mb-8">Login</h1>
       <LoginForm />
       <footer className="flex  justify-between gap-2 mx-8">
         <p className="text-preset-4 text-grey-500">Need to create an account ?</p>
