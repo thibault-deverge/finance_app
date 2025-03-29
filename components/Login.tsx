@@ -11,7 +11,7 @@ import { Eye, EyeOff } from "lucide-react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: "Le nom d'utilisateur doit comporter au moins 2 caractères.",
   }),
   password: z.string().min(8, {
     message: "Le mot de passe doit contenir au moins 8 caractères",
@@ -48,7 +48,9 @@ export function LoginForm() {
                 <Input placeholder="" {...field} />
               </FormControl>
               <FormDescription></FormDescription>
-              <FormMessage />
+              <div className="w-full max-w-[306px] overflow-hidden">
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />
@@ -70,7 +72,9 @@ export function LoginForm() {
                   </div>
                 </FormControl>
                 <FormDescription></FormDescription>
-                <FormMessage />
+                <div className="w-full max-w-[306px] overflow-hidden">
+                  <FormMessage />
+                </div>
               </FormItem>
             );
           }}
@@ -88,7 +92,7 @@ function Login() {
     <div className="my-6 mx-5">
       <h1 className="text-preset-1 mb-8">Login</h1>
       <LoginForm />
-      <footer className="flex  justify-between gap-2 mx-8">
+      <footer className="flex justify-between gap-2 mx-8">
         <p className="text-preset-4 text-grey-500">Need to create an account ?</p>
         <Link href="/signup" className="underline text-preset-4-bold">
           Sign Up
