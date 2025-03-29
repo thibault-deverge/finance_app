@@ -34,7 +34,6 @@
 
 :root {
   /* font-weight*/
-
   --thin: 100;
   --extra-ligth: 200;
   --light: 300;
@@ -55,7 +54,7 @@
 body {
   font-family: "PublicSans", serif;
   font-optical-sizing: auto;
-  font-size: 0.875rem;
+  font-size: var(--preset-4);
   font-weight: var(--medium);
   letter-spacing: 0.88px;
 }
