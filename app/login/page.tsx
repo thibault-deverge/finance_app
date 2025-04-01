@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Login from "@/components/Login";
+import { getBalance, getBudget, getTransactions, getUsers } from "../_lib/data-service";
 // import ErrorTest from "./ErrorTest";
 
 export const metadata: Metadata = {
   title: "Login",
 };
 
-function Page() {
+async function Page() {
+  const [balance, budget, transactions, users] = await Promise.all([getBalance(), getBudget(), getTransactions(), getUsers()]);
+  
+  console.log(balance, budget, transactions, users);
+
   return (
     <section className="flex  flex-1 flex-col items-center">
       {/* <ErrorTest /> */}
