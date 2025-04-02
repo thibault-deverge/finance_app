@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
 import { z } from "zod";
+
+import { authSchema } from "@/lib/schemas";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { authSchema } from "../../lib/schemas";
+import { signupAction } from "@/actions/signup";
 
 type FormFields = z.infer<typeof authSchema>;
 
@@ -23,28 +22,36 @@ function Page() {
 
 	const onSubmit: SubmitHandler<FormFields> = async (data) => {
 		const { email, password } = data;
-		const res = await signIn("credentials", { email, password, redirect: false });
-		if (res?.error) setError("root", { message: "Invalid credentials." });
-		router.push("/");
+		try {
+			await signupAction({ email, password });
+			router.push("/login");
+		} catch (err) {
+			const error = err as Error;
+			setError("root", { message: error.message || "Signup failed." });
+		}
 	};
 
 	return (
-		<section className="flex justify-center items-center py-30">
+		<section>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<div className="m-4 flex gap-4 border-1">
+				<div className="flex gap-2">
 					<label>Email</label>
-					<input {...register("email")} type="email" placeholder="email" />
+					<input type="email" {...register("email")} />
 					{errors.email && <p>{errors.email.message}</p>}
 				</div>
-				<div className="m-4 flex gap-4 border-1">
+				<div className="flex gap-2">
 					<label>Password</label>
-					<input {...register("password")} type="password" placeholder="password" />
+					<input type="password" {...register("password")} />
 					{errors.password && <p>{errors.password.message}</p>}
 				</div>
-				<button className="border-1" disabled={isSubmitting} type="submit">
-					{isSubmitting ? "Loading..." : "Submit"}
-				</button>
 				{errors.root && <p>{errors.root.message}</p>}
+				<button
+					type="submit"
+					disabled={isSubmitting}
+					className="px-4 py-2 bg-blue-500 text-white rounded"
+				>
+					{isSubmitting ? "Signing Up..." : "Sign Up"}
+				</button>
 			</form>
 		</section>
 	);
