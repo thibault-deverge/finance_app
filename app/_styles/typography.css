@@ -1,4 +1,5 @@
 /* Police variable */
+/*
 @font-face {
   font-family: "PublicSans";
   font-style: normal;
@@ -14,8 +15,9 @@
   font-display: swap;
   src: url("/fonts/PublicSans-Italic-VariableFont_wght.ttf") format("truetype");
 }
-
+*/
 /* Polices statiques */
+/* 
 @font-face {
   font-family: "PublicSans";
   font-style: normal;
@@ -31,6 +33,15 @@
   font-display: swap;
   src: url("/fonts/static/PublicSans-Bold.ttf") format("truetype");
 }
+
+body {
+  font-family: "PublicSans", serif;
+  font-optical-sizing: auto;
+  font-size: var(--preset-4);
+  font-weight: var(--medium);
+  letter-spacing: 0.88px;
+}
+*/
 
 :root {
   /* font-weight*/
@@ -50,13 +61,6 @@
   --preset-3: 1rem;
   --preset-4: 0.875rem;
   --preset-5: 0.75rem;
-}
-body {
-  font-family: "PublicSans", serif;
-  font-optical-sizing: auto;
-  font-size: var(--preset-4);
-  font-weight: var(--medium);
-  letter-spacing: 0.88px;
 }
 
 @layer components {

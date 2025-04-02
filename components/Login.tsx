@@ -19,7 +19,7 @@ const formSchema = z.object({
   }),
 });
 
-export function LoginForm() {
+ function LoginForm() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
