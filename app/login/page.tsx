@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -46,6 +45,9 @@ function Page() {
 				</button>
 				{errors.root && <p>{errors.root.message}</p>}
 			</form>
+			<div>
+				<button onClick={() => signIn("github")}>Sign in with Github</button>
+			</div>
 		</section>
 	);
 }

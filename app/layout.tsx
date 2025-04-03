@@ -1,5 +1,7 @@
-import localFont from "next/font/local";
 import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { SessionProvider } from "next-auth/react";
+
 import "@/styles/globals.css";
 
 export const publicSans = localFont({
@@ -25,7 +27,7 @@ export const publicSans = localFont({
 			style: "normal",
 		},
 	],
-	variable: "--font-public-sans", // Pour l'utiliser en CSS
+	variable: "--font-public-sans",
 	display: "swap",
 });
 
@@ -46,7 +48,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${publicSans.className} min-h-screen bg-beige-100 text-grey-900`}>
-				{children}
+				<SessionProvider>{children}</SessionProvider>
 			</body>
 		</html>
 	);

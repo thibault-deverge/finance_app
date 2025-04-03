@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
+import GitHub from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { authSchema } from "./schemas";
@@ -31,7 +32,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				return user;
 			},
 		}),
+		GitHub,
 	],
+	session: {
+		strategy: "jwt",
+		maxAge: 30 * 24 * 60 * 60,
+	},
 	pages: {
 		signIn: "/login",
 	},
