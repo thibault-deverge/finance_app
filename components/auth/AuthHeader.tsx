@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function AuthHeader() {
 	return (
-		<header className="bg-grey-900 h-17 flex justify-center items-center rounded-b-lg">
+		<header className="bg-grey-900 h-[7vh] flex justify-center items-center rounded-b-lg">
 			<Image
 				src={"/images/logo/logo-large.svg"}
 				alt="Logo"

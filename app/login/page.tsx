@@ -1,53 +1,32 @@
-"use client";
-import { z } from "zod";
-import { signIn } from "next-auth/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 
-import { authSchema } from "../../lib/schemas";
+import { LoginForm } from "@/components/auth/LoginForm";
+import { AuthHeader } from "@/components/auth/AuthHeader";
 
-type FormFields = z.infer<typeof authSchema>;
-
-function Page() {
-	const {
-		register,
-		handleSubmit,
-		setError,
-		formState: { errors, isSubmitting },
-	} = useForm<FormFields>({
-		resolver: zodResolver(authSchema),
-	});
-
-	const onSubmit: SubmitHandler<FormFields> = async (data) => {
-		const { email, password } = data;
-		const res = await signIn("credentials", { email, password, redirectTo: "/" });
-		if (res?.error) setError("root", { message: "Invalid credentials." });
-	};
+async function Page() {
+	const session = await auth();
+	if (session) redirect("/");
 
 	return (
-		<section className="flex justify-center items-center py-30">
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<div className="m-4 flex gap-4 border-1">
-					<label>Email</label>
-					<input {...register("email")} type="email" placeholder="email" />
-					{errors.email && <p>{errors.email.message}</p>}
-				</div>
-				<div className="m-4 flex gap-4 border-1">
-					<label>Password</label>
-					<input {...register("password")} type="password" placeholder="password" />
-					{errors.password && <p>{errors.password.message}</p>}
-				</div>
-				<button className="border-1" disabled={isSubmitting} type="submit">
-					{isSubmitting ? "Loading..." : "Submit"}
-				</button>
-				{errors.root && <p>{errors.root.message}</p>}
-			</form>
-			<div>
-				<button onClick={() => signIn("github", { redirectTo: "/" })}>
-					Sign in with Github
-				</button>
-			</div>
-		</section>
+		<>
+			<AuthHeader />
+			<main className="flex flex-col justify-center items-center h-[93vh] px-4">
+				{/* Hero */}
+
+				{/* Login Card */}
+				<section className="bg-white w-[95%] max-w-[35rem] flex flex-col gap-8 px-5 py-8 rounded-xl">
+					<h1 className="text-preset-1">Login</h1>
+					<LoginForm />
+					<div className="flex justify-center items-center gap-2">
+						<p className="text-preset-4 text-grey-500">Need to create an account?</p>
+						<button className="text-preset-4-bold text-grey-900 cursor-pointer capitalize border-b hover:scale-105 transition-all duration-200">
+							Sign Up
+						</button>
+					</div>
+				</section>
+			</main>
+		</>
 	);
 }
 

@@ -3,7 +3,6 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
 import GitHub from "next-auth/providers/github";
-import { redirect } from "next/navigation";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { authSchema } from "./schemas";
@@ -43,12 +42,3 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		signIn: "/login",
 	},
 });
-
-export async function requireAuth() {
-	"use server";
-	const session = await auth();
-	if (!session) {
-		redirect("/login");
-	}
-	return session;
-}

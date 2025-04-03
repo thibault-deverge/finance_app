@@ -1,10 +1,14 @@
-import { requireAuth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 
 import { AuthHeader } from "@/components/auth/AuthHeader";
-import { SignOutButton } from "@/components/auth/LogoutButton";
+import { BtnLogout } from "@/components/auth/BtnLogout";
 
 export default async function Page() {
-	const session = await requireAuth();
+	const session = await auth();
+	if (!session) redirect("/login");
+
+	// Get user email or name
 	const user = session?.user?.email || session?.user?.name;
 
 	return (
@@ -13,7 +17,7 @@ export default async function Page() {
 			<main className="flex flex-col items-center justify-center gap-6 py-16">
 				<h1 className="text-4xl">Hello {user} !</h1>
 				<p className="text-xl">Welcome to the dashboard.</p>
-				<SignOutButton />
+				<BtnLogout>Logout</BtnLogout>
 			</main>
 		</>
 	);
