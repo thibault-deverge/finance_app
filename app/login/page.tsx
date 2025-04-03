@@ -1,6 +1,5 @@
 "use client";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,7 +9,6 @@ import { authSchema } from "../../lib/schemas";
 type FormFields = z.infer<typeof authSchema>;
 
 function Page() {
-	const router = useRouter();
 	const {
 		register,
 		handleSubmit,
@@ -22,9 +20,8 @@ function Page() {
 
 	const onSubmit: SubmitHandler<FormFields> = async (data) => {
 		const { email, password } = data;
-		const res = await signIn("credentials", { email, password, redirect: false });
+		const res = await signIn("credentials", { email, password, redirectTo: "/" });
 		if (res?.error) setError("root", { message: "Invalid credentials." });
-		router.push("/");
 	};
 
 	return (
