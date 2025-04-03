@@ -43,7 +43,9 @@ function Page() {
 				{errors.root && <p>{errors.root.message}</p>}
 			</form>
 			<div>
-				<button onClick={() => signIn("github")}>Sign in with Github</button>
+				<button onClick={() => signIn("github", { redirectTo: "/" })}>
+					Sign in with Github
+				</button>
 			</div>
 		</section>
 	);
