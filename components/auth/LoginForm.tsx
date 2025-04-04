@@ -1,16 +1,25 @@
-"use client";
-import { z } from "zod";
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { authSchema } from "@/lib/schemas";
+'use client';
+import { z } from 'zod';
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { authSchema } from '@/lib/schemas';
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
-import SpinnerMini from "../SpinnerMini";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Eye, EyeOff } from 'lucide-react';
+import { SpinnerMini } from '@/components/SpinnerMini';
+import { FaGithub } from 'react-icons/fa';
+import { BtnOauth } from './BtnOauth';
 
 type FormFields = z.infer<typeof authSchema>;
 
@@ -22,20 +31,29 @@ export function LoginForm() {
 
   const onSubmit = async (data: z.infer<typeof authSchema>) => {
     const { email, password } = data;
-    const res = await signIn("credentials", { email, password, redirectTo: "/" });
-    if (res?.error) form.setError("root", { message: "Invalid credentials." });
+    const res = await signIn('credentials', {
+      email,
+      password,
+      redirectTo: '/',
+    });
+    if (res?.error) form.setError('root', { message: 'Invalid credentials.' });
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4"
+      >
         {/* Email Form Field */}
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-preset-5-bold text-grey-500">Email</FormLabel>
+              <FormLabel className="text-preset-5-bold text-grey-500">
+                Email
+              </FormLabel>
               <FormControl>
                 <Input className="border-beige-500" placeholder="" {...field} />
               </FormControl>
@@ -51,11 +69,21 @@ export function LoginForm() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel className="text-preset-5-bold text-grey-500">Password</FormLabel>
+                <FormLabel className="text-preset-5-bold text-grey-500">
+                  Password
+                </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Input type={showPassword ? "text" : "password"} className="border-beige-500" {...field} />
-                    <button type="button" className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                    <Input
+                      type={showPassword ? 'text' : 'password'}
+                      className="border-beige-500"
+                      {...field}
+                    />
+                    <button
+                      type="button"
+                      className="absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
                       {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}
                     </button>
                   </div>
@@ -66,11 +94,24 @@ export function LoginForm() {
           }}
         />
         {/* Error message for root errors */}
-        {form.formState.errors.root && <p className="text-red-800">{form.formState.errors.root.message}</p>}
+        {form.formState.errors.root && (
+          <p className="text-red-800">{form.formState.errors.root.message}</p>
+        )}
         {/* Submit Button */}
-        <Button type="submit" variant="primary" disabled={form.formState.isSubmitting} className="w-full py-6 my-4 cursor-pointer text-preset-4-bold text-white rounded-lg">
-          {form.formState.isSubmitting ? <SpinnerMini /> : "Login"}
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={form.formState.isSubmitting}
+          className="text-preset-4-bold mt-4 w-full cursor-pointer py-6 text-white"
+        >
+          {form.formState.isSubmitting ? <SpinnerMini /> : 'Login'}
         </Button>
+
+        {/* Github Button */}
+        <BtnOauth provider="github">
+          Sign in with Github{' '}
+          <FaGithub style={{ width: '26px', height: '26px' }} />
+        </BtnOauth>
       </form>
     </Form>
   );

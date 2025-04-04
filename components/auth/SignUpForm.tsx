@@ -1,21 +1,31 @@
-"use client";
+'use client';
+import { z } from 'zod';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { signupAction } from '@/actions/signup';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signupFormSchema } from '@/lib/schemas';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { signupAction } from "@/actions/signup";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { signupFormSchema } from "@/lib/schemas";
-import { Eye, EyeOff } from "lucide-react";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import SpinnerMini from "../SpinnerMini";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { SpinnerMini } from '@/components/SpinnerMini';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Eye, EyeOff } from 'lucide-react';
 
 type FormFields = z.infer<typeof signupFormSchema>;
 
-export function SignUpForm() {
+type SignUpFormProps = {
+  onClick: () => void;
+};
+
+export function SignUpForm({ onClick }: SignUpFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -23,37 +33,31 @@ export function SignUpForm() {
     resolver: zodResolver(signupFormSchema),
   });
 
-  const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<FormFields>({
-    resolver: zodResolver(signupFormSchema),
-  });
-
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const { name, email, password } = data;
     try {
-      await signupAction({ name, email, password });
-      router.push("/login");
+      await signupAction({ ...data });
+      onClick();
     } catch (err) {
       const error = err as Error;
-      setError("root", { message: error.message || "Signup failed." });
+      form.setError('root', { message: error.message || 'Signup failed.' });
     }
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4"
+      >
         {/* Name Form Field */}
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-preset-5-bold text-grey-500">Name</FormLabel>
+              <FormLabel className="text-preset-5-bold text-grey-500">
+                Name
+              </FormLabel>
               <FormControl>
                 <Input className="border-beige-500" placeholder="" {...field} />
               </FormControl>
@@ -61,13 +65,16 @@ export function SignUpForm() {
             </FormItem>
           )}
         />
+
         {/* Email Form Field */}
         <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-preset-5-bold text-grey-500">Email</FormLabel>
+              <FormLabel className="text-preset-5-bold text-grey-500">
+                Email
+              </FormLabel>
               <FormControl>
                 <Input className="border-beige-500" placeholder="" {...field} />
               </FormControl>
@@ -75,6 +82,7 @@ export function SignUpForm() {
             </FormItem>
           )}
         />
+
         {/* Password Form Field */}
         <FormField
           control={form.control}
@@ -82,11 +90,21 @@ export function SignUpForm() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel className="text-preset-5-bold text-grey-500">Password</FormLabel>
+                <FormLabel className="text-preset-5-bold text-grey-500">
+                  Password
+                </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Input type={showPassword ? "text" : "password"} className="border-beige-500" {...field} />
-                    <button type="button" className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                    <Input
+                      type={showPassword ? 'text' : 'password'}
+                      className="border-beige-500"
+                      {...field}
+                    />
+                    <button
+                      type="button"
+                      className="absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
                       {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}
                     </button>
                   </div>
@@ -96,18 +114,33 @@ export function SignUpForm() {
             );
           }}
         />
+
         {/* Confirm Password Field */}
         <FormField
           control={form.control}
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-preset-5-bold text-grey-500">Confirm Password</FormLabel>
+              <FormLabel className="text-preset-5-bold text-grey-500">
+                Confirm Password
+              </FormLabel>
               <FormControl>
                 <div className="relative">
-                  <Input type={showConfirmPassword ? "text" : "password"} className="border-beige-500" {...field} />
-                  <button type="button" className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                    {showConfirmPassword ? <Eye size={16} /> : <EyeOff size={16} />}
+                  <Input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    className="border-beige-500"
+                    {...field}
+                  />
+                  <button
+                    type="button"
+                    className="absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? (
+                      <Eye size={16} />
+                    ) : (
+                      <EyeOff size={16} />
+                    )}
                   </button>
                 </div>
               </FormControl>
@@ -115,11 +148,20 @@ export function SignUpForm() {
             </FormItem>
           )}
         />
+
         {/* Error message for root errors */}
-        {form.formState.errors.root && <p className="text-red-800">{form.formState.errors.root.message}</p>}
+        {form.formState.errors.root && (
+          <p className="text-red-800">{form.formState.errors.root.message}</p>
+        )}
+
         {/* Submit Button */}
-        <Button type="submit" variant="primary" disabled={form.formState.isSubmitting} className="w-full py-6 my-4 cursor-pointer text-preset-4-bold text-white rounded-lg">
-          {form.formState.isSubmitting ? <SpinnerMini /> : "Create account"}
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={form.formState.isSubmitting}
+          className="text-preset-4-bold my-4 w-full cursor-pointer rounded-lg py-6 text-white"
+        >
+          {form.formState.isSubmitting ? <SpinnerMini /> : 'Create account'}
         </Button>
       </form>
     </Form>
