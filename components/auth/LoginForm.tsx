@@ -16,10 +16,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Eye, EyeOff } from 'lucide-react';
 import { SpinnerMini } from '@/components/SpinnerMini';
+import { BtnOauth } from '@/components/auth/BtnOauth';
+import { Eye, EyeOff } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
-import { BtnOauth } from './BtnOauth';
 
 type FormFields = z.infer<typeof authSchema>;
 
