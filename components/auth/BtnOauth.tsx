@@ -17,7 +17,7 @@ export function BtnOauth({ children, provider }: BtnOauthProps) {
     <Button
       type="submit"
       variant="primary"
-      className="bg-beige-100 text-preset-4-bold text-grey-900 hover:bg-grey-300 w-full cursor-pointer rounded-lg py-6"
+      className="[&>*]:hover-bg-grey-500 flex cursor-pointer items-center gap-3 py-6"
       onClick={handleClick}
     >
       {children}

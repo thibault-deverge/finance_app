@@ -110,7 +110,7 @@ export function LoginForm() {
         {/* Github Button */}
         <BtnOauth provider="github">
           Sign in with Github{' '}
-          <FaGithub style={{ width: '26px', height: '26px' }} />
+          <FaGithub style={{ width: '24px', height: '24px' }} />
         </BtnOauth>
       </form>
     </Form>

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { SessionProvider } from 'next-auth/react';
 
 import '@/styles/globals.css';
 
@@ -50,7 +49,7 @@ export default function RootLayout({
       <body
         className={`${publicSans.className} bg-beige-100 text-grey-900 min-h-screen`}
       >
-        <SessionProvider>{children}</SessionProvider>
+        {children}
       </body>
     </html>
   );
