@@ -10,7 +10,7 @@ export function BtnLogout({ children }: { children: React.ReactNode }) {
   return (
     <Button
       onClick={handleSignOut}
-      variant="primary"
+      variant="secondary"
       size="lg"
       className="cursor-pointer"
     >

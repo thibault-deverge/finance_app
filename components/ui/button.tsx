@@ -19,8 +19,7 @@ const buttonVariants = cva(
           'bg-beige-100 text-preset-4-bold text-grey-900 w-full cursor-pointer rounded-lg py-6 hover:bg-beige-100',
         primary:
           'bg-grey-900 text-white shadow-xs hover:bg-grey-500 focus-visible:border-ring focus-visible:ring-grey-900 focus-visible:ring-[3px] focus-visible:ring-offset-2 ',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
+        secondary: 'bg-white text-grey-900 shadow-xs hover:bg-grey-300',
         ghost:
           'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
         link: 'text-primary underline-offset-4 hover:underline',
