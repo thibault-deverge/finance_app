@@ -1,11 +1,9 @@
 'use client';
 
-import { useFinance } from '@/components/context/FinanceProvider';
-import Title from '@/components/Title';
 import DashboardCards from '@/components/OverviewCards';
+import Title from '@/components/Title';
 
-function Dashboard() {
-  const { isVisible } = useFinance();
+function Overview() {
   return (
     <section>
       <div className="grid min-h-screen grid-cols-12 gap-8 px-4 py-6">
@@ -37,4 +35,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Overview;

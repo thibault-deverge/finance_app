@@ -2,9 +2,6 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 import '@/styles/globals.css';
-import SideNavigation from '@/components/SideNavigation';
-import Navigation from '@/components/Navigation';
-import { FinanceProvider } from '@/components/context/FinanceProvider';
 
 export const publicSans = localFont({
   src: [
@@ -52,10 +49,7 @@ export default function RootLayout({
       <body
         className={`${publicSans.className} bg-beige-100 text-grey-900 min-h-screen`}
       >
-        <FinanceProvider>
-          <Navigation />
-          {children}
-        </FinanceProvider>
+        {children}
       </body>
     </html>
   );

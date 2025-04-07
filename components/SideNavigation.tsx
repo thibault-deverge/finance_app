@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BtnLogout } from './auth/BtnLogout';
 import { FinanceContextType } from './context/FinanceProvider';
 
 type NavLink = {
@@ -15,27 +14,27 @@ type NavLink = {
 const navLinks = [
   {
     name: 'Overview',
-    href: '/',
+    href: '/dashboard/overview',
     icon: '/images/icons/icon-nav-overview.svg',
   },
   {
     name: 'Transactions',
-    href: '/transactions',
+    href: '/dashboard/transactions',
     icon: '/images/icons/icon-nav-transactions.svg',
   },
   {
     name: 'Budgets',
-    href: '/budgets',
+    href: '/dashboard/budgets',
     icon: '/images/icons/icon-nav-budgets.svg',
   },
   {
     name: 'Pots',
-    href: '/pots',
+    href: '/dashboard/pots',
     icon: '/images/icons/icon-nav-pots.svg',
   },
   {
     name: 'Recurring Bills',
-    href: '/recurring-bills',
+    href: '/dashboard/recurring-bills',
     icon: '/images/icons/icon-nav-recurring-bills.svg',
   },
 ];
