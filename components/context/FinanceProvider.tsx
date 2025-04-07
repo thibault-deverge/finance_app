@@ -14,11 +14,15 @@ type ProviderProps = {
 };
 
 function FinanceProvider({ children }: ProviderProps) {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   return (
     <FinanceContext.Provider value={{ isVisible, setIsVisible }}>
-      {children}
+      <main
+        className={`transition-grid-cols grid min-h-screen grid-cols-2 duration-300 ease-in-out ${isVisible ? 'xl:grid-cols-[300px_1fr]' : 'xl:grid-cols-[64px_1fr]'}`}
+      >
+        {children}
+      </main>
     </FinanceContext.Provider>
   );
 }

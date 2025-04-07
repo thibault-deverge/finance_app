@@ -125,7 +125,7 @@ function NavigationLink({
   const isActive = pathname === link.href;
 
   return (
-    <li>
+    <li className={`${pathname === link.name ? 'bg-beige-100' : ''}`}>
       <Link
         className={`${isActive ? 'bg-primary-900' : ''} text-primary-200 hover:bg-primary-900 hover:text-grey-300 flex h-12 items-center gap-3 rounded px-2 transition-colors duration-300`}
         href={link.href}
