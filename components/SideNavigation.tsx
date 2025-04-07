@@ -9,6 +9,7 @@ type NavLink = {
   name: string;
   href: string;
   icon: string;
+  activeIcon: string;
 };
 
 const navLinks = [
@@ -16,26 +17,31 @@ const navLinks = [
     name: 'Overview',
     href: '/dashboard/overview',
     icon: '/images/icons/icon-nav-overview.svg',
+    activeIcon: '/images/icons/icon-nav-overview-green.svg',
   },
   {
     name: 'Transactions',
     href: '/dashboard/transactions',
     icon: '/images/icons/icon-nav-transactions.svg',
+    activeIcon: '/images/icons/icon-nav-transactions-green.svg',
   },
   {
     name: 'Budgets',
     href: '/dashboard/budgets',
     icon: '/images/icons/icon-nav-budgets.svg',
+    activeIcon: '/images/icons/icon-nav-budgets-green.svg',
   },
   {
     name: 'Pots',
     href: '/dashboard/pots',
     icon: '/images/icons/icon-nav-pots.svg',
+    activeIcon: '/images/icons/icon-nav-pots-green.svg',
   },
   {
     name: 'Recurring Bills',
     href: '/dashboard/recurring-bills',
     icon: '/images/icons/icon-nav-recurring-bills.svg',
+    activeIcon: '/images/icons/icon-nav-recurring-bills-green.svg',
   },
 ];
 
@@ -43,11 +49,11 @@ function SideNavigation({ isVisible, setIsVisible }: FinanceContextType) {
   const pathname = usePathname();
 
   return (
-    <aside className="relative hidden h-full rounded-r-2xl bg-gray-900 text-white xl:flex">
-      <div className="fixed h-full">
-        <div className="flex flex-col">
+    <aside className="relative hidden h-full rounded-r-2xl bg-gray-900 py-8 text-white xl:flex">
+      <div className="fixed h-full w-full">
+        <div className="flex w-full flex-col">
           <div
-            className={`px-4 py-8 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+            className={`px-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
           >
             <Image
               src={'/images/logo/logo-large.svg'}
@@ -61,7 +67,7 @@ function SideNavigation({ isVisible, setIsVisible }: FinanceContextType) {
           </div>
 
           <nav>
-            <ul className="list-none space-y-1 px-2">
+            <ul className="w-full list-none space-y-1">
               {navLinks.map((link) => (
                 <NavigationLink
                   key={link.name}
@@ -88,7 +94,7 @@ function ToggleVisibilityButton({
   setIsVisible,
 }: FinanceContextType) {
   return (
-    <div className="absolute bottom-8 left-4">
+    <div className="absolute bottom-8 px-4">
       <button
         onClick={() => setIsVisible(!isVisible)}
         className="hover:text-grey-300 flex h-10 cursor-pointer items-center gap-2 transition-colors duration-300"
@@ -124,14 +130,21 @@ function NavigationLink({
   const isActive = pathname === link.href;
 
   return (
-    <li className={`${pathname === link.name ? 'bg-beige-100' : ''}`}>
+    <li
+      className={`text-preset-3 mb-0 px-4 ${isActive && isVisible ? 'bg-beige-100 text-grey-900 w-full max-w-[276px] rounded-r-xl' : ''} ${isVisible ? '' : ''}`}
+    >
       <Link
-        className={`${isActive ? 'bg-primary-900' : ''} text-primary-200 hover:bg-primary-900 hover:text-grey-300 flex h-12 items-center gap-3 rounded px-2 transition-colors duration-300`}
+        className={`bg-primary-900 text-primary-200 flex h-12 items-center gap-3 rounded transition-colors duration-300`}
         href={link.href}
         title={link.name}
       >
-        <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center">
-          <img src={link.icon} alt={`${link.name} icon`} className="h-5 w-5" />
+        <div>
+          <img
+            src={
+              isActive && isVisible ? link.activeIcon || link.icon : link.icon
+            }
+            alt={`${link.name} icon`}
+          />
         </div>
         <span
           className={`whitespace-nowrap transition-all duration-300 ${
