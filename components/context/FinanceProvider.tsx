@@ -14,7 +14,7 @@ type ProviderProps = {
 };
 
 function FinanceProvider({ children }: ProviderProps) {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   return (
     <FinanceContext.Provider value={{ isVisible, setIsVisible }}>

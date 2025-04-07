@@ -7,8 +7,11 @@ import DashboardCards from '@/components/DashboardCards';
 
 function Dashboard() {
   const { isVisible, setIsVisible } = useFinance();
+  console.log(isVisible);
   return (
-    <main className="grid min-h-screen grid-cols-1 xl:grid-cols-[300px_1fr]">
+    <main
+      className={`transition-grid-cols grid min-h-screen grid-cols-1 duration-300 ease-in-out ${isVisible ? 'xl:grid-cols-[300px_1fr]' : 'xl:grid-cols-[64px_1fr]'}`}
+    >
       <SideNavigation isVisible={isVisible} setIsVisible={setIsVisible} />
       <section className="grid min-h-screen grid-cols-12 gap-8 px-4 py-6">
         <div className="col-span-full mb-8">
