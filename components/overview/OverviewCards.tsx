@@ -12,7 +12,7 @@ const cardsInfo = [
   { id: uuidv4(), title: 'Expenses', amount: 1700.5 },
 ];
 
-function DashboardCards() {
+function OverviewCards() {
   return (
     <div className="col-span-full flex w-full flex-col justify-between gap-6 sm:flex-row">
       {cardsInfo &&
@@ -45,4 +45,4 @@ function SummaryCard({ title, amount, isFirstCard }: CardProps) {
     </Card>
   );
 }
-export default DashboardCards;
+export default OverviewCards;

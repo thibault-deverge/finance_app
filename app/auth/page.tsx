@@ -7,7 +7,7 @@ import { HeroPanel } from '@/components/auth/HeroPanel';
 
 async function Page() {
   const session = await auth();
-  if (session) redirect('/');
+  if (session) redirect('/dashboard');
 
   return (
     <>
