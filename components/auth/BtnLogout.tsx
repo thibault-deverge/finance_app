@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export function BtnLogout({ children }: { children: React.ReactNode }) {
   const handleSignOut = async () => {
-    await signOut({ callbackUrl: '/' });
+    await signOut({ callbackUrl: '/auth' });
   };
 
   return (
