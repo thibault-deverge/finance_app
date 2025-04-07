@@ -1,7 +1,5 @@
-'use client';
-
-import DashboardCards from '@/components/OverviewCards';
-import Title from '@/components/Title';
+import DashboardCards from '@/components/overview/OverviewCards';
+import Title from '@/components/ui/Title';
 
 function Overview() {
   return (

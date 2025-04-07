@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FinanceContextType } from './context/FinanceProvider';
 
 type NavLink = {
   name: string;
@@ -12,40 +11,45 @@ type NavLink = {
   activeIcon: string;
 };
 
+type IsNavVisible = {
+  isVisible: boolean;
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const navLinks = [
   {
     name: 'Overview',
-    href: '/dashboard/overview',
+    href: '/overview',
     icon: '/images/icons/icon-nav-overview.svg',
     activeIcon: '/images/icons/icon-nav-overview-green.svg',
   },
   {
     name: 'Transactions',
-    href: '/dashboard/transactions',
+    href: '/transactions',
     icon: '/images/icons/icon-nav-transactions.svg',
     activeIcon: '/images/icons/icon-nav-transactions-green.svg',
   },
   {
     name: 'Budgets',
-    href: '/dashboard/budgets',
+    href: '/budgets',
     icon: '/images/icons/icon-nav-budgets.svg',
     activeIcon: '/images/icons/icon-nav-budgets-green.svg',
   },
   {
     name: 'Pots',
-    href: '/dashboard/pots',
+    href: '/pots',
     icon: '/images/icons/icon-nav-pots.svg',
     activeIcon: '/images/icons/icon-nav-pots-green.svg',
   },
   {
     name: 'Recurring Bills',
-    href: '/dashboard/recurring-bills',
+    href: '/recurring-bills',
     icon: '/images/icons/icon-nav-recurring-bills.svg',
     activeIcon: '/images/icons/icon-nav-recurring-bills-green.svg',
   },
 ];
 
-function SideNavigation({ isVisible, setIsVisible }: FinanceContextType) {
+function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
   const pathname = usePathname();
 
   return (
@@ -89,10 +93,7 @@ function SideNavigation({ isVisible, setIsVisible }: FinanceContextType) {
   );
 }
 
-function ToggleVisibilityButton({
-  isVisible,
-  setIsVisible,
-}: FinanceContextType) {
+function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
   return (
     <div className="absolute bottom-8 px-4">
       <button
