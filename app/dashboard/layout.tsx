@@ -7,7 +7,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
   return (
     <FinanceProvider>
       <Navigation />
-      <main className="flex-1 p-4">{children}</main>
+      {children}
     </FinanceProvider>
   );
 }
