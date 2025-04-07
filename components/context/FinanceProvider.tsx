@@ -18,11 +18,7 @@ function FinanceProvider({ children }: ProviderProps) {
 
   return (
     <FinanceContext.Provider value={{ isVisible, setIsVisible }}>
-      <main
-        className={`transition-grid-cols grid min-h-screen grid-cols-2 duration-300 ease-in-out ${isVisible ? 'xl:grid-cols-[300px_1fr]' : 'xl:grid-cols-[64px_1fr]'}`}
-      >
-        {children}
-      </main>
+      {children}
     </FinanceContext.Provider>
   );
 }
