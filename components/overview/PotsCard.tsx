@@ -1,20 +1,11 @@
-import Link from 'next/link';
+import CardHeader from '../ui/CardHeader';
 import CardMini from '../ui/CardMini';
 
 function PotsCard() {
   return (
-    <div className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
+    <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
       <div>
-        <header className="mb-5 flex justify-between">
-          <h2 className="text-preset-2 text-grey-900">Pots</h2>
-          <Link href="/pots" className="flex items-center gap-3">
-            <p className="text-preset-4">See Details</p>
-            <img
-              src="/images/icons/icon-caret-right.svg"
-              alt="icon carret right"
-            />
-          </Link>
-        </header>
+        <CardHeader title="Pots" href="/pots" />
       </div>
       <div className="flex flex-col gap-5 md:flex-row">
         <div className="bg-beige-100 flex items-center justify-start gap-3 rounded-xl py-5 pr-22 pl-4">
@@ -39,7 +30,7 @@ function PotsCard() {
           <CardMini title="New Laptop" price={10} color="yellow" />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
