@@ -3,6 +3,7 @@ import Title from '@/components/ui/Title';
 import PotsCard from './PotsCard';
 import TransactionsCard from './TransactionsCard';
 import BudgetsCard from './BudgetsCard';
+import RecurringBills from './RecurringBills';
 
 function Overview() {
   return (
@@ -12,7 +13,7 @@ function Overview() {
       </div>
 
       <div className="col-span-full mb-8">
-        <OverviewCards />
+        <OverviewCards /> 
       </div>
 
       <div className="col-span-full flex w-full flex-col gap-8 xl:h-full xl:flex-row">
@@ -23,7 +24,7 @@ function Overview() {
 
         <div className="flex flex-1 flex-col gap-8 xl:h-full">
           <BudgetsCard />
-          <div className="rounded-lg bg-blue-400 p-4">Recurring Bills</div>
+          <RecurringBills />
         </div>
       </div>
     </section>

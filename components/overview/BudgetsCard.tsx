@@ -8,7 +8,7 @@ import data from '../../data/data.json';
 const MAX_DISPLAY = 4;
 const { budgets: allBudgets } = data;
 
-const displayedPots = allBudgets.slice(0, MAX_DISPLAY).map((transaction) => ({
+const displayedBudget = allBudgets.slice(0, MAX_DISPLAY).map((transaction) => ({
   ...transaction,
   id: uuidv4(),
 }));
@@ -17,34 +17,36 @@ function BudgetsCard() {
   return (
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
       <CardHeader title="Budgets" href="/budgets" />
-      <ResponsiveContainer width="100%" height={250}>
-        <PieChart>
-          <Pie
-            data={allBudgets}
-            dataKey="maximum"
-            nameKey="category"
-            cx="50%"
-            cy="50%"
-            outerRadius={80}
-            label
-          >
-            {allBudgets.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.theme} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+      <div className="md:flex">
+        <ResponsiveContainer width="100%" height={250}>
+          <PieChart>
+            <Pie
+              data={allBudgets}
+              dataKey="maximum"
+              nameKey="category"
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              label
+            >
+              {allBudgets.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.theme} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
 
-      <div className="grid w-full max-w-[340px] grid-cols-2 gap-4">
-        {displayedPots &&
-          displayedPots.map((budget) => (
-            <CardMini
-              key={budget.id}
-              title={budget.category}
-              amount={budget.maximum}
-              color={budget.theme}
-            />
-          ))}
+        <div className="col-span-full mx-auto grid w-full max-w-[340px] grid-cols-2 gap-4">
+          {displayedBudget &&
+            displayedBudget.map((budget) => (
+              <CardMini
+                key={budget.id}
+                title={budget.category}
+                amount={budget.maximum}
+                color={budget.theme}
+              />
+            ))}
+        </div>
       </div>
     </section>
   );
