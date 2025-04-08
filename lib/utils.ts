@@ -27,11 +27,15 @@ export interface FinancialData {
   // Other fields omitted for brevity
 }
 
-export interface FinancialDataResult {
-  paidBills: string;
-  totalUpcoming: string;
-  dueSoon: string;
+export interface FinancialDataItem {
+  id: string;
+  title: string;
+  amount?: number;
+  dueSoon?: string;
+  theme: string;
 }
+export type FinancialDataResult = FinancialDataItem[];
+
 export interface FinancialSummary {
   paidBills: number;
   totalUpcoming: number;

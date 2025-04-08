@@ -44,6 +44,7 @@ function BudgetsCard() {
                 title={budget.category}
                 amount={budget.maximum}
                 color={budget.theme}
+                type="budgets"
               />
             ))}
         </div>

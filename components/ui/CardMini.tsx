@@ -1,16 +1,24 @@
+type CardType = 'pots' | 'budgets' | 'recurringBills';
+
 type CardMiniType = {
   title: string;
   amount: number;
   color: string;
-  bgColor?: string;
+  type: CardType;
 };
-const CardMini = ({ title, amount, color, bgColor }: CardMiniType) => {
+
+const classMap: Record<CardType, string> = {
+  pots: 'relative flex max-h-13 flex-col gap-2 rounded-lg pl-4 bg-white',
+  budgets: 'relative flex max-h-13 flex-col gap-2 rounded-lg pl-4 bg-white',
+  recurringBills:
+    'relative flex justify-between max-h-13 gap-2 rounded-lg py-4 px-5 bg-beige-100',
+};
+
+const CardMini = ({ title, amount, color, type }: CardMiniType) => {
   const colorStyle = color.startsWith('#') ? color : color;
 
   return (
-    <div
-      className={`relative flex max-h-13 flex-col gap-2 rounded-lg pl-4 ${bgColor ? bgColor : 'bg-white'}`}
-    >
+    <div className={classMap[type]}>
       <div
         className="absolute top-0 left-0 h-full w-1 rounded-full"
         style={{ backgroundColor: colorStyle }}

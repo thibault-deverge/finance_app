@@ -40,6 +40,7 @@ function PotsCard() {
                 title={pot.name}
                 amount={pot.total}
                 color={pot.theme}
+                type="pots"
               />
             ))}
         </div>
