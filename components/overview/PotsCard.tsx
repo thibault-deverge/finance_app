@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CardMini from '../ui/CardMini';
 
 function PotsCard() {
   return (
@@ -30,23 +31,12 @@ function PotsCard() {
             <p className="text-preset-1 text-grey-900">$850</p>
           </div>
         </div>
+
         <div className="grid w-full max-w-[340px] grid-cols-2 gap-4">
-          <div className="before:bg-green relative bg-white pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:rounded-full">
-            <p className="text-preset-5 text-gray-500">Savings</p>
-            <p className="text-preset-4-bold text-grey-900">$159</p>
-          </div>
-          <div className="before:bg-cyan relative bg-white pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:rounded-full">
-            <p className="text-preset-5 text-gray-500">Gifts</p>
-            <p className="text-preset-4-bold text-grey-900">$40</p>
-          </div>
-          <div className="before:bg-navy relative bg-white pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:rounded-full">
-            <p className="text-preset-5 text-gray-500">Concert Ticket</p>
-            <p className="text-preset-4-bold text-grey-900">$110</p>
-          </div>
-          <div className="before:bg-yellow relative bg-white pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:rounded-full">
-            <p className="text-preset-5 text-gray-500">New Laptop</p>
-            <p className="text-preset-4-bold text-grey-900">$10</p>
-          </div>
+          <CardMini title="Savings" price={159} color="green" />
+          <CardMini title="Gifts" price={40} color="cyan" />
+          <CardMini title="Concert Ticket" price={110} color="navy" />
+          <CardMini title="New Laptop" price={10} color="yellow" />
         </div>
       </div>
     </div>
