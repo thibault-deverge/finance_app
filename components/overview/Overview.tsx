@@ -1,28 +1,27 @@
-import DashboardCards from '@/components/overview/OverviewCards';
+import OverviewCards from '@/components/overview/OverviewCards';
 import Title from '@/components/ui/Title';
+import PotsCard from './PotsCard';
 
 function Overview() {
   return (
-    <section className="grid min-h-screen grid-cols-12 gap-8 px-4 py-6">
+    <section className="grid-auto-rows-min-content col-span-full h-screen px-4 py-6 xl:col-span-1">
       <div className="col-span-full mb-8">
         <Title name="Overview" />
       </div>
 
       <div className="col-span-full mb-8">
-        <DashboardCards />
+        <OverviewCards />
       </div>
 
-      <div className="col-span-full flex h-full flex-grow flex-col gap-8 md:flex-row">
-        <div className="flex flex-1 flex-col gap-8 md:w-7/12">
-          <div className="h-1/4 rounded-lg bg-yellow-400 p-4">Pots</div>
-          <div className="h-3/4 rounded-lg bg-green-400 p-4">Transactions</div>
+      <div className="col-span-full flex w-full flex-col gap-8 xl:flex-row">
+        <div className="flex flex-1 flex-col gap-8">
+          <PotsCard />
+          <div className="rounded-lg bg-green-400 p-4">Transactions</div>
         </div>
 
-        <div className="flex flex-1 flex-col gap-8 md:w-5/12">
-          <div className="h-3/5 rounded-lg bg-red-400 p-4">Budgets</div>
-          <div className="h-2/5 rounded-lg bg-blue-400 p-4">
-            Recurring Bills
-          </div>
+        <div className="flex flex-1 flex-col gap-8">
+          <div className="rounded-lg bg-red-400 p-4">Budgets</div>
+          <div className="rounded-lg bg-blue-400 p-4">Recurring Bills</div>
         </div>
       </div>
     </section>
