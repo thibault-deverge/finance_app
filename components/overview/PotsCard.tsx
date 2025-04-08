@@ -1,12 +1,21 @@
+import { v4 as uuidv4 } from 'uuid';
 import CardHeader from '../ui/CardHeader';
 import CardMini from '../ui/CardMini';
+import data from '../../data/data.json';
+
+const MAX_DISPLAY = 4;
+const { pots: allPots } = data;
+
+const displayedPots = allPots.slice(0, MAX_DISPLAY).map((transaction) => ({
+  ...transaction,
+  id: uuidv4(),
+}));
 
 function PotsCard() {
   return (
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
-      <div>
-        <CardHeader title="Pots" href="/pots" />
-      </div>
+      <CardHeader title="Pots" href="/pots" />
+
       <div className="flex flex-col gap-5 md:flex-row">
         <div className="bg-beige-100 flex items-center justify-start gap-3 rounded-xl py-5 pr-22 pl-4">
           <div className="flex flex-shrink-0 items-center justify-center">
@@ -24,10 +33,15 @@ function PotsCard() {
         </div>
 
         <div className="grid w-full max-w-[340px] grid-cols-2 gap-4">
-          <CardMini title="Savings" price={159} color="green" />
-          <CardMini title="Gifts" price={40} color="cyan" />
-          <CardMini title="Concert Ticket" price={110} color="navy" />
-          <CardMini title="New Laptop" price={10} color="yellow" />
+          {displayedPots &&
+            displayedPots.map((pot) => (
+              <CardMini
+                key={pot.id}
+                title={pot.name}
+                amount={pot.total}
+                color={pot.theme}
+              />
+            ))}
         </div>
       </div>
     </section>

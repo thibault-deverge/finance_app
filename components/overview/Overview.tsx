@@ -2,6 +2,7 @@ import OverviewCards from '@/components/overview/OverviewCards';
 import Title from '@/components/ui/Title';
 import PotsCard from './PotsCard';
 import TransactionsCard from './TransactionsCard';
+import BudgetsCard from './BudgetsCard';
 
 function Overview() {
   return (
@@ -21,7 +22,7 @@ function Overview() {
         </div>
 
         <div className="flex flex-1 flex-col gap-8 xl:h-full">
-          <div className="rounded-lg bg-red-400 p-4">Budgets</div>
+          <BudgetsCard />
           <div className="rounded-lg bg-blue-400 p-4">Recurring Bills</div>
         </div>
       </div>
