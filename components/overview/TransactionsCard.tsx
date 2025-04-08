@@ -3,7 +3,9 @@ import { formatDateToShortString } from '@/lib/utils';
 import CardHeader from '../ui/CardHeader';
 import data from '../../data/data.json';
 
-type TransactionsType = {
+const MAX_DISPLAY = 5;
+
+type TransactionItemType = {
   avatar: string;
   name: string;
   category: string;
@@ -12,28 +14,32 @@ type TransactionsType = {
   recurring: boolean;
   id: string;
 };
-const { transactions } = data;
-const transactionsWithId = transactions.slice(0, 5).map((transaction) => ({
-  ...transaction,
-  date: formatDateToShortString(transaction.date),
-  id: uuidv4(),
-}));
+const { transactions: allTransactions } = data;
+
+const displayedTransactions = allTransactions
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, MAX_DISPLAY)
+  .map((transaction) => ({
+    ...transaction,
+    date: formatDateToShortString(transaction.date),
+    id: uuidv4(),
+  }));
 
 function TransactionsCard() {
   return (
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
       <CardHeader title="Transactions" href="/transactions" />
       <ul className="list-none space-y-1">
-        {transactions &&
-          transactionsWithId.map((transaction) => (
-            <TransactionsEntries entry={transaction} key={transaction.id} />
+        {allTransactions &&
+          displayedTransactions.map((transaction) => (
+            <TransactionListItem entry={transaction} key={transaction.id} />
           ))}
       </ul>
     </section>
   );
 }
 
-function TransactionsEntries({ entry }: { entry: TransactionsType }) {
+function TransactionListItem({ entry }: { entry: TransactionItemType }) {
   return (
     <li className="flex justify-between border-b border-gray-300 py-5 last:border-b-0">
       <div className="flex items-center gap-4">
