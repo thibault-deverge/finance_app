@@ -1,21 +1,18 @@
-// scripts/seed.ts
-import { PrismaClient } from '@prisma/client';
-import fs from 'fs';
-import path from 'path';
+/* eslint-disable @typescript-eslint/no-require-imports */
+// scripts/seed.js
+const { PrismaClient } = require('@prisma/client');
+const fs = require('fs');
+const path = require('path');
 
 const prisma = new PrismaClient();
 
 async function main() {
   try {
-    // Chemin vers votre fichier JSON
     const dataPath = path.join(process.cwd(), './data/data.json');
-
-    // Lire le fichier JSON
     const jsonData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
     console.log('Chargement des données:', jsonData);
 
-    // Créer un utilisateur par défaut si nécessaire
     let defaultUser = null;
 
     if (!jsonData.users || jsonData.users.length === 0) {
@@ -23,13 +20,12 @@ async function main() {
         data: {
           email: 'default@example.com',
           name: 'Utilisateur par défaut',
-          password: 'password123', // À remplacer par un mot de passe hashé en production
+          password: 'password123',
         },
       });
       console.log('Utilisateur par défaut créé:', defaultUser.id);
     }
 
-    // Importer les balances
     if (jsonData.balance) {
       await prisma.balance.create({
         data: {
@@ -42,7 +38,6 @@ async function main() {
       console.log('Balance imported successfully');
     }
 
-    // Importer les transactions
     if (jsonData.transactions) {
       for (const transaction of jsonData.transactions) {
         await prisma.transaction.create({
@@ -60,7 +55,6 @@ async function main() {
       console.log(`${jsonData.transactions.length} transaction(s) importée(s)`);
     }
 
-    // Importer les budgets
     if (jsonData.budgets) {
       for (const budget of jsonData.budgets) {
         await prisma.budget.create({
@@ -75,7 +69,6 @@ async function main() {
       console.log(`${jsonData.budgets.length} budget(s) importé(s)`);
     }
 
-    // Importer les pots
     if (jsonData.pots) {
       for (const pot of jsonData.pots) {
         await prisma.pot.create({
@@ -91,7 +84,6 @@ async function main() {
       console.log(`${jsonData.pots.length} pot(s) importé(s)`);
     }
 
-    // Importer les utilisateurs (si présents)
     if (jsonData.users) {
       for (const user of jsonData.users) {
         await prisma.user.create({
@@ -108,7 +100,6 @@ async function main() {
     console.log('Toutes les données ont été importées avec succès !');
   } catch (error) {
     console.error("Erreur lors de l'importation des données :", error);
-    console.error(error);
   }
 }
 
