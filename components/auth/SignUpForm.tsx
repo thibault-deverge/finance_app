@@ -25,7 +25,7 @@ type SignUpFormProps = {
   onClick: () => void;
 };
 
-export function SignUpForm({ onClick }: SignUpFormProps) {
+function SignUpForm({ onClick }: SignUpFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -167,3 +167,5 @@ export function SignUpForm({ onClick }: SignUpFormProps) {
     </Form>
   );
 }
+
+export default SignUpForm;

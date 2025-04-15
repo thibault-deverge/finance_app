@@ -2,7 +2,7 @@
 import { signOut } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 
-export function BtnLogout({ children }: { children: React.ReactNode }) {
+function BtnLogout({ children }: { children: React.ReactNode }) {
   const handleSignOut = async () => {
     await signOut({ callbackUrl: '/auth' });
   };
@@ -18,3 +18,5 @@ export function BtnLogout({ children }: { children: React.ReactNode }) {
     </Button>
   );
 }
+
+export default BtnLogout;

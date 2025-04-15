@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export function HeroPanel() {
+function HeroPanel() {
   return (
     <section className="m-4 hidden h-[96%] max-w-[37.5rem] flex-col justify-between overflow-hidden rounded-xl bg-[url(/images/illustration-authentication.svg)] bg-cover bg-center bg-no-repeat lg:flex">
       <Image
@@ -24,3 +24,5 @@ export function HeroPanel() {
     </section>
   );
 }
+
+export default HeroPanel;

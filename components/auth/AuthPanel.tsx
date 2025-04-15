@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
 
-import { LoginForm } from '@/components/auth/LoginForm';
-import { SwitchAuth } from '@/components/auth/SwitchAuth';
-import { SignUpForm } from './SignUpForm';
+import LoginForm from '@/components/auth/LoginForm';
+import SwitchAuth from '@/components/auth/SwitchAuth';
+import SignUpForm from './SignUpForm';
 
-export function AuthPanel() {
+function AuthPanel() {
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const h1Text = isLogin ? 'Login' : 'Sign Up';
 
@@ -25,3 +25,5 @@ export function AuthPanel() {
     </section>
   );
 }
+
+export default AuthPanel;

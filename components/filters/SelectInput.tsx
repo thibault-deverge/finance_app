@@ -15,7 +15,7 @@ type FilterSelectProps = {
   onChange: (value: string) => void;
 };
 
-function FilterSelect({
+function SelectInput({
   label,
   options,
   placeholder,
@@ -31,15 +31,23 @@ function FilterSelect({
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="border-none bg-white">
-          {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
-              {option.label}
-            </SelectItem>
-          ))}
+          {options.map((option) => {
+            const isActive = value === option.value;
+
+            return (
+              <SelectItem
+                key={option.value}
+                value={option.value}
+                className={`${isActive && 'font-bold'}`}
+              >
+                {option.label}
+              </SelectItem>
+            );
+          })}
         </SelectContent>
       </Select>
     </div>
   );
 }
 
-export default FilterSelect;
+export default SelectInput;

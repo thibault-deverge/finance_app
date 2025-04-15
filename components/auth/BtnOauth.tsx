@@ -1,12 +1,12 @@
-import { Button } from '../ui/button';
 import { signIn } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
 
 type BtnOauthProps = {
   children: React.ReactNode;
   provider: 'github';
 };
 
-export function BtnOauth({ children, provider }: BtnOauthProps) {
+function BtnOauth({ children, provider }: BtnOauthProps) {
   const handleClick = () => {
     signIn(provider, {
       redirectTo: '/',
@@ -24,3 +24,5 @@ export function BtnOauth({ children, provider }: BtnOauthProps) {
     </Button>
   );
 }
+
+export default BtnOauth;

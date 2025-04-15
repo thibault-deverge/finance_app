@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-type Props = {
+type SearchInputProps = {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -13,7 +13,7 @@ export default function SearchInput({
   onChange,
   placeholder,
   className = '',
-}: Props) {
+}: SearchInputProps) {
   return (
     <div className={`relative max-w-[320px] min-w-[160px] ${className}`}>
       <input
@@ -21,6 +21,7 @@ export default function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder || 'Search...'}
+        aria-label={placeholder || 'Search...'}
         className="border-grey-500 text-preset-4 text-grey-500 hover:border-grey-900 focus:border-grey-900 w-full rounded-lg border-1 px-5 py-3 hover:cursor-pointer focus:ring-0 focus:outline-none [&::-webkit-search-cancel-button]:appearance-none"
       />
       <img

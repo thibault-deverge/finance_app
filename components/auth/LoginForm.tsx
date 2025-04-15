@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authSchema } from '@/lib/schemas';
 
+import BtnOauth from '@/components/auth/BtnOauth';
 import {
   Form,
   FormControl,
@@ -17,13 +18,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SpinnerMini } from '@/components/SpinnerMini';
-import { BtnOauth } from '@/components/auth/BtnOauth';
 import { Eye, EyeOff } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 
 type FormFields = z.infer<typeof authSchema>;
 
-export function LoginForm() {
+function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<FormFields>({
     resolver: zodResolver(authSchema),
@@ -116,3 +116,5 @@ export function LoginForm() {
     </Form>
   );
 }
+
+export default LoginForm;

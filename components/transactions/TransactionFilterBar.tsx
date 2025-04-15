@@ -1,77 +1,50 @@
 /* eslint-disable @next/next/no-img-element */
-import FilterSelect from '@/components/transactions/FilterSelect';
+import SearchInput from '@/components/filters/SearchInput';
+import FilterControls from '@/components/filters/FilterControls';
+
 import { categoriesOptions, sortByOptions } from '@/data/transactions';
-import MobileSelectMenu from '@/components/transactions/MobileSelectMenu';
-import SearchInput from '@/components/transactions/SearchInput';
 
 type TransactionFilterBarProps = {
   search: string;
   onSearch: (value: string) => void;
   sortBy: string;
-  onSortByChange: (value: string) => void;
+  onSortBy: (value: string) => void;
   category: string;
-  onCategoryChange: (value: string) => void;
+  onCategory: (value: string) => void;
 };
 
 function TransactionFilterBar({
   search,
   onSearch,
   sortBy,
-  onSortByChange,
+  onSortBy,
   category,
-  onCategoryChange,
+  onCategory,
 }: TransactionFilterBarProps) {
   return (
     <section className="flex items-center gap-6">
-      {/* Search Bar */}
       <SearchInput
         value={search}
         onChange={onSearch}
         placeholder="Search transactions"
       />
 
-      {/* Sort */}
-      <div className="ml-auto flex items-center">
-        {/* Mobile: icons */}
-        <MobileSelectMenu
-          iconSrc="/images/icons/icon-sort-mobile.svg"
-          alt="sort by"
-          label="Sort by"
-          value={sortBy}
-          onChange={onSortByChange}
-          options={sortByOptions}
-        />
+      <FilterControls
+        icon="sort-mobile"
+        label="Sort by"
+        value={sortBy}
+        onChange={onSortBy}
+        options={sortByOptions}
+        className="ml-auto"
+      />
 
-        {/* Desktop : Select */}
-        <FilterSelect
-          label="Sort by"
-          placeholder="Latest"
-          value={sortBy}
-          onChange={onSortByChange}
-          options={sortByOptions}
-        />
-      </div>
-
-      <div>
-        {/* Mobile: icons */}
-        <MobileSelectMenu
-          iconSrc="/images/icons/icon-filter-mobile.svg"
-          alt="filter by category"
-          label="Category"
-          value={category}
-          onChange={onCategoryChange}
-          options={categoriesOptions}
-        />
-
-        {/* Desktop : Select */}
-        <FilterSelect
-          label="Category"
-          placeholder="All Transactions"
-          value={category}
-          onChange={onCategoryChange}
-          options={categoriesOptions}
-        />
-      </div>
+      <FilterControls
+        icon="filter-mobile"
+        label="Category"
+        value={category}
+        onChange={onCategory}
+        options={categoriesOptions}
+      />
     </section>
   );
 }

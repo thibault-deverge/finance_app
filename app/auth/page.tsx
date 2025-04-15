@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 
-import { AuthHeader } from '@/components/auth/AuthHeader';
-import { AuthPanel } from '@/components/auth/AuthPanel';
-import { HeroPanel } from '@/components/auth/HeroPanel';
+import AuthHeader from '@/components/auth/AuthHeader';
+import AuthPanel from '@/components/auth/AuthPanel';
+import HeroPanel from '@/components/auth/HeroPanel';
 
 async function Page() {
   const session = await auth();
