@@ -1,9 +1,10 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { createPortal } from 'react-dom';
+import ModalInput from './ModalInput';
+import ModalSelect from './ModalSelectCategory';
+import ModalSelectColor from './ModalSelectColor';
 import { Button } from './ui/button';
-import ModalSelect from './ModalSelect';
 
 interface ModalProps {
   children: ReactNode;
@@ -17,7 +18,7 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 // 2. Create parent component
 function Modal({ children }: ModalProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <ModalContext.Provider value={{ setIsOpen, isOpen }}>
@@ -37,7 +38,7 @@ function useModal() {
 /* 3. Create child components to help implementing the common tasks 
 of this overall compound components */
 
-function AddNewButton({ children }: { children: ReactNode }) {
+function AddNewButton({ title }: { title: string }) {
   const { setIsOpen } = useModal();
   return (
     <Button
@@ -45,7 +46,7 @@ function AddNewButton({ children }: { children: ReactNode }) {
       variant="primary"
       onClick={() => setIsOpen(true)}
     >
-      {children}
+      {title}
     </Button>
   );
 }
@@ -55,7 +56,7 @@ function Content({ children }: { children: ReactNode }) {
 
   if (!isOpen) return null;
 
-  return createPortal(
+  return (
     <div className="fixed inset-0 z-20 flex items-center justify-center">
       {/* BACKDROP avec gestionnaire de clic */}
       <div
@@ -70,44 +71,39 @@ function Content({ children }: { children: ReactNode }) {
       >
         {children}
       </div>
-    </div>,
-    document.body
+    </div>
   );
 }
-function Header({ children }: { children: ReactNode }) {
+function Header({ title }: { title: string }) {
   const { setIsOpen } = useModal();
   const close = () => setIsOpen(false);
 
   return (
     <header className="mb-5 flex items-center justify-between">
-      <h2 className="text-preset-1 text-grey-900">{children}</h2>
+      <h2 className="text-preset-1 text-grey-900">{title}</h2>
       <button className="cursor-pointer" onClick={close}>
         <img src="/images/icons/icon-close-modal.svg" alt="icon close modal" />
       </button>
     </header>
   );
 }
-function Description({ children }: { children: ReactNode }) {
-  return <p className="text-preset-4 text-grey-500 mb-5">{children}</p>;
+function Description({ description }: { description: string }) {
+  return <p className="text-preset-4 text-grey-500 mb-5">{description}</p>;
 }
 function Name() {
   return <p>Name</p>;
 }
-function Category() {
-  return (
-    <div>
-      <ModalSelect />
-    </div>
-  );
+function Category({ title }: { title: string }) {
+  return <ModalSelect title={title} />;
 }
 function Chart() {
   return <p>Chart</p>;
 }
-function Amount() {
-  return <p>Amount</p>;
+function Amount({ title }: { title: string }) {
+  return <ModalInput title={title} />;
 }
-function Theme() {
-  return <p>Theme</p>;
+function Theme({ title }: { title: string }) {
+  return <ModalSelectColor title={title} />;
 }
 
 // 4. Add child components as properties to parent component
