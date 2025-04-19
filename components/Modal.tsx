@@ -2,10 +2,9 @@
 
 import { createContext, ReactNode, useContext, useState } from 'react';
 import ModalInput from './ModalInput';
-import ModalSelect from './ModalSelectCategory';
+import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
 import { Button } from './ui/button';
-
 interface ModalProps {
   children: ReactNode;
 }
@@ -94,7 +93,7 @@ function Name() {
   return <p>Name</p>;
 }
 function Category({ title }: { title: string }) {
-  return <ModalSelect title={title} />;
+  return <ModalSelectCategory title={title} />;
 }
 function Chart() {
   return <p>Chart</p>;
@@ -104,6 +103,14 @@ function Amount({ title }: { title: string }) {
 }
 function Theme({ title }: { title: string }) {
   return <ModalSelectColor title={title} />;
+}
+
+function BtnModal({ title }: { title: string }) {
+  return (
+    <Button variant="primary" size="lg" className="w-full cursor-pointer py-6">
+      {title}
+    </Button>
+  );
 }
 
 // 4. Add child components as properties to parent component
@@ -116,5 +123,6 @@ Modal.Chart = Chart;
 Modal.Amount = Amount;
 Modal.Theme = Theme;
 Modal.AddNewButton = AddNewButton;
+Modal.BtnModal = BtnModal;
 
 export default Modal;

@@ -13,7 +13,7 @@ function Overview() {
       </div>
 
       <div className="col-span-full mb-8">
-        <OverviewCards /> 
+        <OverviewCards />
       </div>
 
       <div className="col-span-full flex w-full flex-col gap-8 xl:h-full xl:flex-row">

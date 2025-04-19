@@ -35,7 +35,7 @@ function ModalSelectColor({ title }: { title: string }) {
   const [value, setValue] = useState('');
 
   return (
-    <div className="mb-4">
+    <div className="mb-5">
       <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
       <Select value={value} onValueChange={setValue}>
         <SelectTrigger className="w-full px-5 py-5 hover:cursor-pointer">
