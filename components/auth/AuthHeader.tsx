@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export function AuthHeader() {
+function AuthHeader() {
   return (
     <header className="bg-grey-900 flex h-[7vh] items-center justify-center rounded-b-lg lg:hidden">
       <Image
@@ -14,3 +14,5 @@ export function AuthHeader() {
     </header>
   );
 }
+
+export default AuthHeader;

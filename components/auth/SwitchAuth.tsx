@@ -3,7 +3,7 @@ type SwitchAuthProps = {
   isLogin: boolean;
 };
 
-export function SwitchAuth({ onClick, isLogin }: SwitchAuthProps) {
+function SwitchAuth({ onClick, isLogin }: SwitchAuthProps) {
   const pText = isLogin
     ? 'Need to create an account?'
     : 'Already have an account?';
@@ -22,3 +22,5 @@ export function SwitchAuth({ onClick, isLogin }: SwitchAuthProps) {
     </div>
   );
 }
+
+export default SwitchAuth;

@@ -22,6 +22,8 @@ const buttonVariants = cva(
         secondary: 'bg-white text-grey-900 shadow-xs hover:bg-grey-300',
         ghost:
           'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+        dropdown:
+          'border-grey-100 w-full cursor-pointer justify-start rounded-none border-b-1 py-3 text-left text-sm last:border-b-0',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
