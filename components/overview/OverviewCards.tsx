@@ -14,7 +14,7 @@ const cardsInfo = [
 
 function OverviewCards() {
   return (
-    <div className="col-span-full flex w-full flex-col justify-between gap-6 sm:flex-row">
+    <div className="col-span-full flex w-full flex-col justify-between gap-6 md:flex-row">
       {cardsInfo &&
         cardsInfo.map(({ id, title, amount }, index) => (
           <SummaryCard

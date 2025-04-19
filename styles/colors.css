@@ -22,6 +22,9 @@
   --color-army: var(--army);
   --color-gold: var(--gold);
   --color-orange: var(--orange);
+  --color-magenta: var(--magenta);
+  --color-blue: var(--blue);
+  --color-navy-grey: var(--navy-grey);
 }
 
 :root {
@@ -43,4 +46,7 @@
   --army: #7f9161;
   --gold: #cab361;
   --orange: #be6c49;
+  --magenta: #934f6f;
+  --blue: #3f82b2;
+  --navy-grey: #97a0ac;
 }
