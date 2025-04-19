@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import TransactionFilterBar from '@/components/transactions/TransactionFilterBar';
