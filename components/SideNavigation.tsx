@@ -54,8 +54,8 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
 
   return (
     <aside className="relative hidden h-full rounded-r-2xl bg-gray-900 py-8 text-white xl:flex">
-      <div className="fixed h-full w-full">
-        <div className="flex w-full flex-col">
+      <div className="fixed h-full">
+        <div className="flex flex-col">
           <div
             className={`px-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
           >
@@ -71,7 +71,7 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
           </div>
 
           <nav>
-            <ul className="w-full list-none space-y-1">
+            <ul className="list-none space-y-1">
               {navLinks.map((link) => (
                 <NavigationLink
                   key={link.name}
@@ -95,7 +95,7 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
 
 function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
   return (
-    <div className="absolute bottom-8 px-4">
+    <div className="absolute bottom-16 px-4">
       <button
         onClick={() => setIsVisible(!isVisible)}
         className="hover:text-grey-300 flex h-10 cursor-pointer items-center gap-2 transition-colors duration-300"
@@ -132,26 +132,34 @@ function NavigationLink({
 
   return (
     <li
-      className={`text-preset-3 mb-0 px-4 ${isActive && isVisible ? 'bg-beige-100 text-grey-900 w-full max-w-[276px] rounded-r-xl' : ''} ${isVisible ? '' : ''}`}
+      className={`text-preset-3 mb-0 px-4 whitespace-nowrap transition-all duration-300 ease-in-out ${
+        isVisible ? 'w-[276px]' : 'w-16'
+      }`}
     >
+      <div
+        className={`absolute left-0 h-12 rounded-r-xl transition-all duration-300 ease-in-out ${
+          isActive && isVisible
+            ? 'bg-beige-100 w-[276px] opacity-100'
+            : 'w-0 opacity-0'
+        }`}
+      />
       <Link
-        className={`bg-primary-900 text-primary-200 flex h-12 items-center gap-3 rounded transition-colors duration-300`}
+        className={`relative flex h-12 items-center gap-3 rounded transition-colors duration-300 ${
+          isActive && isVisible ? 'text-grey-900' : 'text-primary-200'
+        }`}
         href={link.href}
         title={link.name}
       >
-        <div>
+        <div className="z-10 flex w-6 items-center justify-center">
           <img
-            src={
-              isActive && isVisible ? link.activeIcon || link.icon : link.icon
-            }
+            src={isActive && isVisible ? link.activeIcon : link.icon}
             alt={`${link.name} icon`}
+            className="transition-all duration-300"
           />
         </div>
         <span
-          className={`whitespace-nowrap transition-all duration-300 ${
-            isVisible
-              ? 'max-w-32 opacity-100'
-              : 'max-w-0 overflow-hidden opacity-0'
+          className={`z-10 whitespace-nowrap transition-all duration-300 ease-in-out ${
+            isVisible ? 'w-auto opacity-100' : 'w-0 overflow-hidden opacity-0'
           }`}
         >
           {link.name}
@@ -160,5 +168,4 @@ function NavigationLink({
     </li>
   );
 }
-
 export default SideNavigation;
