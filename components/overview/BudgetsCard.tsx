@@ -2,7 +2,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import data from '../../data/data.json';
-import BudgetPieChart from '../BudgetPieChart';
+import BudgetPieChart from '../ui/BudgetPieChart';
 import CardHeader from '../ui/CardHeader';
 import CardMini from '../ui/CardMini';
 

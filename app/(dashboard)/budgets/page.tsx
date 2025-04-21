@@ -1,6 +1,6 @@
 'use client';
 
-import BudgetPieChart from '@/components/BudgetPieChart';
+import BudgetPieChart from '@/components/ui/BudgetPieChart';
 import AddBudget from '@/components/budgets/AddBudget';
 import BudgetList from '@/components/budgets/BudgetList';
 import SummarySpending from '@/components/budgets/SummarySpending';
@@ -14,7 +14,7 @@ function Page() {
         <AddBudget />
       </header>
       <div className="grid grid-cols-1 gap-6">
-        <div className="flex flex-col gap-8 rounded-xl bg-white">
+        <div className="flex flex-col gap-8 rounded-xl bg-white pt-8">
           <BudgetPieChart />
           <SummarySpending />
         </div>

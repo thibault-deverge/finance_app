@@ -1,5 +1,5 @@
 'use client';
-import SideNavigation from '@/components/SideNavigation';
+import SideNavigation from '@/components/ui/SideNavigation';
 import { ReactNode, useState } from 'react';
 
 export default function AppLayout({ children }: { children: ReactNode }) {

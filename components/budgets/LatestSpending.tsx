@@ -51,7 +51,7 @@ function LatestSpending({
       </div>
       <ul>
         {displayedTransactions.map((transaction, index) => (
-          <React.Fragment key={transaction.name}>
+          <React.Fragment key={transaction.name + index}>
             <SpendingCard {...transaction} />
             {index < displayedTransactions.length - 1 && (
               <div className="border-grey-500 my-4 h-px border-b"></div>

@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 import ModalInput from './ModalInput';
 import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
-import { Button } from './ui/button';
+import { Button } from './button';
 interface ModalProps {
   children: ReactNode;
 }

@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { SpinnerMini } from '@/components/SpinnerMini';
+import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { BtnOauth } from '@/components/auth/BtnOauth';
 import { Eye, EyeOff } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';

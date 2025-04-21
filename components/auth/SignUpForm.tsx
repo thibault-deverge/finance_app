@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { SpinnerMini } from '@/components/SpinnerMini';
+import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeOff } from 'lucide-react';

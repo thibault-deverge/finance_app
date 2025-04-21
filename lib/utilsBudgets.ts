@@ -21,7 +21,7 @@ export type BudgetCategory =
 
 type TransactionsByCategory = Record<string, BudgetTransaction[]>;
 
-const { transactions } = data;
+const { transactions, budgets } = data;
 // Liste des catégories uniques basées sur les transactions
 const categoryNames = [...new Set(transactions.map((t) => t.category))];
 // Récupérer les transactions groupées par catégorie
@@ -64,6 +64,17 @@ export function getSpentThisMonth(category: BudgetCategory): number {
     (total, t) => total + t.amount,
     0
   );
+}
+
+export function getTotalCurrent(): number {
+  const total = transactions
+    .filter((t) => t.amount < 0)
+    .reduce((sum, t) => sum + t.amount, 0);
+  return Math.round(Math.abs(total));
+}
+export function getTotalMaximum(): number {
+  const total = budgets.reduce((sum, t) => sum + t.maximum, 0);
+  return Math.round(total);
 }
 
 export function getSpent(category: BudgetCategory): number {

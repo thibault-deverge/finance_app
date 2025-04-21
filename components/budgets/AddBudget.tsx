@@ -1,5 +1,5 @@
 'use client';
-import Modal from '../Modal';
+import Modal from '../ui/Modal';
 
 function AddBudget() {
   return (
