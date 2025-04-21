@@ -1,5 +1,7 @@
+import { BudgetCategory } from '@/lib/utilsBudgets';
+
 type CardMiniType = {
-  category: string;
+  category: BudgetCategory;
   maximum: number;
   spent: number;
   theme: string;

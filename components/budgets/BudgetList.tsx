@@ -18,15 +18,15 @@ const spent = getSpent('Entertainment');
 const max = getMax('Entertainment');
 const allEntertainmentTx = getAllTransactions('Entertainment');
 
-console.log(allEntertainmentTx);
-
 function BudgetList() {
   return budgets ? (
-    <ul>
-      {budgets.map((budget) => (
-        <BudgetCard key={budget.category} {...budget} />
-      ))}
-    </ul>
+    <div>
+      <ul className="flex flex-col gap-6">
+        {budgets.map((budget) => (
+          <BudgetCard key={budget.category} {...budget} />
+        ))}
+      </ul>
+    </div>
   ) : (
     <p>No Budgets</p>
   );

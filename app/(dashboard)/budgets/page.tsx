@@ -13,7 +13,7 @@ function Page() {
         <Title name="Budgets" />
         <AddBudget />
       </header>
-      <div className="grid grid-cols-1">
+      <div className="grid grid-cols-1 gap-6">
         <div className="flex flex-col gap-8 rounded-xl bg-white">
           <BudgetPieChart />
           <SummarySpending />
