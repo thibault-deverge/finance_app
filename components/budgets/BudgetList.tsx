@@ -1,6 +1,7 @@
 import data from '@/data/data.json';
 
 import {
+  BudgetCategory,
   getAllTransactions,
   getLastThreeTransactions,
   getMax,
@@ -23,7 +24,11 @@ function BudgetList() {
     <div>
       <ul className="flex flex-col gap-6">
         {budgets.map((budget) => (
-          <BudgetCard key={budget.category} {...budget} />
+          <BudgetCard
+            key={budget.category}
+            {...budget}
+            category={budget.category as BudgetCategory}
+          />
         ))}
       </ul>
     </div>
