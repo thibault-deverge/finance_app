@@ -83,3 +83,12 @@ export function getAllTransactions(category: BudgetCategory) {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
+
+export function formatAmountBudget(amount: number): string {
+  // Si le montant est négatif, on met le signe moins avant le symbole dollar
+  if (amount < 0) {
+    return `-$${Math.abs(amount)}`;
+  }
+  // Si le montant est positif ou zéro
+  return `$${amount}`;
+}

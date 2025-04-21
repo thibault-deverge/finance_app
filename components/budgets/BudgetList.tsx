@@ -17,21 +17,19 @@ const latestEntertainmentTx = getLastThreeTransactions('Entertainment');
 const spentThisMonth = getSpentThisMonth('Entertainment');
 const spent = getSpent('Entertainment');
 const max = getMax('Entertainment');
-const allEntertainmentTx = getAllTransactions('Entertainment');
+
 
 function BudgetList() {
   return budgets ? (
-    <div>
-      <ul className="flex flex-col gap-6">
-        {budgets.map((budget) => (
-          <BudgetCard
-            key={budget.category}
-            {...budget}
-            category={budget.category as BudgetCategory}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul className="flex flex-col gap-6">
+      {budgets.map((budget) => (
+        <BudgetCard
+          key={budget.category}
+          {...budget}
+          category={budget.category as BudgetCategory}
+        />
+      ))}
+    </ul>
   ) : (
     <p>No Budgets</p>
   );

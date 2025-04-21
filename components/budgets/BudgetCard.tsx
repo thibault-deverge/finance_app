@@ -1,6 +1,14 @@
-import { BudgetCategory, getSpent } from '@/lib/utilsBudgets';
+import {
+  BudgetCategory,
+  getAllTransactions,
+  getSpent,
+} from '@/lib/utilsBudgets';
 import BudgetDropDown from './BudgetDropDown';
 import { Progress } from '@/components/ui/progress';
+import CardMini from '../ui/CardMini';
+import React from 'react';
+import SpendingCard from './SpendingCard';
+import LatestSpending from './LatestSpending';
 
 type Budget = {
   category: BudgetCategory;
@@ -8,9 +16,17 @@ type Budget = {
   theme: string;
 };
 
+export type SpendingCardType = {
+  name: string;
+  date: string;
+  amount: number;
+};
+
 function BudgetCard({ category, maximum, theme }: Budget) {
   const spent = getSpent(category);
   const percentage = parseFloat(((spent / maximum) * 100).toFixed(2));
+  const allTransactions = getAllTransactions(category);
+
   return (
     <li className="flex flex-col gap-5 rounded-xl bg-white px-5 py-7">
       <div className="flex justify-between">
@@ -30,11 +46,47 @@ function BudgetCard({ category, maximum, theme }: Budget) {
           value={percentage}
           indicatorColor={theme}
           innerPadding={4}
-          indicatorClassName="rounded-md" // Appliquer le même border-radius à l'indicateur
         />
       </div>
+      <div className="flex items-center justify-between">
+        <div className="w-1/2">
+          <CardMini title="Spent" amount={spent} color={theme} type="budgets" />
+        </div>
+        <div className="w-1/2">
+          <CardMini
+            title="Free"
+            amount={maximum}
+            color="#F8F4F0"
+            type="budgets"
+          />
+        </div>
+      </div>
+      <LatestSpending allTransactions={allTransactions} />
+      {/* <div className="bg-beige-100 rounded-xl p-4">
+        <div className="mb-5 flex items-center justify-between">
+          <h3 className="text-preset-3 text-grey-900">Latest Spending</h3>
+          <div className="flex items-center gap-3">
+            <p className="text-preset-4 text-grey-500">Sell All</p>
+            <img
+              className="cursor-pointer"
+              src="images/icons/icon-caret-right.svg"
+              alt="icon carret right"
+            />
+          </div>
+        </div>
+        {allTransactions &&
+          allTransactions.map((transaction) => (
+            <ul>
+              <React.Fragment key={transaction.name}>
+                <SpendingCard {...transaction} />
+                <div className="border-grey-500 my-4 h-px border-b last:border-b-0"></div>
+              </React.Fragment>
+            </ul>
+          ))}
+      </div> */}
     </li>
   );
 }
-
+//{ title, amount, color, type }
+// {name,date,amount}
 export default BudgetCard;

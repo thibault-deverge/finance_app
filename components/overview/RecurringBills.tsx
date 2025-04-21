@@ -6,7 +6,7 @@ import {
   FinancialData,
   FinancialDataResult,
 } from '@/lib/utils';
-import CardMini from '../ui/CardMiniOverView';
+import CardMini from '../ui/CardMini';
 const MAX_DISPLAY = 3;
 
 function getFinancialSummaryForCurrentMonth(
