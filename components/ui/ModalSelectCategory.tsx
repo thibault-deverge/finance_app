@@ -31,12 +31,12 @@ function ModalSelectCategory({
             <SelectLabel>Categories</SelectLabel>
             <SelectItem value="general">General</SelectItem>
             <SelectItem value="bills">Bills</SelectItem>
-            <SelectItem value="dining-out">Dining Out</SelectItem>
+            <SelectItem value="dining out">Dining Out</SelectItem>
             <SelectItem value="education">Education</SelectItem>
             <SelectItem value="entertainment">Entertainment</SelectItem>
             <SelectItem value="groceries">Groceries</SelectItem>
             <SelectItem value="lifestyle">Lifestyle</SelectItem>
-            <SelectItem value="personal-care">Personal Care</SelectItem>
+            <SelectItem value="personal care">Personal Care</SelectItem>
             <SelectItem value="shopping">Shopping</SelectItem>
             <SelectItem value="transportation">Transportation</SelectItem>
           </SelectGroup>

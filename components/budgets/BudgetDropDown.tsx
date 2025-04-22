@@ -7,8 +7,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Modal from '../ui/Modal';
+import { Budget } from './BudgetCard';
 
-function BudgetDropDown() {
+function BudgetDropDown({ category, maximum, theme }: Budget) {
+  const budget = { category, maximum, theme };
   return (
     <Modal>
       <DropdownMenu>
@@ -33,14 +35,14 @@ function BudgetDropDown() {
           </Modal.Open>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Modal.Window name="edit-budget">
-        <Modal.Header title="Modifier le budget" />
-        <Modal.Description description="Mettez à jour les paramètres de votre budget. Ces catégories vous aident à surveiller vos dépenses." />
+      <Modal.Window name="edit-budget" initialData={budget}>
+        <Modal.Header title="Edit Budget" />
+        <Modal.Description description="As your budgets change, feel free to update your spending limits." />
+        <Modal.Category title="Budget Category" />
+        <Modal.Amount title="Maximum Spending" />
+        <Modal.Theme title="Theme" />
       </Modal.Window>
-      <Modal.Window name="delete-budget">
-        <Modal.Header title="Modifier le budget" />
-        <Modal.Description description="Mettez à jour les paramètres de votre budget. Ces catégories vous aident à surveiller vos dépenses." />
-      </Modal.Window>
+      
     </Modal>
   );
 }

@@ -1,16 +1,14 @@
+import { Progress } from '@/components/ui/progress';
 import {
   BudgetCategory,
   getAllTransactions,
   getSpent,
 } from '@/lib/utilsBudgets';
-import BudgetDropDown from './BudgetDropDown';
-import { Progress } from '@/components/ui/progress';
 import CardMini from '../ui/CardMini';
-import React from 'react';
-import SpendingCard from './SpendingCard';
+import BudgetDropDown from './BudgetDropDown';
 import LatestSpending from './LatestSpending';
 
-type Budget = {
+export type Budget = {
   category: BudgetCategory;
   maximum: number;
   theme: string;
@@ -37,7 +35,7 @@ function BudgetCard({ category, maximum, theme }: Budget) {
           ></div>
           <h3 className="text-preset-2 text-grey-900">{category}</h3>
         </div>
-        <BudgetDropDown />
+        <BudgetDropDown category={category} maximum={maximum} theme={theme} />
       </div>
       <div className="flex flex-col gap-4">
         <p className="text-grey-500 text-preset-4">Maximum of ${maximum}</p>

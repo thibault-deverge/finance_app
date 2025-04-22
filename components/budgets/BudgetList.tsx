@@ -1,23 +1,9 @@
 import data from '@/data/data.json';
 
-import {
-  BudgetCategory,
-  getAllTransactions,
-  getLastThreeTransactions,
-  getMax,
-  getSpent,
-  getSpentThisMonth,
-} from '@/lib/utilsBudgets';
+import { BudgetCategory } from '@/lib/utilsBudgets';
 import BudgetCard from './BudgetCard';
 
 const { budgets } = data;
-
-const entertainmentSpent = getSpentThisMonth('Entertainment');
-const latestEntertainmentTx = getLastThreeTransactions('Entertainment');
-const spentThisMonth = getSpentThisMonth('Entertainment');
-const spent = getSpent('Entertainment');
-const max = getMax('Entertainment');
-
 
 function BudgetList() {
   return budgets ? (

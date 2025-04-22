@@ -1,11 +1,6 @@
 'use client';
 
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useState
-} from 'react';
+import React, { createContext, ReactNode, useContext, useState } from 'react';
 import ModalInput from './ModalInput';
 import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
@@ -82,15 +77,26 @@ function Open({ children, opens: opensWindowName }: OpenProps) {
   });
 }
 
-function Window({ children, name }: { children: ReactNode; name: string }) {
+function Window({
+  children,
+  name,
+  initialData,
+}: {
+  children: ReactNode;
+  name: string;
+  initialData?: {
+    category?: string;
+    maximum?: string | number;
+    theme?: string;
+  };
+}) {
   const { openName, close } = useModal();
 
   const [formData, setFormData] = useState({
-    category: '',
-    maximum: '',
-    theme: '',
+    category: initialData?.category || '',
+    maximum: initialData?.maximum !== undefined ? initialData.maximum : '',
+    theme: initialData?.theme || '',
   });
-  // console.log(formData);
 
   const updateFormData = (
     field: keyof typeof formData,
@@ -104,6 +110,7 @@ function Window({ children, name }: { children: ReactNode; name: string }) {
     console.log('Submit');
     //ajout de la fonction POST ICI
     // addBudget({ ...formData, maximum: Number(formData.maximum) });
+    close();
   }
   if (name !== openName) return null;
 
@@ -126,8 +133,6 @@ function Window({ children, name }: { children: ReactNode; name: string }) {
   );
 }
 
-
-
 function Header({ title }: { title: string }) {
   const { close } = useModal();
 
@@ -143,26 +148,24 @@ function Header({ title }: { title: string }) {
 function Description({ description }: { description: string }) {
   return <p className="text-preset-4 text-grey-500 mb-5">{description}</p>;
 }
-function Name() {
-  return <p>Name</p>;
-}
+
 function Category({ title }: { title: string }) {
   const { formData, updateFormData } = useFormContext();
-
+  const normalizedCategory = formData.category
+    ? formData.category.toLowerCase()
+    : '';
   const handleChange = (value: string) => {
     updateFormData('category', value);
   };
   return (
     <ModalSelectCategory
       title={title}
-      value={formData?.category}
+      value={normalizedCategory}
       onChange={handleChange}
     />
   );
 }
-function Chart() {
-  return <p>Chart</p>;
-}
+
 function Amount({ title }: { title: string }) {
   const { formData, updateFormData } = useFormContext();
 
@@ -185,7 +188,7 @@ function Theme({ title }: { title: string }) {
   return (
     <ModalSelectColor
       title={title}
-      value={formData?.theme}
+      value={formData.theme}
       onChange={handleChange}
     />
   );
@@ -209,9 +212,7 @@ Modal.Open = Open;
 Modal.Window = Window;
 Modal.Header = Header;
 Modal.Description = Description;
-Modal.Name = Name;
 Modal.Category = Category;
-Modal.Chart = Chart;
 Modal.Amount = Amount;
 Modal.Theme = Theme;
 Modal.BtnModal = BtnModal;

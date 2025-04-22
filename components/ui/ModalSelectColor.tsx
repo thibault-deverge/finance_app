@@ -50,32 +50,33 @@ function ModalSelectColor({
         <SelectContent className="z-50 bg-white">
           <SelectGroup>
             <SelectLabel>Categories</SelectLabel>
-            <ColorSelectItem color="green" label="Green" value="#277c78" />
-            <ColorSelectItem color="yellow" label="Yellow" value="#f2cdac" />
+            <ColorSelectItem color="green" label="Green" value="#277C78" />
+            <ColorSelectItem color="yellow" label="Yellow" value="#F2CDAC" />
             <ColorSelectItem color="navy" label="Navy" value="#626070" />
-            <ColorSelectItem color="red" label="Red" value="#c94736" />
-            <ColorSelectItem color="purple" label="Purple" value="#826cb0" />
+            <ColorSelectItem color="red" label="Red" value="#C94736" />
+            <ColorSelectItem color="purple" label="Purple" value="#826CB0" />
             <ColorSelectItem
               color="turquoise"
               label="Turquoise"
-              value="#597c7c"
+              value="#597C7C"
             />
-            <ColorSelectItem color="brown" label="Brown" value="#93674f" />
-            <ColorSelectItem color="magenta" label="Magenta" value="#934f6f" />
-            <ColorSelectItem color="blue" label="Blue" value="#3f82b2" />
+            <ColorSelectItem color="brown" label="Brown" value="#93674F" />
+            <ColorSelectItem color="magenta" label="Magenta" value="#934F6F" />
+            <ColorSelectItem color="blue" label="Blue" value="#3F82B2" />
             <ColorSelectItem
               color="navy-grey"
               label="Navy Grey"
-              value="#97a0ac"
+              value="#97A0AC"
             />
             <ColorSelectItem color="army" label="Army" value="#7f9161" />
             <ColorSelectItem
               color="purple-seconday"
               label="Pink"
-              value="#af81ba"
+              value="#AF81BA"
             />
-            <ColorSelectItem color="gold" label="Gold" value="#cab361" />
-            <ColorSelectItem color="orange" label="Orange" value="#be6c49" />
+            <ColorSelectItem color="gold" label="Gold" value="#CAB361" />
+            <ColorSelectItem color="orange" label="Orange" value="#BE6C49" />
+            <ColorSelectItem color="cyan" label="Cyan" value="#82C9D7" />
           </SelectGroup>
         </SelectContent>
       </Select>

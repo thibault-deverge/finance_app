@@ -19,7 +19,7 @@ export async function addBudget(newBudget: {
     const data = await prisma.budget.create({
       data: newBudget,
     });
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     console.error('Error adding a new budget:', error);
