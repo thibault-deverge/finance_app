@@ -1,5 +1,3 @@
-
-
 import BudgetPieChart from '@/components/ui/BudgetPieChart';
 import AddBudget from '@/components/budgets/AddBudget';
 import BudgetList from '@/components/budgets/BudgetList';

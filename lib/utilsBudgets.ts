@@ -94,7 +94,11 @@ export function getAllTransactions(category: BudgetCategory) {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
-
+export function getAllCategories() {
+  const categories = transactions.map((t) => t.category); // extrait les catégories
+  const uniqueCategories = [...new Set(categories)]; // supprime les doublons
+  return uniqueCategories;
+}
 export function formatAmountBudget(amount: number): string {
   // Si le montant est négatif, on met le signe moins avant le symbole dollar
   if (amount < 0) {

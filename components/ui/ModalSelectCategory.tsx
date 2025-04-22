@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { getAllCategories } from '@/lib/utilsBudgets';
 
 function ModalSelectCategory({
   title,
@@ -18,7 +19,8 @@ function ModalSelectCategory({
   value: string;
   onChange: (value: string) => void;
 }) {
- 
+  const categoryAll = getAllCategories();
+  console.log(categoryAll);
   return (
     <div className="mb-4">
       <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
