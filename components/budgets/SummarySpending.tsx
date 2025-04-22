@@ -1,6 +1,6 @@
 import React from 'react';
 import data from '@/data/data.json';
-import CardMiniBudgets from '../ui/CardMiniBudgets';
+import CardMiniBudget from './CardMiniBudgets';
 import { v4 as uuidv4 } from 'uuid';
 import { BudgetCategory, getSpent } from '@/lib/utilsBudgets';
 
@@ -21,7 +21,7 @@ function SummarySpending() {
         {displayedBudget &&
           displayedBudget.map(({ id, category, maximum, theme }) => (
             <React.Fragment key={id}>
-              <CardMiniBudgets
+              <CardMiniBudget
                 category={category}
                 maximum={maximum}
                 theme={theme}

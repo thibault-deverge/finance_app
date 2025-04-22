@@ -1,21 +1,20 @@
 'use client';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useState } from 'react';
-interface HandleBlurEvent {
-  target: {
-    value: string;
+
+function ModalInput({
+  title,
+  value,
+  onChange,
+}: {
+  title: string;
+  value: number | string;
+  onChange: (value: number) => void;
+}) {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value === '' ? 0 : Number(e.target.value);
+    onChange(newValue);
   };
-}
-
-function ModalInput({ title }: { title: string }) {
-  const [value, setValue] = useState(0);
-
-  const handleBlur = (e: HandleBlurEvent): void => {
-    const newValue = Number(e.target.value);
-    setValue(newValue);
-  };
-
   return (
     <div className="mb-4">
       <Label className="text-preset-5-bold text-grey-500 mb-2" htmlFor="number">
@@ -28,7 +27,8 @@ function ModalInput({ title }: { title: string }) {
         placeholder="Amount"
         min={0}
         max={10000}
-        onBlur={handleBlur}
+        value={value === 0 ? '' : value}
+        onChange={handleInputChange}
       >
         $
       </Input>

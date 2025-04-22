@@ -1,3 +1,4 @@
+'use client';
 import { ResponsiveContainer, PieChart, Pie, Cell, Label } from 'recharts';
 import data from '../../data/data.json';
 import { getTotalCurrent, getTotalMaximum } from '@/lib/utilsBudgets';
@@ -28,14 +29,14 @@ function BudgetPieChart() {
     ...budget,
     value: budget.maximum,
   }));
-  console.log(innerdata);
+
   return (
     <ResponsiveContainer width="100%" height={250}>
       <PieChart>
         {/* Anneau extérieur */}
         <Pie
           data={allBudgets}
-          dataKey="maximum" // Doit être une propriété qui existe dans vos objets budget
+          dataKey="maximum"
           nameKey="category"
           cx="50%"
           cy="50%"
@@ -53,7 +54,7 @@ function BudgetPieChart() {
         {/* Anneau intérieur */}
         <Pie
           data={innerdata}
-          dataKey="value" // Doit être une propriété qui existe dans vos objets budget
+          dataKey="value"
           nameKey="category"
           cx="50%"
           cy="50%"

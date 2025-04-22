@@ -7,7 +7,7 @@ type CardMiniType = {
   theme: string;
 };
 
-function CardMiniBudgets({ category, maximum, spent, theme }: CardMiniType) {
+function CardMiniBudget({ category, maximum, spent, theme }: CardMiniType) {
   const colorStyle = theme.startsWith('#') ? theme : theme;
   return (
     <li className="relative flex max-h-5 flex-col gap-2 rounded-lg bg-white pl-4">
@@ -26,4 +26,4 @@ function CardMiniBudgets({ category, maximum, spent, theme }: CardMiniType) {
   );
 }
 
-export default CardMiniBudgets;
+export default CardMiniBudget;
