@@ -1,11 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-import TransactionFilterBar from '@/components/transactions/TransactionFilterBar';
 import { useDebounce } from '@/hooks/useDebounce';
 
-function TransactionsSection() {
+import TransactionFilterBar from '@/components/transactions/TransactionFilterBar';
+import { Transaction } from '@prisma/client';
+
+type TransactionsSectionProps = {
+  transactions: Transaction[];
+};
+
+function TransactionsSection({ transactions }: TransactionsSectionProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -54,6 +59,16 @@ function TransactionsSection() {
           updateQueryParams('category', val);
         }}
       />
+
+      <ul>
+        {transactions.map((t: Transaction) => {
+          return (
+            <li key={t.id}>
+              {t.name} - {t.amount}
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }
