@@ -1,6 +1,11 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useState
+} from 'react';
 import ModalInput from './ModalInput';
 import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
@@ -9,13 +14,14 @@ interface ModalProps {
   children: ReactNode;
 }
 interface ModalContextType {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  open: React.Dispatch<React.SetStateAction<string>>;
+  close: () => void;
+  openName: string;
 }
 interface FormContextType {
   formData: {
     category: string;
-    amount: string;
+    maximum: string | number;
     theme: string;
   };
   updateFormData: (
@@ -23,6 +29,11 @@ interface FormContextType {
     value: string | number
   ) => void;
 }
+
+type OpenProps = {
+  children: React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>;
+  opens: string;
+};
 // Create a context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -46,10 +57,13 @@ function useFormContext() {
 
 // Create parent component
 function Modal({ children }: ModalProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [openName, setOpenName] = useState('');
+
+  const close = () => setOpenName('');
+  const open = setOpenName;
 
   return (
-    <ModalContext.Provider value={{ setIsOpen, isOpen }}>
+    <ModalContext.Provider value={{ open, close, openName }}>
       {children}
     </ModalContext.Provider>
   );
@@ -58,27 +72,25 @@ function Modal({ children }: ModalProps) {
 /* Create child components to help implementing the common tasks 
 of this overall compound components */
 
-function AddNewButton({ title }: { title: string }) {
-  const { setIsOpen } = useModal();
-  return (
-    <Button
-      className="text-preset-4-bold max-w-[9.68rem] cursor-pointer rounded-lg p-4 text-white"
-      variant="primary"
-      onClick={() => setIsOpen(true)}
-    >
-      {title}
-    </Button>
-  );
+function Open({ children, opens: opensWindowName }: OpenProps) {
+  const { open } = useModal();
+
+  return React.cloneElement(children, {
+    onClick: () => {
+      open(opensWindowName);
+    },
+  });
 }
-function Content({ children }: { children: ReactNode }) {
-  const { isOpen, setIsOpen } = useModal();
+
+function Window({ children, name }: { children: ReactNode; name: string }) {
+  const { openName, close } = useModal();
+
   const [formData, setFormData] = useState({
     category: '',
-    amount: '',
+    maximum: '',
     theme: '',
   });
-  console.log(formData);
-  const close = () => setIsOpen(false);
+  // console.log(formData);
 
   const updateFormData = (
     field: keyof typeof formData,
@@ -86,13 +98,14 @@ function Content({ children }: { children: ReactNode }) {
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
-  if (!isOpen) return null;
 
   function handleSubmitData(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     console.log('Submit');
     //ajout de la fonction POST ICI
+    // addBudget({ ...formData, maximum: Number(formData.maximum) });
   }
+  if (name !== openName) return null;
 
   return (
     <div className="fixed inset-0 z-20 flex items-center justify-center">
@@ -113,9 +126,10 @@ function Content({ children }: { children: ReactNode }) {
   );
 }
 
+
+
 function Header({ title }: { title: string }) {
-  const { setIsOpen } = useModal();
-  const close = () => setIsOpen(false);
+  const { close } = useModal();
 
   return (
     <header className="mb-5 flex items-center justify-between">
@@ -153,12 +167,12 @@ function Amount({ title }: { title: string }) {
   const { formData, updateFormData } = useFormContext();
 
   const handleChange = (value: number) => {
-    updateFormData('amount', value);
+    updateFormData('maximum', value);
   };
   return (
     <ModalInput
       title={title}
-      value={Number(formData.amount)}
+      value={Number(formData.maximum)}
       onChange={handleChange}
     />
   );
@@ -191,7 +205,8 @@ function BtnModal({ title }: { title: string }) {
 }
 
 // 4. Add child components as properties to parent component
-Modal.Content = Content;
+Modal.Open = Open;
+Modal.Window = Window;
 Modal.Header = Header;
 Modal.Description = Description;
 Modal.Name = Name;
@@ -199,7 +214,6 @@ Modal.Category = Category;
 Modal.Chart = Chart;
 Modal.Amount = Amount;
 Modal.Theme = Theme;
-Modal.AddNewButton = AddNewButton;
 Modal.BtnModal = BtnModal;
 
 export default Modal;
