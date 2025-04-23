@@ -20,6 +20,7 @@ function ModalSelectCategory({
   onChange: (value: string) => void;
 }) {
   const categoryAll = getAllCategories();
+
   return (
     <div className="mb-4">
       <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
@@ -32,12 +33,7 @@ function ModalSelectCategory({
             <SelectLabel>Categories</SelectLabel>
             {categoryAll.length > 0 &&
               categoryAll.map((category) => (
-                <SelectItem
-                  key={category}
-                  value={
-                    category.charAt(0).toLocaleLowerCase() + category.slice(1)
-                  }
-                >
+                <SelectItem key={category} value={category}>
                   {category}
                 </SelectItem>
               ))}

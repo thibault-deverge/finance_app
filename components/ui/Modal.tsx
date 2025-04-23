@@ -172,16 +172,14 @@ function Description({ description }: { description: string }) {
 
 function Category({ title }: { title: string }) {
   const { formData, updateFormData } = useFormContext();
-  const normalizedCategory = formData.category
-    ? formData.category.toLowerCase()
-    : '';
+
   const handleChange = (value: string) => {
     updateFormData('category', value);
   };
   return (
     <ModalSelectCategory
       title={title}
-      value={normalizedCategory}
+      value={formData.category}
       onChange={handleChange}
     />
   );
