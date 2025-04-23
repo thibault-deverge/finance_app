@@ -4,7 +4,6 @@ import React, { createContext, ReactNode, useContext, useState } from 'react';
 import ModalInput from './ModalInput';
 import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
-import { Button } from './button';
 interface ModalProps {
   children: ReactNode;
 }
@@ -194,19 +193,6 @@ function Theme({ title }: { title: string }) {
   );
 }
 
-function BtnModal({ title }: { title: string }) {
-  return (
-    <Button
-      type="submit"
-      variant="primary"
-      size="lg"
-      className="w-full cursor-pointer py-6"
-    >
-      {title}
-    </Button>
-  );
-}
-
 // 4. Add child components as properties to parent component
 Modal.Open = Open;
 Modal.Window = Window;
@@ -215,6 +201,5 @@ Modal.Description = Description;
 Modal.Category = Category;
 Modal.Amount = Amount;
 Modal.Theme = Theme;
-Modal.BtnModal = BtnModal;
 
 export default Modal;

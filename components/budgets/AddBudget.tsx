@@ -22,7 +22,15 @@ function AddBudget() {
         <Modal.Category title="Budget Category" />
         <Modal.Amount title="Maximum Spending" />
         <Modal.Theme title="Theme" />
-        <Modal.BtnModal title="Add Budget" />
+
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          className="w-full cursor-pointer py-6"
+        >
+          Add Budget
+        </Button>
       </Modal.Window>
     </Modal>
   );

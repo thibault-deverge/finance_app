@@ -1,3 +1,4 @@
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -7,9 +8,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
-import { useState } from 'react';
 
+const themeColors = [
+  { color: 'green', label: 'Green', value: '#277C78' },
+  { color: 'yellow', label: 'Yellow', value: '#F2CDAC' },
+  { color: 'navy', label: 'Navy', value: '#626070' },
+  { color: 'red', label: 'Red', value: '#C94736' },
+  { color: 'purple', label: 'Purple', value: '#826CB0' },
+  { color: 'turquoise', label: 'Turquoise', value: '#597C7C' },
+  { color: 'brown', label: 'Brown', value: '#93674F' },
+  { color: 'magenta', label: 'Magenta', value: '#934F6F' },
+  { color: 'blue', label: 'Blue', value: '#3F82B2' },
+  { color: 'navy-grey', label: 'Navy Grey', value: '#97A0AC' },
+  { color: 'army', label: 'Army', value: '#7f9161' },
+  { color: 'purple-seconday', label: 'Pink', value: '#AF81BA' },
+  { color: 'gold', label: 'Gold', value: '#CAB361' },
+  { color: 'orange', label: 'Orange', value: '#BE6C49' },
+  { color: 'cyan', label: 'Cyan', value: '#82C9D7' },
+];
 function ColorSelectItem({
   color,
   label,
@@ -50,33 +66,15 @@ function ModalSelectColor({
         <SelectContent className="z-50 bg-white">
           <SelectGroup>
             <SelectLabel>Categories</SelectLabel>
-            <ColorSelectItem color="green" label="Green" value="#277C78" />
-            <ColorSelectItem color="yellow" label="Yellow" value="#F2CDAC" />
-            <ColorSelectItem color="navy" label="Navy" value="#626070" />
-            <ColorSelectItem color="red" label="Red" value="#C94736" />
-            <ColorSelectItem color="purple" label="Purple" value="#826CB0" />
-            <ColorSelectItem
-              color="turquoise"
-              label="Turquoise"
-              value="#597C7C"
-            />
-            <ColorSelectItem color="brown" label="Brown" value="#93674F" />
-            <ColorSelectItem color="magenta" label="Magenta" value="#934F6F" />
-            <ColorSelectItem color="blue" label="Blue" value="#3F82B2" />
-            <ColorSelectItem
-              color="navy-grey"
-              label="Navy Grey"
-              value="#97A0AC"
-            />
-            <ColorSelectItem color="army" label="Army" value="#7f9161" />
-            <ColorSelectItem
-              color="purple-seconday"
-              label="Pink"
-              value="#AF81BA"
-            />
-            <ColorSelectItem color="gold" label="Gold" value="#CAB361" />
-            <ColorSelectItem color="orange" label="Orange" value="#BE6C49" />
-            <ColorSelectItem color="cyan" label="Cyan" value="#82C9D7" />
+            {themeColors.length > 0 &&
+              themeColors.map(({ color, label, value }) => (
+                <ColorSelectItem
+                  key={color}
+                  color={color}
+                  label={label}
+                  value={value}
+                />
+              ))}
           </SelectGroup>
         </SelectContent>
       </Select>
