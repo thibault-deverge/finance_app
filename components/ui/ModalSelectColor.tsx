@@ -39,7 +39,7 @@ function ColorSelectItem({
     <SelectItem value={value}>
       <div className="flex items-center gap-2">
         <span
-          style={{ backgroundColor: `var(--${color})` }}
+          style={{ backgroundColor: value }}
           className={`h-4 w-4 rounded-full`}
         ></span>
         {label}

@@ -1,6 +1,12 @@
 'use client';
 
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import ModalInput from './ModalInput';
 import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
@@ -96,7 +102,23 @@ function Window({
     maximum: initialData?.maximum !== undefined ? initialData.maximum : '',
     theme: initialData?.theme || '',
   });
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && name === openName) {
+        close();
+      }
+    };
 
+    // Ajouter l'écouteur d'événement lorsque la modale est ouverte
+    if (name === openName) {
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    // Nettoyer l'écouteur d'événement lors du démontage du composant
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [close, name, openName]);
   const updateFormData = (
     field: keyof typeof formData,
     value: string | number

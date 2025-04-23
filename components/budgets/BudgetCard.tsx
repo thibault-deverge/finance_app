@@ -5,7 +5,7 @@ import {
   getSpent,
 } from '@/lib/utilsBudgets';
 import CardMini from '../ui/CardMini';
-import BudgetDropDown from './BudgetDropDown';
+import EditDeleteBudget from './EditDeleteBudget';
 import LatestSpending from './LatestSpending';
 
 export type Budget = {
@@ -21,6 +21,7 @@ export type SpendingCardType = {
 };
 
 function BudgetCard({ category, maximum, theme }: Budget) {
+  const budget = { category, maximum, theme };
   const spent = getSpent(category);
   const percentage = parseFloat(((spent / maximum) * 100).toFixed(2));
   const allTransactions = getAllTransactions(category);
@@ -35,7 +36,7 @@ function BudgetCard({ category, maximum, theme }: Budget) {
           ></div>
           <h3 className="text-preset-2 text-grey-900">{category}</h3>
         </div>
-        <BudgetDropDown category={category} maximum={maximum} theme={theme} />
+        <EditDeleteBudget budget={budget} />
       </div>
       <div className="flex flex-col gap-4">
         <p className="text-grey-500 text-preset-4">Maximum of ${maximum}</p>

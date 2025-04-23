@@ -33,7 +33,7 @@ function Progress({
           className="h-full rounded-sm transition-all"
           style={{
             width: `${value || 0}%`,
-            backgroundColor: indicatorColor || 'var(--primary)',
+            backgroundColor: indicatorColor || '#f2cdac',
           }}
         />
       </div>
