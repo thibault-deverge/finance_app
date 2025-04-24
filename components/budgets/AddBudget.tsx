@@ -1,4 +1,5 @@
 'use client';
+import { createBudget } from '@/services/budgetService';
 import { Button } from '../ui/button';
 import Modal from '../ui/Modal';
 
@@ -13,7 +14,7 @@ function AddBudget() {
           + Add New Budget
         </Button>
       </Modal.Open>
-      <Modal.Window name="add-budget">
+      <Modal.Window name="add-budget" formAction={createBudget}>
         <Modal.Header title="Add New Budget" />
         <Modal.Description
           description="Choose a category to set a spending budget. These categories can help

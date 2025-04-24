@@ -86,20 +86,23 @@ function Window({
   children,
   name,
   initialData,
+  formAction,
 }: {
   children: ReactNode;
   name: string;
   initialData?: {
+    id?: string;
     category?: string;
     maximum?: string | number;
     theme?: string;
   };
+  formAction?: (formData: FormData) => Promise<void>;
 }) {
   const { openName, close } = useModal();
 
   const [formData, setFormData] = useState({
     category: initialData?.category || '',
-    maximum: initialData?.maximum !== undefined ? initialData.maximum : '',
+    maximum: initialData?.maximum || '',
     theme: initialData?.theme || '',
   });
   useEffect(() => {
@@ -119,6 +122,7 @@ function Window({
       document.removeEventListener('keydown', handleEscapeKey);
     };
   }, [close, name, openName]);
+
   const updateFormData = (
     field: keyof typeof formData,
     value: string | number
@@ -126,13 +130,19 @@ function Window({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  function handleSubmitData(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-    console.log('Submit');
-    //ajout de la fonction POST ICI
-    // addBudget({ ...formData, maximum: Number(formData.maximum) });
-    close();
-  }
+  // Function pour fermer le modal après l'action serveur
+  const actionWithClose = formAction
+    ? async (formData: FormData) => {
+        // Ajouter l'ID si disponible (pour edit/delete)
+        if (initialData?.id && !formData.has('id')) {
+          formData.append('id', initialData.id);
+        }
+
+        await formAction(formData);
+        close();
+      }
+    : undefined;
+
   if (name !== openName) return null;
 
   return (
@@ -147,7 +157,21 @@ function Window({
         onClick={(e) => e.stopPropagation()}
       >
         <FormContext.Provider value={{ formData, updateFormData }}>
-          <form onSubmit={handleSubmitData}>{children}</form>
+          <form action={actionWithClose}>
+            {children}
+
+            {/* Champs cachés pour transmettre les données d'état */}
+            {/* Ces champs ne sont pas visibles mais seront soumis avec le formulaire */}
+            <input type="hidden" name="category" value={formData.category} />
+            <input
+              type="hidden"
+              name="maximum"
+              value={formData.maximum.toString()}
+            />
+            {formData.theme && (
+              <input type="hidden" name="theme" value={formData.theme} />
+            )}
+          </form>
         </FormContext.Provider>
       </div>
     </div>

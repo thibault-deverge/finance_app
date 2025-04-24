@@ -1,7 +1,7 @@
 'use client';
-import { ResponsiveContainer, PieChart, Pie, Cell, Label } from 'recharts';
-import data from '../../data/data.json';
+import { BudgetsProps } from '@/app/(dashboard)/budgets/page';
 import { getTotalCurrent, getTotalMaximum } from '@/lib/utilsBudgets';
+import { Cell, Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
 interface PieChartViewBox {
   cx: number;
@@ -14,9 +14,9 @@ interface PieChartViewBox {
   height: number;
 }
 
-const { budgets: allBudgets } = data;
+// const { budgets: allBudgets } = data;
 
-function BudgetPieChart() {
+function BudgetPieChart({ budgets }: BudgetsProps) {
   const totalCurrent = getTotalCurrent();
   const totalMaximum = getTotalMaximum();
 
@@ -25,7 +25,7 @@ function BudgetPieChart() {
   const outerPieOuterRadius = innerPieOuterRadius + 30; // Épaisseur de 30px
   const outerPieInnerRadius = innerPieOuterRadius;
 
-  const innerdata = allBudgets.map((budget) => ({
+  const innerdata = budgets.map((budget) => ({
     ...budget,
     value: budget.maximum,
   }));
@@ -35,7 +35,7 @@ function BudgetPieChart() {
       <PieChart>
         {/* Anneau extérieur */}
         <Pie
-          data={allBudgets}
+          data={budgets}
           dataKey="maximum"
           nameKey="category"
           cx="50%"
@@ -46,8 +46,8 @@ function BudgetPieChart() {
           endAngle={-270}
           paddingAngle={0}
         >
-          {allBudgets.map((entry, index) => (
-            <Cell key={`outer-cell-${index}`} fill={entry.theme} />
+          {budgets.map((entry, index) => (
+            <Cell key={`outer-cell-${index}`} fill={entry.theme || '#000000'} />
           ))}
         </Pie>
 
@@ -67,7 +67,7 @@ function BudgetPieChart() {
           {innerdata.map((entry, index) => (
             <Cell
               key={`inner-cell-${index}`}
-              fill={entry.theme}
+              fill={entry.theme || '#000000'}
               fillOpacity={0.35}
             />
           ))}

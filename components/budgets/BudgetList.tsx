@@ -1,17 +1,15 @@
-import data from '@/data/data.json';
-
 import { BudgetCategory } from '@/lib/utilsBudgets';
 import BudgetCard from './BudgetCard';
+import { BudgetsProps } from '@/app/(dashboard)/budgets/page';
 
-const { budgets } = data;
-
-function BudgetList() {
+function BudgetList({ budgets }: BudgetsProps) {
   return budgets ? (
     <ul className="flex flex-col gap-6">
       {budgets.map((budget) => (
         <BudgetCard
-          key={budget.category}
+          key={budget.id}
           {...budget}
+          theme={budget.theme ?? '#f2cdac'}
           category={budget.category as BudgetCategory}
         />
       ))}
