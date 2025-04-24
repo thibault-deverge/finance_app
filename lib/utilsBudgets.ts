@@ -1,6 +1,6 @@
 import data from '@/data/data.json';
 
-type BudgetTransaction = {
+export type BudgetTransaction = {
   category: BudgetCategory;
   date: string; // ISO 8601 format
   amount: number;
@@ -19,7 +19,7 @@ export type BudgetCategory =
   | 'Shopping'
   | 'Transportation';
 
-type TransactionsByCategory = Record<string, BudgetTransaction[]>;
+export type TransactionsByCategory = Record<string, BudgetTransaction[]>;
 
 const { transactions, budgets } = data;
 // Liste des catégories uniques basées sur les transactions

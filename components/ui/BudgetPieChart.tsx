@@ -1,5 +1,5 @@
 'use client';
-import { BudgetsProps } from '@/app/(dashboard)/budgets/page';
+import { BudgetsProps } from '@/app/(dashboard)/overview/page';
 import { getTotalCurrent, getTotalMaximum } from '@/lib/utilsBudgets';
 import { Cell, Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
 

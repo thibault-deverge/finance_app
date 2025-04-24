@@ -4,8 +4,9 @@ import PotsCard from './PotsCard';
 import TransactionsCard from './TransactionsCard';
 import BudgetsCard from './BudgetsCard';
 import RecurringBills from './RecurringBills';
+import { BudgetsProps } from '@/app/(dashboard)/overview/page';
 
-function Overview() {
+function Overview({budgets}:BudgetsProps) {
   return (
     <section className="col-span-full h-screen px-4 py-6 xl:col-span-1 xl:h-screen xl:overflow-y-auto">
       <div className="col-span-full mb-8">
@@ -23,7 +24,7 @@ function Overview() {
         </div>
 
         <div className="flex flex-1 flex-col gap-8 xl:h-full">
-          <BudgetsCard />
+          <BudgetsCard budgets={budgets}/>
           <RecurringBills />
         </div>
       </div>

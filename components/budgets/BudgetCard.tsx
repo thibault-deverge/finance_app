@@ -1,27 +1,12 @@
+import { Budget } from '@/app/(dashboard)/overview/page';
 import { Progress } from '@/components/ui/progress';
-import {
-  BudgetCategory,
-  getAllTransactions,
-  getSpent,
-} from '@/lib/utilsBudgets';
+import { getAllTransactions, getSpent } from '@/lib/utilsBudgets';
 import CardMini from '../ui/CardMini';
 import EditDeleteBudget from './EditDeleteBudget';
 import LatestSpending from './LatestSpending';
 
-export type Budget = {
-  category: BudgetCategory;
-  maximum: number;
-  theme: string;
-};
-
-export type SpendingCardType = {
-  name: string;
-  date: string;
-  amount: number;
-};
-
-function BudgetCard({ category, maximum, theme }: Budget) {
-  const budget = { category, maximum, theme };
+function BudgetCard({ budget }: { budget: Budget }) {
+  const { category, maximum, theme } = budget;
   const spent = getSpent(category);
   const percentage = parseFloat(((spent / maximum) * 100).toFixed(2));
   const allTransactions = getAllTransactions(category);

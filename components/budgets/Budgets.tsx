@@ -3,7 +3,7 @@ import AddBudget from '@/components/budgets/AddBudget';
 import BudgetList from '@/components/budgets/BudgetList';
 import SummarySpending from '@/components/budgets/SummarySpending';
 import Title from '@/components/ui/Title';
-import { BudgetsProps } from '@/app/(dashboard)/budgets/page';
+import { BudgetsProps } from '@/app/(dashboard)/overview/page';
 
 function Budgets({ budgets }: BudgetsProps) {
   return (

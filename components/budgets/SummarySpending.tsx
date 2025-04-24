@@ -1,8 +1,8 @@
 import React from 'react';
 import CardMiniBudget from './CardMiniBudgets';
-import { BudgetsProps } from '@/app/(dashboard)/budgets/page';
 import { BudgetCategory, getSpent } from '@/lib/utilsBudgets';
 import { v4 as uuidv4 } from 'uuid';
+import { BudgetsProps } from '@/app/(dashboard)/overview/page';
 
 const MAX_DISPLAY = 4;
 
