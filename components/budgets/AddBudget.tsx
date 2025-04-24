@@ -1,5 +1,5 @@
 'use client';
-import { createBudget } from '@/services/budgetService';
+import { createBudget } from '@/actions/budgets';
 import { Button } from '../ui/button';
 import Modal from '../ui/Modal';
 

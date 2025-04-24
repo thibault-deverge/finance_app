@@ -1,10 +1,8 @@
-// app/actions/budget.ts
 'use server';
-
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 
 // Récupérer tous les budgets de l'utilisateur connecté
 export async function getBudgets() {
@@ -27,15 +25,15 @@ export async function getBudgets() {
 export async function createBudget(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error('Vous devez être connecté');
+    throw new Error('You must be connected');
   }
 
   const category = formData.get('category') as string;
   const maximum = parseFloat(formData.get('maximum') as string);
   const theme = formData.get('theme') as string | null;
   // Validation
-  if (!category) throw new Error('La catégorie est requise');
-  if (isNaN(maximum)) throw new Error('Le montant maximum doit être un nombre');
+  if (!category) throw new Error('The category is required');
+  if (isNaN(maximum)) throw new Error('The maximum amount must be a number');
 
   await prisma.budget.create({
     data: {
@@ -54,7 +52,7 @@ export async function createBudget(formData: FormData) {
 export async function updateBudget(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error('Vous devez être connecté');
+    throw new Error('You must be connected');
   }
   console.log(formData);
   const id = formData.get('id') as string;
@@ -63,9 +61,9 @@ export async function updateBudget(formData: FormData) {
   const theme = formData.get('theme') as string | null;
 
   // Validation
-  if (!id) throw new Error('ID du budget requis');
-  if (!category) throw new Error('La catégorie est requise');
-  if (isNaN(maximum)) throw new Error('Le montant maximum doit être un nombre');
+  if (!id) throw new Error('Budget ID required');
+  if (!category) throw new Error('The category is required');
+  if (isNaN(maximum)) throw new Error('The maximum amount must be a number');
 
   // Vérifier que le budget appartient à l'utilisateur
   const existingBudget = await prisma.budget.findUnique({
@@ -74,7 +72,7 @@ export async function updateBudget(formData: FormData) {
   });
 
   if (!existingBudget || existingBudget.userId !== session.user.id) {
-    throw new Error('Budget non trouvé ou accès non autorisé');
+    throw new Error('Budget not found or unauthorised access');
   }
 
   await prisma.budget.update({
@@ -94,7 +92,7 @@ export async function updateBudget(formData: FormData) {
 export async function deleteBudget(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error('Vous devez être connecté');
+    throw new Error('You must be connected');
   }
 
   const id = formData.get('id') as string;
@@ -106,7 +104,7 @@ export async function deleteBudget(formData: FormData) {
   });
 
   if (!existingBudget || existingBudget.userId !== session.user.id) {
-    throw new Error('Budget non trouvé ou accès non autorisé');
+    throw new Error('Budget not found or unauthorised access');
   }
 
   await prisma.budget.delete({

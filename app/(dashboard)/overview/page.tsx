@@ -1,5 +1,5 @@
+import { getBudgets } from '@/actions/budgets';
 import Overview from '@/components/overview/Overview';
-import { getBudgets } from '@/services/budgetService';
 
 export type Budget = {
   category: string;
@@ -17,7 +17,7 @@ export type BudgetsProps = {
 const budgets = await getBudgets();
 
 function page() {
-  return <Overview budgets={budgets}/>;
+  return <Overview budgets={budgets} />;
 }
 
 export default page;

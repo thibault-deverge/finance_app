@@ -34,6 +34,16 @@ type OpenProps = {
   children: React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>;
   opens: string;
 };
+
+export interface Budget {
+  id: string;
+  category: string;
+  maximum: number | string;
+  theme: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 // Create a context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 const FormContext = createContext<FormContextType | undefined>(undefined);

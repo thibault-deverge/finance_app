@@ -6,10 +6,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Modal from '../ui/Modal';
-import { Budget } from './BudgetCard';
 import { Button } from '../ui/button';
-import { deleteBudget, updateBudget } from '@/services/budgetService';
+import Modal, { Budget } from '../ui/Modal';
+import { deleteBudget, updateBudget } from '@/actions/budgets';
 
 function EditDeleteBudget({ budget }: { budget: Budget }) {
   return (
@@ -44,7 +43,11 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
           </Modal.Open>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Modal.Window name="edit-budget" initialData={budget} formAction={updateBudget}>
+      <Modal.Window
+        name="edit-budget"
+        initialData={budget}
+        formAction={updateBudget}
+      >
         <Modal.Header title="Edit Budget" />
         <Modal.Description description="As your budgets change, feel free to update your spending limits." />
         <Modal.Category title="Budget Category" />
@@ -59,7 +62,11 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
           Save Changes
         </Button>
       </Modal.Window>
-      <Modal.Window name="delete-budget" initialData={budget} formAction={deleteBudget}>
+      <Modal.Window
+        name="delete-budget"
+        initialData={budget}
+        formAction={deleteBudget}
+      >
         <Modal.Header title={`Delete '${budget.category}'`} />
         <Modal.Description description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever." />
         <Button

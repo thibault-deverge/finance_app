@@ -1,5 +1,5 @@
 import Budgets from '@/components/budgets/Budgets';
-import { getBudgets } from '@/services/budgetService';
+import { getBudgets } from '@/actions/budgets';
 
 const budgets = await getBudgets();
 
