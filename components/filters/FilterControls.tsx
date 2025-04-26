@@ -22,7 +22,7 @@ function FilterControls({
     <div className={`flex items-center ${className}`}>
       <SelectInputMobile
         iconSrc={`/images/icons/icon-${icon}.svg`}
-        alt={label}
+        alt={`Open ${label} filter`}
         label={label}
         value={value}
         onChange={onChange}

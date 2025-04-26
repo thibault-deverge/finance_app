@@ -30,6 +30,7 @@ function SelectInput({
         <SelectTrigger className="border-grey-500 text-preset-4 px-5 py-3">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
+
         <SelectContent className="border-none bg-white">
           {options.map((option) => {
             const isActive = value === option.value;

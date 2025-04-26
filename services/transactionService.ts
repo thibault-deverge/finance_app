@@ -1,14 +1,16 @@
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
+import { TRANSACTION_PER_PAGE } from '@/lib/constants';
 
 type TypeOptions = {
   search: string;
   category: string;
   sortBy: string;
+  page: number;
 };
 
 export async function getTransactions(options: TypeOptions) {
-  const { search, category, sortBy } = options;
+  const { search, category, sortBy, page } = options;
 
   const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
     latest: { createdAt: 'desc' },
@@ -31,8 +33,15 @@ export async function getTransactions(options: TypeOptions) {
       where.category = category;
     }
 
-    const transactions = await prisma.transaction.findMany({ where, orderBy });
-    return transactions;
+    const transactions = await prisma.transaction.findMany({
+      where,
+      orderBy,
+      take: TRANSACTION_PER_PAGE,
+      skip: (page - 1) * TRANSACTION_PER_PAGE,
+    });
+    const totalCount = await prisma.transaction.count({ where });
+
+    return { transactions, totalCount };
   } catch (error) {
     console.error('[getTransaction Error]', error);
     throw new Error('Failed to fetch transactions');

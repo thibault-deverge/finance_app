@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { useState } from 'react';
-
 import {
   Popover,
   PopoverContent,
@@ -43,15 +42,15 @@ function SelectInputMobile({
           sideOffset={30}
           className="w-fit border-none px-5 md:hidden"
         >
-          <ul className="flex flex-col">
-            {/* Label element */}
+          <ul role="listbox" className="flex flex-col">
+            {/* This is the label element that is always visible */}
             <li className="border-grey-100 text-grey-500 border-b-1 pb-2 last:border-b-0">
               <Button type="button" disabled variant="dropdown" aria-disabled>
                 {label}
               </Button>
             </li>
 
-            {/* Options */}
+            {/* This is the list of options */}
             {options.map((opt) => {
               const isActive = opt.value === value;
 
@@ -63,6 +62,8 @@ function SelectInputMobile({
               return (
                 <li
                   key={opt.value}
+                  role="option"
+                  aria-selected={isActive}
                   className="border-grey-100 border-b-1 py-2 last:border-b-0 last:pb-0"
                 >
                   <Button

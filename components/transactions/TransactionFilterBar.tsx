@@ -1,8 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
+import { categoriesOptions, sortByOptions } from '@/data/transactions';
+
 import SearchInput from '@/components/filters/SearchInput';
 import FilterControls from '@/components/filters/FilterControls';
-
-import { categoriesOptions, sortByOptions } from '@/data/transactions';
 
 type TransactionFilterBarProps = {
   search: string;

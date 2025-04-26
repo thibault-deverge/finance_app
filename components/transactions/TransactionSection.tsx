@@ -1,10 +1,11 @@
 'use client';
+import { Transaction } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDebounce } from '@/hooks/useDebounce';
 
 import TransactionFilterBar from '@/components/transactions/TransactionFilterBar';
-import { Transaction } from '@prisma/client';
+import TransactionList from '@/components/transactions/TransactionList';
 
 type TransactionsSectionProps = {
   transactions: Transaction[];
@@ -32,7 +33,6 @@ function TransactionsSection({ transactions }: TransactionsSectionProps) {
       } else {
         params.delete('search');
       }
-
       router.push(`?${params.toString()}`);
     }
   }, [debouncedSearch, router, searchParams]);
@@ -44,7 +44,7 @@ function TransactionsSection({ transactions }: TransactionsSectionProps) {
   }
 
   return (
-    <section className="flex flex-col gap-6 bg-white px-5 py-6 md:px-8 md:py-8">
+    <>
       <TransactionFilterBar
         search={rawSearch}
         onSearch={setRawSearch}
@@ -60,16 +60,8 @@ function TransactionsSection({ transactions }: TransactionsSectionProps) {
         }}
       />
 
-      <ul>
-        {transactions.map((t: Transaction) => {
-          return (
-            <li key={t.id}>
-              {t.name} - {t.amount}
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+      <TransactionList transactions={transactions} />
+    </>
   );
 }
 
