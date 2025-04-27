@@ -1,4 +1,5 @@
 import data from '@/data/data.json';
+import { Budget, Transactions } from './type';
 
 export type BudgetTransaction = {
   category: BudgetCategory;
@@ -21,9 +22,10 @@ export type BudgetCategory =
 
 export type TransactionsByCategory = Record<string, BudgetTransaction[]>;
 
-const { transactions, budgets } = data;
+const { transactions } = data;
 // Liste des catégories uniques basées sur les transactions
 const categoryNames = [...new Set(transactions.map((t) => t.category))];
+
 // Récupérer les transactions groupées par catégorie
 const transactionsByCategory: TransactionsByCategory = categoryNames.reduce(
   (acc, category) => {
@@ -37,7 +39,9 @@ const transactionsByCategory: TransactionsByCategory = categoryNames.reduce(
   },
   {} as TransactionsByCategory
 );
+console.log(transactionsByCategory);
 
+/*
 // Obtenir les 3 dernières transactions d'une catégorie (tous mois confondus)
 export function getLastThreeTransactions(category: BudgetCategory) {
   return [...transactionsByCategory[category]]
@@ -65,24 +69,7 @@ export function getSpentThisMonth(category: BudgetCategory): number {
     0
   );
 }
-
-export function getTotalCurrent(): number {
-  const total = transactions
-    .filter((t) => t.amount < 0)
-    .reduce((sum, t) => sum + t.amount, 0);
-  return Math.round(Math.abs(total));
-}
-export function getTotalMaximum(): number {
-  const total = budgets.reduce((sum, t) => sum + t.maximum, 0);
-  return Math.round(total);
-}
-
-export function getSpent(category: string): number {
-  return [...transactionsByCategory[category]].reduce((acc, t) => {
-    acc = acc + t.amount;
-    return Number(Math.abs(acc).toFixed(2));
-  }, 0);
-}
+*/
 
 export function getMax(category: BudgetCategory): number | undefined {
   const budget = data.budgets.find((t) => t.category === category);
@@ -106,4 +93,29 @@ export function formatAmountBudget(amount: number): string {
   }
   // Si le montant est positif ou zéro
   return `$${amount}`;
+}
+
+//##################################################################################
+//##################################################################################
+
+export function getTotalCurrent(data: Transactions[]): number {
+  const total = data
+    .filter((t) => t.amount < 0)
+    .reduce((sum, t) => sum + t.amount, 0);
+  return Math.round(Math.abs(total));
+}
+
+export function getTotalMaximum(data: Budget[]): number {
+  const total = data.reduce((sum, t) => sum + t.maximum, 0);
+  return Math.round(total);
+}
+
+export function getSpent(category: BudgetCategory): number {
+  return [...transactionsByCategory[category]].reduce((acc, t) => {
+    // On n'ajoute que les montants négatifs
+    if (t.amount < 0) {
+      acc = acc + Math.abs(t.amount);
+    }
+    return Number(acc.toFixed(2));
+  }, 0);
 }

@@ -1,11 +1,17 @@
 'use client';
 
-import { Budget } from '@/lib/type';
+import { Budget, Transactions } from '@/lib/type';
 import BudgetPieChart from '../ui/BudgetPieChart';
 import CardHeader from '../ui/CardHeader';
 import CardMini from '../ui/CardMini';
 
-function BudgetsCard({ budgets }: { budgets: Budget[] }) {
+function BudgetsCard({
+  budgets,
+  transactions,
+}: {
+  budgets: Budget[];
+  transactions: Transactions[];
+}) {
   const MAX_DISPLAY = 4;
   const displayedBudget = budgets.slice(0, MAX_DISPLAY);
 
@@ -13,7 +19,7 @@ function BudgetsCard({ budgets }: { budgets: Budget[] }) {
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
       <CardHeader title="Budgets" href="/budgets" />
       <div className="md:flex">
-        <BudgetPieChart budgets={budgets} />
+        <BudgetPieChart budgets={budgets} transactions={transactions} />
 
         <div className="col-span-full mx-auto grid w-full max-w-[340px] grid-cols-2 gap-4">
           {displayedBudget.length > 0 &&

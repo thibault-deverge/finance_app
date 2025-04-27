@@ -32,7 +32,7 @@ function Overview({
         </div>
 
         <div className="flex flex-1 flex-col gap-8 xl:h-full">
-          <BudgetsCard budgets={budgets} />
+          <BudgetsCard budgets={budgets} transactions={transactions} />
           <RecurringBills />
         </div>
       </div>

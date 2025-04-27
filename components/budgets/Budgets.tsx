@@ -3,9 +3,15 @@ import AddBudget from '@/components/budgets/AddBudget';
 import BudgetList from '@/components/budgets/BudgetList';
 import SummarySpending from '@/components/budgets/SummarySpending';
 import Title from '@/components/ui/Title';
-import { Budget } from '@/lib/type';
+import { Budget, Transactions } from '@/lib/type';
 
-function Budgets({ budgets }: { budgets: Budget[] }) {
+function Budgets({
+  budgets,
+  transactions,
+}: {
+  budgets: Budget[];
+  transactions: Transactions[];
+}) {
   return (
     <section className="col-span-full h-screen px-4 py-6 xl:col-span-1 xl:h-screen xl:overflow-y-auto">
       <header className="mb-8.5 flex items-center justify-between">
@@ -14,7 +20,7 @@ function Budgets({ budgets }: { budgets: Budget[] }) {
       </header>
       <div className="grid grid-cols-1 gap-6">
         <div className="flex flex-col gap-8 rounded-xl bg-white pt-8">
-          <BudgetPieChart budgets={budgets} />
+          <BudgetPieChart budgets={budgets} transactions={transactions} />
           <SummarySpending budgets={budgets} />
         </div>
         <BudgetList budgets={budgets} />

@@ -18,8 +18,20 @@ export type CardMiniType = {
 };
 
 // BUDGETS
+export type BudgetCategory =
+  | 'Entertainment'
+  | 'Dine Out'
+  | 'General'
+  | 'Bills'
+  | 'Education'
+  | 'Groceries'
+  | 'Lifestyle'
+  | 'Personal Care'
+  | 'Shopping'
+  | 'Transportation';
+
 export type Budget = {
-  category: string;
+  category: BudgetCategory;
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -57,17 +69,5 @@ export type BudgetTransaction = {
   amount: number;
   name: string;
 };
-
-export type BudgetCategory =
-  | 'Entertainment'
-  | 'Dine Out'
-  | 'General'
-  | 'Bills'
-  | 'Education'
-  | 'Groceries'
-  | 'Lifestyle'
-  | 'Personal Care'
-  | 'Shopping'
-  | 'Transportation';
 
 export type TransactionsByCategory = Record<string, BudgetTransaction[]>;
