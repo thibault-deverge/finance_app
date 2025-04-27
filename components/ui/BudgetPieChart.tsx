@@ -1,5 +1,5 @@
 'use client';
-import { BudgetsProps } from '@/app/(dashboard)/overview/page';
+import { Budget } from '@/lib/type';
 import { getTotalCurrent, getTotalMaximum } from '@/lib/utilsBudgets';
 import { Cell, Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
@@ -16,7 +16,7 @@ interface PieChartViewBox {
 
 // const { budgets: allBudgets } = data;
 
-function BudgetPieChart({ budgets }: BudgetsProps) {
+function BudgetPieChart({ budgets }: { budgets: Budget[] }) {
   const totalCurrent = getTotalCurrent();
   const totalMaximum = getTotalMaximum();
 

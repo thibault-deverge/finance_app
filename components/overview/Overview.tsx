@@ -1,12 +1,20 @@
 import OverviewCards from '@/components/overview/OverviewCards';
 import Title from '@/components/ui/Title';
-import PotsCard from './PotsCard';
-import TransactionsCard from './TransactionsCard';
+import { Balance, Budget, Transactions } from '@/lib/type';
 import BudgetsCard from './BudgetsCard';
+import PotsCard from './PotsCard';
 import RecurringBills from './RecurringBills';
-import { BudgetsProps } from '@/app/(dashboard)/overview/page';
+import TransactionsCard from './TransactionsCard';
 
-function Overview({budgets}:BudgetsProps) {
+function Overview({
+  budgets,
+  transactions,
+  balance,
+}: {
+  budgets: Budget[];
+  transactions: Transactions[];
+  balance: Balance[];
+}) {
   return (
     <section className="col-span-full h-screen px-4 py-6 xl:col-span-1 xl:h-screen xl:overflow-y-auto">
       <div className="col-span-full mb-8">
@@ -14,17 +22,17 @@ function Overview({budgets}:BudgetsProps) {
       </div>
 
       <div className="col-span-full mb-8">
-        <OverviewCards />
+        <OverviewCards balance={balance} />
       </div>
 
       <div className="col-span-full flex w-full flex-col gap-8 xl:h-full xl:flex-row">
         <div className="flex flex-1 flex-col gap-8">
           <PotsCard />
-          <TransactionsCard />
+          <TransactionsCard transactions={transactions} />
         </div>
 
         <div className="flex flex-1 flex-col gap-8 xl:h-full">
-          <BudgetsCard budgets={budgets}/>
+          <BudgetsCard budgets={budgets} />
           <RecurringBills />
         </div>
       </div>

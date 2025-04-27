@@ -1,23 +1,24 @@
+import { getAllBalances } from '@/actions/balance';
 import { getBudgets } from '@/actions/budgets';
+import { getAllTransactions } from '@/actions/transactions';
 import Overview from '@/components/overview/Overview';
+import { Spinner } from '@/components/ui/Spinner';
+import { Suspense } from 'react';
 
-export type Budget = {
-  category: string;
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  userId: string | null;
-  maximum: number;
-  theme: string | null;
-};
+async function Page() {
+  const budgets = await getBudgets();
+  const transactions = await getAllTransactions();
+  const balance = await getAllBalances();
 
-export type BudgetsProps = {
-  budgets: Budget[];
-};
-const budgets = await getBudgets();
-
-function page() {
-  return <Overview budgets={budgets} />;
+  return (
+    <Suspense fallback={<Spinner />}>
+      <Overview
+        budgets={budgets}
+        transactions={transactions}
+        balance={balance}
+      />
+    </Suspense>
+  );
 }
 
-export default page;
+export default Page;

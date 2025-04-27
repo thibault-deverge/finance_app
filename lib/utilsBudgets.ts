@@ -77,7 +77,7 @@ export function getTotalMaximum(): number {
   return Math.round(total);
 }
 
-export function getSpent(category: BudgetCategory): number {
+export function getSpent(category: string): number {
   return [...transactionsByCategory[category]].reduce((acc, t) => {
     acc = acc + t.amount;
     return Number(Math.abs(acc).toFixed(2));

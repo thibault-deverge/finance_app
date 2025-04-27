@@ -1,17 +1,14 @@
-import React from 'react';
-import CardMiniBudget from './CardMiniBudgets';
+import { Budget } from '@/lib/type';
 import { BudgetCategory, getSpent } from '@/lib/utilsBudgets';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { BudgetsProps } from '@/app/(dashboard)/overview/page';
+import CardMiniBudget from './CardMiniBudgets';
 
 const MAX_DISPLAY = 4;
 
-function SummarySpending({ budgets }: BudgetsProps) {
-  const displayedBudget = budgets.slice(0, MAX_DISPLAY).map((transaction) => ({
-    ...transaction,
-    id: uuidv4(),
-    category: transaction.category as BudgetCategory,
-  }));
+function SummarySpending({ budgets }: { budgets: Budget[] }) {
+  console.log(budgets);
+  const displayedBudget = budgets.slice(0, MAX_DISPLAY);
   return (
     <div className="mx-5">
       <h2 className="text-preset-2 text-grey-900 mb-6">Spending Summary</h2>
