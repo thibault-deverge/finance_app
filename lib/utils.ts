@@ -53,6 +53,15 @@ export function formatAmount(amount: number): string {
   });
 }
 
+export function formatAmountSign(amount: number): string {
+  const sign = amount < 0 ? '-' : '+';
+  const formatted = Math.abs(amount).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  return `${sign}\$${formatted}`;
+}
+
 export function formatDateToShortString(dateString: string): string {
   const date = new Date(dateString);
 
