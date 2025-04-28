@@ -13,8 +13,8 @@ export async function getTransactions(options: TypeOptions) {
   const { search, category, sortBy, page } = options;
 
   const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
-    latest: { createdAt: 'desc' },
-    oldest: { createdAt: 'asc' },
+    latest: { date: 'desc' },
+    oldest: { date: 'asc' },
     atoz: { name: 'asc' },
     ztoa: { name: 'desc' },
     highest: { amount: 'desc' },

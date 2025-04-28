@@ -21,7 +21,7 @@ function TransactionsSection({ transactions }: TransactionsSectionProps) {
     searchParams.get('category') || 'all'
   );
 
-  const debouncedSearch = useDebounce(rawSearch, 400);
+  const debouncedSearch = useDebounce(rawSearch);
 
   useEffect(() => {
     const current = searchParams.get('search') || '';
