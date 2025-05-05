@@ -77,7 +77,7 @@ body {
     line-height: 120%;
   }
   .text-preset-3 {
-    font-size: var(--preset-4);
+    font-size: var(--preset-3);
     font-weight: var(--bold);
     letter-spacing: 0px;
     line-height: 150%;

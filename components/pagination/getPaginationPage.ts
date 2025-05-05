@@ -5,6 +5,10 @@ export function getPaginationPages(
 ): (number | string)[] {
   const pages: (number | string)[] = [];
 
+  if (totalPages === 1) {
+    return [1];
+  }
+
   if (totalPages <= 5 && !isMobile) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }

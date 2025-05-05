@@ -4,22 +4,23 @@ import { TRANSACTION_PER_PAGE } from '@/lib/constants';
 
 type TypeOptions = {
   search: string;
-  category: string;
+  category?: string;
   sortBy: string;
   page: number;
+  onlyRecurringBills?: boolean;
+};
+
+const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
+  latest: { date: 'desc' },
+  oldest: { date: 'asc' },
+  atoz: { name: 'asc' },
+  ztoa: { name: 'desc' },
+  highest: { amount: 'desc' },
+  lowest: { amount: 'asc' },
 };
 
 export async function getTransactions(options: TypeOptions) {
-  const { search, category, sortBy, page } = options;
-
-  const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
-    latest: { date: 'desc' },
-    oldest: { date: 'asc' },
-    atoz: { name: 'asc' },
-    ztoa: { name: 'desc' },
-    highest: { amount: 'desc' },
-    lowest: { amount: 'asc' },
-  };
+  const { search, category, sortBy, page, onlyRecurringBills } = options;
 
   try {
     const where: Prisma.TransactionWhereInput = {};
@@ -31,6 +32,10 @@ export async function getTransactions(options: TypeOptions) {
 
     if (category !== 'all') {
       where.category = category;
+    }
+
+    if (onlyRecurringBills) {
+      where.recurring = true;
     }
 
     const transactions = await prisma.transaction.findMany({
