@@ -1,3 +1,5 @@
+import { Transaction } from "@prisma/client";
+
 // OVERVIEW
 export type CardProps = {
   title: string;
@@ -18,6 +20,14 @@ export type CardMiniType = {
 };
 
 // BUDGETS
+
+export type BudgetTransaction = {
+  category: BudgetCategory;
+  date: string; // ISO 8601 format
+  amount: number;
+  name: string;
+};
+
 export type BudgetCategory =
   | 'Entertainment'
   | 'Dine Out'
@@ -30,11 +40,4 @@ export type BudgetCategory =
   | 'Shopping'
   | 'Transportation';
 
-export type BudgetTransaction = {
-  category: BudgetCategory;
-  date: string; // ISO 8601 format
-  amount: number;
-  name: string;
-};
-
-export type TransactionsByCategory = Record<string, BudgetTransaction[]>;
+export type TransactionsByCategory = Record<string, Transaction[]>;

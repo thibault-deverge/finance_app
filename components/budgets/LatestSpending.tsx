@@ -1,15 +1,14 @@
 'use client';
 import React, { useState } from 'react';
-import { SpendingCardType } from './BudgetCard';
 import SpendingCard from './SpendingCard';
+import { Transaction } from '@prisma/client';
 
 function LatestSpending({
   allTransactions,
 }: {
-  allTransactions: SpendingCardType[];
+  allTransactions: Transaction[];
 }) {
   const [showAll, setShowAll] = useState(false);
-
   if (!allTransactions || allTransactions.length === 0) {
     return (
       <div className="bg-beige-100 rounded-xl p-4">
@@ -18,8 +17,13 @@ function LatestSpending({
     );
   }
 
+  // Filtrer uniquement les transactions avec des montants négatifs (dépenses)
+  const expenseTransactions = allTransactions.filter(
+    (transaction) => transaction.amount < 0
+  );
+
   // Trier les transactions par date décroissante
-  const sortedTransactions = [...allTransactions].sort(
+  const sortedTransactions = [...expenseTransactions].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 

@@ -4,12 +4,19 @@ import { getAllTransactions, getSpent } from '@/lib/utilsBudgets';
 import CardMini from '../ui/CardMini';
 import EditDeleteBudget from './EditDeleteBudget';
 import LatestSpending from './LatestSpending';
+import { TransactionsByCategory } from '@/lib/type';
 
-function BudgetCard({ budget }: { budget: Budget }) {
+function BudgetCard({
+  budget,
+  transactionsByCategory,
+}: {
+  budget: Budget;
+  transactionsByCategory: TransactionsByCategory;
+}) {
   const { category, maximum, theme } = budget;
-  const spent = getSpent(category);
+  const spent = getSpent(category, transactionsByCategory);
   const percentage = parseFloat(((spent / maximum) * 100).toFixed(2));
-  const allTransactions = getAllTransactions(category);
+  const allTransactions = getAllTransactions(category, transactionsByCategory);
 
   return (
     <li className="flex flex-col gap-5 rounded-xl bg-white px-5 py-7">
