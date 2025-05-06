@@ -3,14 +3,14 @@ import AddBudget from '@/components/budgets/AddBudget';
 import BudgetList from '@/components/budgets/BudgetList';
 import SummarySpending from '@/components/budgets/SummarySpending';
 import Title from '@/components/ui/Title';
-import { Budget, Transactions } from '@/lib/type';
+import { Budget, Transaction } from '@prisma/client';
 
 function Budgets({
   budgets,
   transactions,
 }: {
   budgets: Budget[];
-  transactions: Transactions[];
+  transactions: Transaction[];
 }) {
   return (
     <section className="col-span-full h-screen px-4 py-6 xl:col-span-1 xl:h-screen xl:overflow-y-auto">

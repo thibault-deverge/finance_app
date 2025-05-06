@@ -1,6 +1,6 @@
 'use client';
 
-import { Budget, Transactions } from '@/lib/type';
+import { Budget, Transaction } from '@prisma/client';
 import BudgetPieChart from '../ui/BudgetPieChart';
 import CardHeader from '../ui/CardHeader';
 import CardMini from '../ui/CardMini';
@@ -10,7 +10,7 @@ function BudgetsCard({
   transactions,
 }: {
   budgets: Budget[];
-  transactions: Transactions[];
+  transactions: Transaction[];
 }) {
   const MAX_DISPLAY = 4;
   const displayedBudget = budgets.slice(0, MAX_DISPLAY);

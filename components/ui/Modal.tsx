@@ -1,5 +1,4 @@
 'use client';
-
 import React, {
   createContext,
   ReactNode,
@@ -10,6 +9,7 @@ import React, {
 import ModalInput from './ModalInput';
 import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
+import { Budget } from '@prisma/client';
 interface ModalProps {
   children: ReactNode;
 }
@@ -35,15 +35,6 @@ type OpenProps = {
   opens: string;
 };
 
-export interface Budget {
-  id: string;
-  category: string;
-  maximum: number | string;
-  theme: string;
-  userId: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 // Create a context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -100,12 +91,7 @@ function Window({
 }: {
   children: ReactNode;
   name: string;
-  initialData?: {
-    id?: string;
-    category?: string;
-    maximum?: string | number;
-    theme?: string;
-  };
+  initialData?: Budget;
   formAction?: (formData: FormData) => Promise<void>;
 }) {
   const { openName, close } = useModal();

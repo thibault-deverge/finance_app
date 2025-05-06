@@ -1,5 +1,5 @@
 'use client';
-import { Budget, Transactions } from '@/lib/type';
+import { Budget, Transaction } from '@prisma/client';
 import { getTotalCurrent, getTotalMaximum } from '@/lib/utilsBudgets';
 import { Cell, Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
@@ -21,7 +21,7 @@ function BudgetPieChart({
   transactions,
 }: {
   budgets: Budget[];
-  transactions: Transactions[];
+  transactions: Transaction[];
 }) {
   const totalCurrent = getTotalCurrent(transactions);
   const totalMaximum = getTotalMaximum(budgets);

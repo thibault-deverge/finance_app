@@ -54,7 +54,7 @@ export async function updateBudget(formData: FormData) {
   if (!session?.user?.id) {
     throw new Error('You must be connected');
   }
-  console.log(formData);
+  // console.log(formData);
   const id = formData.get('id') as string;
   const category = formData.get('category') as string;
   const maximum = parseFloat(formData.get('maximum') as string);

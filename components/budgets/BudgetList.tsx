@@ -1,16 +1,15 @@
-import { BudgetCategory } from '@/lib/utilsBudgets';
-import BudgetCard from './BudgetCard';
-import { BudgetsProps } from '@/app/(dashboard)/overview/page';
 
-function BudgetList({ budgets }: BudgetsProps) {
-  return budgets ? (
+import BudgetCard from './BudgetCard';
+import { Budget } from '@prisma/client';
+
+function BudgetList({ budgets }: { budgets: Budget[] }) {
+  return budgets.length > 0 ? (
     <ul className="flex flex-col gap-6">
       {budgets.map((budget) => (
         <BudgetCard
           key={budget.id}
           budget={budget}
-          // theme={budget.theme ?? '#f2cdac'}
-          // category={budget.category as BudgetCategory}
+          
         />
       ))}
     </ul>

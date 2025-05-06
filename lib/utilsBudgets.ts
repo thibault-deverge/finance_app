@@ -1,5 +1,5 @@
 import data from '@/data/data.json';
-import { Budget, Transactions } from './type';
+import { Budget, Transaction } from '@prisma/client';
 
 export type BudgetTransaction = {
   category: BudgetCategory;
@@ -39,7 +39,7 @@ const transactionsByCategory: TransactionsByCategory = categoryNames.reduce(
   },
   {} as TransactionsByCategory
 );
-console.log(transactionsByCategory);
+// console.log(transactionsByCategory);
 
 /*
 // Obtenir les 3 dernières transactions d'une catégorie (tous mois confondus)
@@ -76,7 +76,7 @@ export function getMax(category: BudgetCategory): number | undefined {
   return budget?.maximum;
 }
 
-export function getAllTransactions(category: BudgetCategory) {
+export function getAllTransactions(category: string) {
   return [...transactionsByCategory[category]].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
@@ -98,7 +98,7 @@ export function formatAmountBudget(amount: number): string {
 //##################################################################################
 //##################################################################################
 
-export function getTotalCurrent(data: Transactions[]): number {
+export function getTotalCurrent(data: Transaction[]): number {
   const total = data
     .filter((t) => t.amount < 0)
     .reduce((sum, t) => sum + t.amount, 0);
@@ -110,7 +110,7 @@ export function getTotalMaximum(data: Budget[]): number {
   return Math.round(total);
 }
 
-export function getSpent(category: BudgetCategory): number {
+export function getSpent(category: string): number {
   return [...transactionsByCategory[category]].reduce((acc, t) => {
     // On n'ajoute que les montants négatifs
     if (t.amount < 0) {

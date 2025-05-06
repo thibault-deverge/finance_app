@@ -1,4 +1,4 @@
-import { Budget } from '@/app/(dashboard)/overview/page';
+import { Budget } from '@prisma/client';
 import { Progress } from '@/components/ui/progress';
 import { getAllTransactions, getSpent } from '@/lib/utilsBudgets';
 import CardMini from '../ui/CardMini';
@@ -16,7 +16,7 @@ function BudgetCard({ budget }: { budget: Budget }) {
       <div className="flex justify-between">
         <div className="flex items-center gap-4">
           <div
-            style={{ backgroundColor: theme }}
+            style={{ backgroundColor: theme ?? '#f2cdac' }}
             className={`h-4 w-4 rounded-full`}
           ></div>
           <h3 className="text-preset-2 text-grey-900">{category}</h3>
@@ -28,13 +28,18 @@ function BudgetCard({ budget }: { budget: Budget }) {
         <Progress
           className="bg-beige-100 h-8 w-full rounded-md" // rounded-md équivaut à environ 4px
           value={percentage}
-          indicatorColor={theme}
+          indicatorColor={theme ?? '#f2cdac'}
           innerPadding={4}
         />
       </div>
       <div className="flex items-center justify-between">
         <div className="w-1/2">
-          <CardMini title="Spent" amount={spent} color={theme} type="budgets" />
+          <CardMini
+            title="Spent"
+            amount={spent}
+            color={theme ?? '#f2cdac'}
+            type="budgets"
+          />
         </div>
         <div className="w-1/2">
           <CardMini
@@ -46,31 +51,8 @@ function BudgetCard({ budget }: { budget: Budget }) {
         </div>
       </div>
       <LatestSpending allTransactions={allTransactions} />
-      {/* <div className="bg-beige-100 rounded-xl p-4">
-        <div className="mb-5 flex items-center justify-between">
-          <h3 className="text-preset-3 text-grey-900">Latest Spending</h3>
-          <div className="flex items-center gap-3">
-            <p className="text-preset-4 text-grey-500">Sell All</p>
-            <img
-              className="cursor-pointer"
-              src="images/icons/icon-caret-right.svg"
-              alt="icon carret right"
-            />
-          </div>
-        </div>
-        {allTransactions &&
-          allTransactions.map((transaction) => (
-            <ul>
-              <React.Fragment key={transaction.name}>
-                <SpendingCard {...transaction} />
-                <div className="border-grey-500 my-4 h-px border-b last:border-b-0"></div>
-              </React.Fragment>
-            </ul>
-          ))}
-      </div> */}
     </li>
   );
 }
-//{ title, amount, color, type }
-// {name,date,amount}
+
 export default BudgetCard;

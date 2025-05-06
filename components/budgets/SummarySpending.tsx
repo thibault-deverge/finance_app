@@ -1,4 +1,4 @@
-import { Budget } from '@/lib/type';
+import { Budget } from '@prisma/client';
 import { getSpent } from '@/lib/utilsBudgets';
 import React from 'react';
 import CardMiniBudget from './CardMiniBudgets';

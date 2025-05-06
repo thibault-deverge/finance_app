@@ -1,8 +1,8 @@
-import { Transactions } from '@/lib/type';
+import { Transaction } from '@prisma/client';
 import { formatDateToShortString } from '@/lib/utils';
 import CardHeader from '../ui/CardHeader';
 
-function TransactionsCard({ transactions }: { transactions: Transactions[] }) {
+function TransactionsCard({ transactions }: { transactions: Transaction[] }) {
   const MAX_DISPLAY = 5;
   const displayedTransactions = transactions
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -27,7 +27,7 @@ function TransactionsCard({ transactions }: { transactions: Transactions[] }) {
   );
 }
 
-function TransactionListItem({ transaction }: { transaction: Transactions }) {
+function TransactionListItem({ transaction }: { transaction: Transaction }) {
   const { avatar, name, amount, date } = transaction;
   return (
     <li className="flex justify-between border-b border-gray-300 py-5 last:border-b-0">

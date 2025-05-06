@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Balance, CardProps } from '@/lib/type';
+import { CardProps } from '@/lib/type';
+import { Balance } from '@prisma/client';
 import { formatAmount } from '@/lib/utils';
 
 function OverviewCards({ balance }: { balance: Balance[] }) {

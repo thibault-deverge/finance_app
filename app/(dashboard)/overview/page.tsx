@@ -1,9 +1,9 @@
+import Overview from '@/components/overview/Overview';
+import { Suspense } from 'react';
+import { Spinner } from '@/components/ui/Spinner';
 import { getAllBalances } from '@/actions/balance';
 import { getBudgets } from '@/actions/budgets';
 import { getAllTransactions } from '@/actions/transactions';
-import Overview from '@/components/overview/Overview';
-import { Spinner } from '@/components/ui/Spinner';
-import { Suspense } from 'react';
 
 async function Page() {
   const budgets = await getBudgets();
