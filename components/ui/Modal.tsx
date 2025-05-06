@@ -9,7 +9,8 @@ import React, {
 import ModalInput from './ModalInput';
 import ModalSelectCategory from './ModalSelectCategory';
 import ModalSelectColor from './ModalSelectColor';
-import { Budget } from '@prisma/client';
+import { Budget, Pot } from '@prisma/client';
+import { FormDataState } from '@/lib/type';
 interface ModalProps {
   children: ReactNode;
 }
@@ -91,14 +92,18 @@ function Window({
 }: {
   children: ReactNode;
   name: string;
-  initialData?: Budget;
+  initialData?: Budget | Pot;
   formAction?: (formData: FormData) => Promise<void>;
 }) {
   const { openName, close } = useModal();
 
-  const [formData, setFormData] = useState({
-    category: initialData?.category || '',
-    maximum: initialData?.maximum || '',
+  const [formData, setFormData] = useState<FormDataState>({
+    name: initialData && 'name' in initialData ? initialData.name : '',
+    target: initialData && 'target' in initialData ? initialData.target : '',
+    total: initialData && 'total' in initialData ? initialData.total : '',
+    category:
+      initialData && 'category' in initialData ? initialData.category : '',
+    maximum: initialData && 'maximum' in initialData ? initialData.maximum : '',
     theme: initialData?.theme || '',
   });
   useEffect(() => {
@@ -159,6 +164,8 @@ function Window({
             {/* Champs cachés pour transmettre les données d'état */}
             {/* Ces champs ne sont pas visibles mais seront soumis avec le formulaire */}
             <input type="hidden" name="category" value={formData.category} />
+            <input type="hidden" name="name" value={formData.name} />
+            <input type="hidden" name="target" value={formData.target} />
             <input
               type="hidden"
               name="maximum"

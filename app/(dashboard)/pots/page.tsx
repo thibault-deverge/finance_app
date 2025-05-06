@@ -1,10 +1,15 @@
-import Title from '@/components/ui/Title';
+import Pots from '@/components/pots/Pots';
+import { getPots } from '@/actions/pots';
+import { Spinner } from '@/components/ui/Spinner';
+import { Suspense } from 'react';
 
-function Page() {
+async function Page() {
+  const pots = await getPots();
+
   return (
-    <section className="flex w-full items-center justify-center">
-      <Title name="Pots" />
-    </section>
+    <Suspense fallback={<Spinner />}>
+      <Pots pots={pots} />;
+    </Suspense>
   );
 }
 

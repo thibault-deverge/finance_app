@@ -40,7 +40,7 @@ function Budgets({
       <div className="grid grid-cols-1 gap-6">
         <div className="flex flex-col gap-8 rounded-xl bg-white pt-8">
           <BudgetPieChart budgets={budgets} transactions={transactions} />
-          <SummarySpending budgets={budgets} transactionsByCategory={transactionsByCategory}/>
+          <SummarySpending  budgets={budgets} transactionsByCategory={transactionsByCategory}/>
         </div>
         <BudgetList budgets={budgets} transactionsByCategory={transactionsByCategory}/>
       </div>

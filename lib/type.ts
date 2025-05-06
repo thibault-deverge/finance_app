@@ -41,3 +41,13 @@ export type BudgetCategory =
   | 'Transportation';
 
 export type TransactionsByCategory = Record<string, Transaction[]>;
+
+
+export interface FormDataState {
+  name: string;
+  target: string | number;
+  total: string | number;
+  category: string;
+  maximum: string | number;
+  theme: string;
+}
