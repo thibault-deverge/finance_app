@@ -1,8 +1,7 @@
-"use server";
-import bcrypt from "bcryptjs";
-
-import { prisma } from "@/lib/prisma";
-import { signUpSchema } from "@/lib/schemas";
+'use server';
+import { prisma } from '@/lib/prisma';
+import { signUpSchema } from '@/lib/schemas';
+import bcrypt from 'bcryptjs';
 
 export interface SignupInput {
   name: string;
@@ -17,7 +16,7 @@ export async function signupAction(data: SignupInput) {
   // check if email already exists
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) {
-    throw new Error("Email already in use");
+    throw new Error('Email already in use');
   }
 
   // Hash password

@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { SpinnerMini } from '@/components/SpinnerMini';
+import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Eye, EyeOff } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 
@@ -81,7 +81,7 @@ function LoginForm() {
                     />
                     <button
                       type="button"
-                      className="absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transform cursor-pointer"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}

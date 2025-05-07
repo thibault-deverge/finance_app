@@ -1,29 +1,26 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardProps } from '@/lib/type';
+import { Balance } from '@prisma/client';
 import { formatAmount } from '@/lib/utils';
-import { v4 as uuidv4 } from 'uuid';
-type CardProps = {
-  title: string;
-  amount: number;
-  isFirstCard: boolean;
-};
-const cardsInfo = [
-  { id: uuidv4(), title: 'Current Balance', amount: 4836.0 },
-  { id: uuidv4(), title: 'Income', amount: 3814.25 },
-  { id: uuidv4(), title: 'Expenses', amount: 1700.5 },
-];
 
-function OverviewCards() {
+function OverviewCards({ balance }: { balance: Balance[] }) {
   return (
     <div className="col-span-full flex w-full flex-col justify-between gap-6 md:flex-row">
-      {cardsInfo &&
-        cardsInfo.map(({ id, title, amount }, index) => (
-          <SummaryCard
-            key={id}
-            title={title}
-            amount={amount}
-            isFirstCard={index === 0}
-          />
-        ))}
+      <SummaryCard
+        title="current"
+        amount={balance[0].current}
+        isFirstCard={true}
+      />
+      <SummaryCard
+        title="income"
+        amount={balance[0].income}
+        isFirstCard={false}
+      />
+      <SummaryCard
+        title="expenses"
+        amount={balance[0].expenses}
+        isFirstCard={false}
+      />
     </div>
   );
 }

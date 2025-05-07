@@ -2,7 +2,9 @@
   --grey-900: #201f24;
   --beige-100: #f8f4f0;
 }
-
+body {
+  overflow: hidden; /* Hide scrollbars */
+}
 @layer components {
   .spinner {
     margin: 3.2rem auto 1.6rem;
@@ -44,6 +46,7 @@
 .no-spinner {
   -moz-appearance: textfield; /* Firefox */
 }
+
 @theme {
   --shadow-1: inset 0px -8px 0px 0px #cc8b13;
   --shadow-2: inset 0px -8px 0px 0px #118c87;

@@ -1,7 +1,7 @@
-import { v4 as uuidv4 } from 'uuid';
-import CardHeader from '../ui/CardHeader';
-import CardMini from '../ui/CardMini';
+import CardHeader from '@/components/ui/CardHeader';
+import CardMini from '@/components/ui/CardMini';
 import data from '../../data/data.json';
+import { v4 as uuidv4 } from 'uuid';
 
 const MAX_DISPLAY = 4;
 const { pots: allPots } = data;

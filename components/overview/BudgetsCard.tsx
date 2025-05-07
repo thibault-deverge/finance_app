@@ -1,34 +1,34 @@
 'use client';
 
-import { v4 as uuidv4 } from 'uuid';
-import data from '../../data/data.json';
-import BudgetPieChart from '../BudgetPieChart';
-import CardHeader from '../ui/CardHeader';
-import CardMini from '../ui/CardMini';
+import BudgetPieChart from '@/components/ui/BudgetPieChart';
+import CardHeader from '@/components/ui/CardHeader';
+import CardMini from '@/components/ui/CardMini';
+import { Budget, Transaction } from '@prisma/client';
 
-const MAX_DISPLAY = 4;
-const { budgets: allBudgets } = data;
+function BudgetsCard({
+  budgets,
+  transactions,
+}: {
+  budgets: Budget[];
+  transactions: Transaction[];
+}) {
+  const MAX_DISPLAY = 4;
+  const displayedBudget = budgets.slice(0, MAX_DISPLAY);
 
-const displayedBudget = allBudgets.slice(0, MAX_DISPLAY).map((transaction) => ({
-  ...transaction,
-  id: uuidv4(),
-}));
-
-function BudgetsCard() {
   return (
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
       <CardHeader title="Budgets" href="/budgets" />
       <div className="md:flex">
-        <BudgetPieChart />
+        <BudgetPieChart budgets={budgets} transactions={transactions} />
 
         <div className="col-span-full mx-auto grid w-full max-w-[340px] grid-cols-2 gap-4">
-          {displayedBudget &&
+          {displayedBudget.length > 0 &&
             displayedBudget.map((budget) => (
               <CardMini
                 key={budget.id}
                 title={budget.category}
                 amount={budget.maximum}
-                color={budget.theme}
+                color={budget.theme || '#000000'}
                 type="budgets"
               />
             ))}

@@ -1,11 +1,10 @@
-import Title from '@/components/ui/Title';
+import { getPots } from '@/actions/pots';
+import Pots from '@/components/pots/Pots';
 
-function Page() {
-  return (
-    <section className="flex w-full items-center justify-center">
-      <Title name="Pots" />
-    </section>
-  );
+async function Page() {
+  const pots = await getPots();
+
+  return <Pots pots={pots} />;
 }
 
 export default Page;

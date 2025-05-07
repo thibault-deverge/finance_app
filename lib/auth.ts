@@ -23,8 +23,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         // get user from its email
         const { email, password } = result.data;
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user || !user.password) return null;
 
+        if (!user || !user.password) return null;
         // compare password
         const passwordMatches = await bcrypt.compare(password, user.password);
         if (!passwordMatches) return null;
@@ -37,6 +37,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60,
+  },
+  callbacks: {
+    async session({ session, token }) {
+      if (token && session.user) {
+        // Utiliser sub comme ID utilisateur
+        session.user.id = token.sub as string;
+      }
+      return session;
+    },
   },
   pages: {
     signIn: '/auth',
