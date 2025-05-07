@@ -1,9 +1,7 @@
-import Overview from '@/components/overview/Overview';
-import { Suspense } from 'react';
-import { Spinner } from '@/components/ui/Spinner';
 import { getAllBalances } from '@/actions/balance';
 import { getBudgets } from '@/actions/budgets';
 import { getAllTransactions } from '@/actions/transactions';
+import Overview from '@/components/overview/Overview';
 
 async function Page() {
   const budgets = await getBudgets();
@@ -11,13 +9,7 @@ async function Page() {
   const balance = await getAllBalances();
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <Overview
-        budgets={budgets}
-        transactions={transactions}
-        balance={balance}
-      />
-    </Suspense>
+    <Overview budgets={budgets} transactions={transactions} balance={balance} />
   );
 }
 

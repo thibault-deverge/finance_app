@@ -2,7 +2,9 @@
   --grey-900: #201f24;
   --beige-100: #f8f4f0;
 }
-
+body {
+  overflow: hidden; /* Hide scrollbars */
+}
 @layer components {
   .spinner {
     margin: 3.2rem auto 1.6rem;
@@ -43,36 +45,6 @@
 
 .no-spinner {
   -moz-appearance: textfield; /* Firefox */
-}
-
-html {
-  overflow-y: scroll;
-}
-
-/* Classe pour la modale ouverte */
-html.modal-open {
-  /* Nous gardons le scroll visible mais nous bloquons son utilisation */
-  height: 100%;
-}
-
-/* Classe pour la modale ouverte */
-.modal-open body {
-  /* Empêche le défilement du contenu */
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
-
-/* Classe pour quand le select est ouvert */
-html.select-open {
-  /* Force le scroll à être visible */
-  overflow-y: scroll !important;
-}
-
-/* Overrides pour corriger le comportement de l'interface lorsque le select est ouvert */
-.select-open .select-content {
-  z-index: 9999 !important;
 }
 
 @theme {

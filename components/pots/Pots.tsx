@@ -16,16 +16,5 @@ function Pots({ pots }: { pots: Pot[] }) {
     </section>
   );
 }
-/*
- {
-    id: 'cm9o95ikw001fzyz3rgzgsbkr',
-    name: 'Gift',
-    target: 150,
-    total: 110,
-    theme: '#82C9D7',
-    userId: 'cm9o95j04001izyz3kszpqj4c',
-    createdAt: 2025-04-19T13:26:53.264Z,
-    updatedAt: 2025-04-19T13:26:53.264Z
-  },
-*/
+
 export default Pots;

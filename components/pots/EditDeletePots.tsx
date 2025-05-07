@@ -1,15 +1,15 @@
 'use client';
 
+import { deletePot, updatePot } from '@/actions/pots';
 import Modal from '@/components/ui/Modal//Modal';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
 import { Pot } from '@prisma/client';
-import { deleteBudget, updateBudget } from '@/actions/budgets';
 
 function EditDeletePots({ pot }: { pot: Pot }) {
   return (
@@ -44,7 +44,7 @@ function EditDeletePots({ pot }: { pot: Pot }) {
           </Modal.Open>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Modal.Window name="edit-pot" initialData={pot} formAction={updateBudget}>
+      <Modal.Window name="edit-pot" initialData={pot} formAction={updatePot}>
         <Modal.Header title="Edit Pot" />
         <Modal.Description description="If your saving targets change, feel free to update your pots." />
         <Modal.Name title="Pot Name" />
@@ -59,13 +59,9 @@ function EditDeletePots({ pot }: { pot: Pot }) {
           Save Changes
         </Button>
       </Modal.Window>
-      <Modal.Window
-        name="delete-pot"
-        initialData={pot}
-        formAction={deleteBudget}
-      >
+      <Modal.Window name="delete-pot" initialData={pot} formAction={deletePot}>
         <Modal.Header title={`Delete '${pot.name}'`} />
-        <Modal.Description description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever." />
+        <Modal.Description description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever." />
         <Button
           type="submit"
           variant="destructive"

@@ -1,16 +1,10 @@
-import Pots from '@/components/pots/Pots';
 import { getPots } from '@/actions/pots';
-import { Spinner } from '@/components/ui/Spinner';
-import { Suspense } from 'react';
+import Pots from '@/components/pots/Pots';
 
 async function Page() {
   const pots = await getPots();
 
-  return (
-    <Suspense fallback={<Spinner />}>
-      <Pots pots={pots} />;
-    </Suspense>
-  );
+  return <Pots pots={pots} />;
 }
 
 export default Page;

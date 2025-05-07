@@ -1,15 +1,15 @@
 'use client';
 
+import Modal from '@/components/ui/Modal/Modal';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { Budget } from '@prisma/client';
 import { deleteBudget, updateBudget } from '@/actions/budgets';
-import Modal from '../ui/Modal/Modal';
 
 function EditDeleteBudget({ budget }: { budget: Budget }) {
   return (
@@ -52,7 +52,7 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
         <Modal.Header title="Edit Budget" />
         <Modal.Description description="As your budgets change, feel free to update your spending limits." />
         <Modal.Category title="Budget Category" />
-        <Modal.Amount title="Maximum Spending" />
+        <Modal.Amount title="Maximum Spending" name="budget" />
         <Modal.Theme title="Theme" />
         <Button
           type="submit"
@@ -69,7 +69,7 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
         formAction={deleteBudget}
       >
         <Modal.Header title={`Delete '${budget.category}'`} />
-        <Modal.Description description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever." />
+        <Modal.Description description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever." />
         <Button
           type="submit"
           variant="destructive"
