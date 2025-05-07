@@ -2,12 +2,14 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-function ModalInput({
+function InputAmount({
   title,
+  name,
   value,
   onChange,
 }: {
   title: string;
+  name: string;
   value: number | string;
   onChange: (value: number) => void;
 }) {
@@ -24,7 +26,7 @@ function ModalInput({
         className="no-spinner items-center px-8 py-2.25"
         type="number"
         id="number"
-        placeholder="Amount"
+        placeholder={name === 'budget' ? 'Amount' : 'e.g. 2000'}
         min={0}
         max={10000}
         value={value === 0 ? '' : value}
@@ -36,4 +38,4 @@ function ModalInput({
   );
 }
 
-export default ModalInput;
+export default InputAmount;

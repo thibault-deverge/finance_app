@@ -2,7 +2,7 @@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
-function ModalNameInput({
+function PotInputName({
   title,
   value,
   onChange,
@@ -27,16 +27,14 @@ function ModalNameInput({
         {title}
       </Label>
       <Input
-        className="no-spinner items-center px-8 py-2.25"
+        className="no-spinner items-center px-4 py-2.25"
         type="string"
         id="name"
-        placeholder="e.g.2000"
+        placeholder="e.g. Rainy Days"
         value={value}
         onChange={handleInputChange}
         maxLength={maxLength}
-      >
-        $
-      </Input>
+      ></Input>
       <p className="mt-1 self-end text-sm text-gray-500">
         {value.length} of {maxLength} characters used
       </p>
@@ -44,4 +42,4 @@ function ModalNameInput({
   );
 }
 
-export default ModalNameInput;
+export default PotInputName;

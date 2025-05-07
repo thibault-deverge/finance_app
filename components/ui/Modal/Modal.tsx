@@ -1,14 +1,15 @@
-import { createContext, useContext, useState } from 'react';
-import { ModalContextType, ModalProps } from '@/lib/type';
-import Open from '@/components/ui/Modal/Open';
-import Window from '@/components/ui/Modal/Window';
-import Header from '@/components/ui/Modal/Header';
-import Description from '@/components/ui/Modal/Description';
+'use client';
+import Theme from '@/components/ui/Modal/GenericSelectTheme';
 import Category from '@/components/ui/Modal/Category';
-import Name from '@/components/ui/Modal/Name';
 import Amount from '@/components/ui/Modal/Amount';
+import Description from '@/components/ui/Modal/Description';
+import Header from '@/components/ui/Modal/Header';
+import Name from '@/components/ui/Modal/Name';
+import Open from '@/components/ui/Modal/Open';
 import Target from '@/components/ui/Modal/Target';
-import Theme from '@/components/ui/Modal/Theme';
+import Window from '@/components/ui/Modal/Window';
+import { ModalContextType, ModalProps } from '@/lib/type';
+import { createContext, useContext, useState } from 'react';
 
 // Create a context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);

@@ -46,9 +46,9 @@ function EditDeletePots({ pot }: { pot: Pot }) {
       </DropdownMenu>
       <Modal.Window name="edit-pot" initialData={pot} formAction={updateBudget}>
         <Modal.Header title="Edit Pot" />
-        <Modal.Description description="As your budgets change, feel free to update your spending limits." />
-        <Modal.Category title="Pot Name" />
-        <Modal.Amount title="Target" />
+        <Modal.Description description="If your saving targets change, feel free to update your pots." />
+        <Modal.Name title="Pot Name" />
+        <Modal.Amount title="Target" name="pot" />
         <Modal.Theme title="Theme" />
         <Button
           type="submit"

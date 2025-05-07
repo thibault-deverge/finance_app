@@ -1,4 +1,5 @@
-import ModalSelectColor from '@/components/ui/Modal/ModalSelectColor';
+'use client';
+import GenericSelectTheme from '@/components/ui/Modal/ModalSelectColor';
 import { useFormContext } from '@/components/ui/Modal/Window';
 
 function Theme({ title }: { title: string }) {
@@ -7,7 +8,7 @@ function Theme({ title }: { title: string }) {
     updateFormData('theme', value);
   };
   return (
-    <ModalSelectColor
+    <GenericSelectTheme
       title={title}
       value={formData.theme}
       onChange={handleChange}

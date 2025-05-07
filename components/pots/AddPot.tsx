@@ -17,13 +17,10 @@ function AddPot({ pots }: { pots: Pot[] }) {
       </Modal.Open>
       <Modal.Window name="add-pot" formAction={createPot}>
         <Modal.Header title="Add New Pot" />
-        <Modal.Description
-          description="Choose a category to set a spending pot. These categories can help
-          you monitor spending."
-        />
+        <Modal.Description description="Create a pot to set savings targets. These can help keep you on track as you save for special purchases." />
         <Modal.Name title="Pot Name" />
-        <Modal.Target title="Target" />
-        <Modal.Theme title="Color Tag" />
+        <Modal.Target title="Target" name="pot" />
+        <Modal.Theme title="Theme" />
 
         <Button
           type="submit"

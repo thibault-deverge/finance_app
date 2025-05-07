@@ -1,3 +1,4 @@
+'use client';
 import {
   createContext,
   ReactNode,
@@ -113,9 +114,10 @@ function Window({
               name="maximum"
               value={formData.maximum.toString()}
             />
-            {formData.theme && (
+            <input type="hidden" name="theme" value={formData.theme} />
+            {/* {formData.theme && (
               <input type="hidden" name="theme" value={formData.theme} />
-            )}
+            )} */}
           </form>
         </FormContext.Provider>
       </div>

@@ -21,7 +21,7 @@ function AddBudget() {
           you monitor spending."
         />
         <Modal.Category title="Budget Category" />
-        <Modal.Amount title="Maximum Spending" />
+        <Modal.Amount title="Maximum Spending" name="budget"/>
         <Modal.Theme title="Theme" />
 
         <Button

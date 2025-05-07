@@ -1,3 +1,4 @@
+'use client';
 import { useModal } from '@/components/ui/Modal/Modal';
 
 function Header({ title }: { title: string }) {

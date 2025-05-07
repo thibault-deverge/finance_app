@@ -1,4 +1,5 @@
-import ModalNameInput from '@/components/ui/Modal/ModalNameInput';
+'use client';
+import PotInputName from '@/components/ui/Modal/PotInputName';
 import { useFormContext } from '@/components/ui/Modal/Window';
 
 function Name({ title }: { title: string }) {
@@ -8,7 +9,7 @@ function Name({ title }: { title: string }) {
     updateFormData('name', value);
   };
   return (
-    <ModalNameInput
+    <PotInputName
       title={title}
       value={formData.name}
       onChange={handleChange}

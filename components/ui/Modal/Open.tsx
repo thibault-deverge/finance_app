@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { useModal } from '@/components/ui/Modal/Modal';
 import { OpenProps } from '@/lib/type';

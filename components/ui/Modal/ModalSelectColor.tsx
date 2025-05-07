@@ -47,7 +47,7 @@ function ColorSelectItem({
     </SelectItem>
   );
 }
-function ModalSelectColor({
+function BudgetSelectTheme({
   title,
   value,
   onChange,
@@ -82,4 +82,4 @@ function ModalSelectColor({
   );
 }
 
-export default ModalSelectColor;
+export default BudgetSelectTheme;

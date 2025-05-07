@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label';
 import { getAllCategories } from '@/lib/utilsBudgets';
 import { useEffect, useState } from 'react';
 
-function ModalSelectCategory({
+function BudgetSelectCategory({
   title,
   value,
   onChange,
@@ -87,4 +87,4 @@ function ModalSelectCategory({
   );
 }
 
-export default ModalSelectCategory;
+export default BudgetSelectCategory;

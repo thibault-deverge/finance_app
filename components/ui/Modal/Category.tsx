@@ -1,4 +1,5 @@
-import ModalSelectCategory from '@/components/ui/Modal/ModalSelectCategory';
+'use client';
+import BudgetSelectCategory from '@/components/ui/Modal/BudgetSelectCategory';
 import { useFormContext } from '@/components/ui/Modal/Window';
 
 function Category({ title }: { title: string }) {
@@ -8,7 +9,7 @@ function Category({ title }: { title: string }) {
     updateFormData('category', value);
   };
   return (
-    <ModalSelectCategory
+    <BudgetSelectCategory
       title={title}
       value={formData.category}
       onChange={handleChange}
