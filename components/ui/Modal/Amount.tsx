@@ -2,7 +2,15 @@
 import InputAmount from '@/components/ui/Modal/InputAmount';
 import { useFormContext } from '@/components/ui/Modal/Window';
 
-function Amount({ title, name }: { title: string; name: string }) {
+function Amount({
+  title,
+  name,
+  onAmountChange,
+}: {
+  title: string;
+  name: string;
+  onAmountChange?: (value: number) => void;
+}) {
   const { formData, updateFormData } = useFormContext();
 
   const handleChangeBudget = (value: number) => {
@@ -12,6 +20,11 @@ function Amount({ title, name }: { title: string; name: string }) {
   const handleChangePot = (value: number) => {
     updateFormData('target', value);
   };
+  const handleChangePotAdd = (value: number) => {
+    updateFormData('total', value);
+    // Propagez le changement au parent si nécessaire
+    if (onAmountChange) onAmountChange(value);
+  };
 
   if (name === 'budget') {
     return (
@@ -19,6 +32,16 @@ function Amount({ title, name }: { title: string; name: string }) {
         title={title}
         value={Number(formData.maximum) || 0}
         onChange={handleChangeBudget}
+        name={name}
+      />
+    );
+  }
+  if (name === 'addMoneyPot' || 'withdraw-moneyPot') {
+    return (
+      <InputAmount
+        title={title}
+        value={Number(formData.total) || 0}
+        onChange={handleChangePotAdd}
         name={name}
       />
     );

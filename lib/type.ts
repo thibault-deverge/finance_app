@@ -76,6 +76,7 @@ export interface FormContextType {
     name: string;
     target: string | number;
     theme: string;
+    total: string | number;
   };
   updateFormData: (
     field: keyof FormContextType['formData'],

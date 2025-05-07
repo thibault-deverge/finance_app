@@ -9,10 +9,12 @@ interface ProgressProps
   extends React.ComponentProps<typeof ProgressPrimitive.Root> {
   indicatorColor?: string;
   innerPadding?: number;
+  classNamePrimitive?: string;
 }
 
 function Progress({
   className,
+  classNamePrimitive,
   value,
   indicatorColor,
   innerPadding = 0,
@@ -30,7 +32,10 @@ function Progress({
       <div className="absolute inset-0 p-1">
         <ProgressPrimitive.Indicator
           data-slot="progress-indicator"
-          className="h-full rounded-sm transition-all"
+          className={cn(
+            'h-full transition-all',
+            classNamePrimitive ? classNamePrimitive : 'rounded-sm'
+          )}
           style={{
             width: `${value || 0}%`,
             backgroundColor: indicatorColor || '#f2cdac',

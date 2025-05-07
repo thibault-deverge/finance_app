@@ -26,7 +26,13 @@ function InputAmount({
         className="no-spinner items-center px-8 py-2.25"
         type="number"
         id="number"
-        placeholder={name === 'budget' ? 'Amount' : 'e.g. 2000'}
+        placeholder={
+          name === 'budget'
+            ? 'Amount'
+            : name === 'addMoneyPot'
+              ? '0'
+              : 'e.g. 2000'
+        }
         min={0}
         max={10000}
         value={value === 0 ? '' : value}

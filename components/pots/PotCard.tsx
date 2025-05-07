@@ -2,10 +2,11 @@ import EditDeletePots from './EditDeletePots';
 import { Pot } from '@prisma/client';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
+import AddMoney from './AddMoney';
+import WithdrawMoney from './WithdrawMoney';
 
 function PotCard({ pot }: { pot: Pot }) {
   const { name, theme, target, total } = pot;
-  // console.log(pot);
   const percentage = parseFloat(((total / target) * 100).toFixed(2));
   return (
     <li className="flex flex-col gap-5 rounded-xl bg-white px-5 py-7">
@@ -39,12 +40,11 @@ function PotCard({ pot }: { pot: Pot }) {
           </div>
         </div>
         <div className="flex gap-4">
-          <Button variant="oauth" className="flex-1">
+          <AddMoney pot={pot} />
+          {/* <Button variant="oauth" className="flex-1">
             + Add Money
-          </Button>
-          <Button variant="oauth" className="flex-1">
-            Withdraw
-          </Button>
+          </Button> */}
+          <WithdrawMoney pot={pot} />
         </div>
       </div>
     </li>

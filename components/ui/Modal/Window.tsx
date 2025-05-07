@@ -62,15 +62,11 @@ function Window({
     // Ajouter l'écouteur d'événement lorsque la modale est ouverte
     if (name === openName) {
       document.addEventListener('keydown', handleEscapeKey);
-
-      // Au lieu de modifier le body, on ajoute une classe à un niveau plus haut
-      document.documentElement.classList.add('modal-open');
     }
 
     // Nettoyer l'écouteur d'événement lors du démontage du composant
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
-      document.documentElement.classList.remove('modal-open');
     };
   }, [close, name, openName]);
 
@@ -115,9 +111,7 @@ function Window({
               value={formData.maximum.toString()}
             />
             <input type="hidden" name="theme" value={formData.theme} />
-            {/* {formData.theme && (
-              <input type="hidden" name="theme" value={formData.theme} />
-            )} */}
+            <input type="hidden" name="total" value={formData.total} />
           </form>
         </FormContext.Provider>
       </div>
