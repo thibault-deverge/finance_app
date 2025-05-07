@@ -1,6 +1,6 @@
+import CardHeader from '@/components/ui/CardHeader';
 import { Transaction } from '@prisma/client';
 import { formatDateToShortString } from '@/lib/utils';
-import CardHeader from '../ui/CardHeader';
 
 function TransactionsCard({ transactions }: { transactions: Transaction[] }) {
   const MAX_DISPLAY = 5;

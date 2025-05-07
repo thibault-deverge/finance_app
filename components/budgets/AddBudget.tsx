@@ -1,7 +1,7 @@
 'use client';
 import { createBudget } from '@/actions/budgets';
-import { Button } from '../ui/button';
-import Modal from '../ui/Modal';
+import { Button } from '@/components/ui/button';
+import Modal from '@/components/ui/Modal/Modal';
 
 function AddBudget() {
   return (

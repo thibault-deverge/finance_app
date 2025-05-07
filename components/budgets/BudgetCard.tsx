@@ -1,9 +1,9 @@
-import { Budget } from '@prisma/client';
-import { Progress } from '@/components/ui/progress';
-import { getAllTransactions, getSpent } from '@/lib/utilsBudgets';
-import CardMini from '../ui/CardMini';
+import CardMini from '@/components/ui/CardMini';
 import EditDeleteBudget from './EditDeleteBudget';
 import LatestSpending from './LatestSpending';
+import { getAllTransactions, getSpent } from '@/lib/utilsBudgets';
+import { Budget } from '@prisma/client';
+import { Progress } from '@/components/ui/progress';
 import { TransactionsByCategory } from '@/lib/type';
 
 function BudgetCard({

@@ -63,7 +63,7 @@ function ModalSelectColor({
         <SelectTrigger className="w-full px-5 py-5 hover:cursor-pointer">
           <SelectValue placeholder="Select a category" />
         </SelectTrigger>
-        <SelectContent className="z-50 bg-white">
+        <SelectContent className="max-h-72 overflow-auto bg-white">
           <SelectGroup>
             <SelectLabel>Categories</SelectLabel>
             {themeColors.length > 0 &&

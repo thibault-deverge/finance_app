@@ -7,9 +7,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '../ui/button';
-import Modal from '../ui/Modal';
 import { Budget } from '@prisma/client';
 import { deleteBudget, updateBudget } from '@/actions/budgets';
+import Modal from '../ui/Modal/Modal';
 
 function EditDeleteBudget({ budget }: { budget: Budget }) {
   return (

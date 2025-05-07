@@ -1,9 +1,9 @@
 'use client';
 
+import BudgetPieChart from '@/components/ui/BudgetPieChart';
+import CardHeader from '@/components/ui/CardHeader';
+import CardMini from '@/components/ui/CardMini';
 import { Budget, Transaction } from '@prisma/client';
-import BudgetPieChart from '../ui/BudgetPieChart';
-import CardHeader from '../ui/CardHeader';
-import CardMini from '../ui/CardMini';
 
 function BudgetsCard({
   budgets,

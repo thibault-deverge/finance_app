@@ -1,9 +1,10 @@
 'use client';
+import Modal from '@/components/ui/Modal/Modal';
 import { createPot } from '@/actions/pots';
-import { Button } from '../ui/button';
-import Modal from '../ui/Modal';
+import { Button } from '@/components/ui/button';
+import { Pot } from '@prisma/client';
 
-function AddPot() {
+function AddPot({ pots }: { pots: Pot[] }) {
   return (
     <Modal>
       <Modal.Open opens="add-pot">
@@ -20,8 +21,8 @@ function AddPot() {
           description="Choose a category to set a spending pot. These categories can help
           you monitor spending."
         />
-        <Modal.Category title="Pot Name" />
-        <Modal.Amount title="Target" />
+        <Modal.Name title="Pot Name" />
+        <Modal.Target title="Target" />
         <Modal.Theme title="Color Tag" />
 
         <Button

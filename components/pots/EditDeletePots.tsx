@@ -1,13 +1,13 @@
 'use client';
 
+import Modal from '@/components/ui/Modal//Modal';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '../ui/button';
-import Modal from '../ui/Modal';
+import { Button } from '@/components/ui/button';
 import { Pot } from '@prisma/client';
 import { deleteBudget, updateBudget } from '@/actions/budgets';
 
@@ -44,11 +44,7 @@ function EditDeletePots({ pot }: { pot: Pot }) {
           </Modal.Open>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Modal.Window
-        name="edit-pot"
-        initialData={pot}
-        formAction={updateBudget}
-      >
+      <Modal.Window name="edit-pot" initialData={pot} formAction={updateBudget}>
         <Modal.Header title="Edit Pot" />
         <Modal.Description description="As your budgets change, feel free to update your spending limits." />
         <Modal.Category title="Pot Name" />

@@ -1,4 +1,5 @@
-import CardHeader from '../ui/CardHeader';
+import CardHeader from '@/components/ui/CardHeader';
+import CardMini from '@/components/ui/CardMini';
 import data from '../../data/data.json';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -6,7 +7,6 @@ import {
   FinancialData,
   FinancialDataResult,
 } from '@/lib/utils';
-import CardMini from '../ui/CardMini';
 const MAX_DISPLAY = 3;
 
 function getFinancialSummaryForCurrentMonth(

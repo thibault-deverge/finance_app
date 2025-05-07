@@ -1,4 +1,5 @@
-import { Transaction } from "@prisma/client";
+import { Transaction } from '@prisma/client';
+import { ReactNode } from 'react';
 
 // OVERVIEW
 export type CardProps = {
@@ -42,7 +43,6 @@ export type BudgetCategory =
 
 export type TransactionsByCategory = Record<string, Transaction[]>;
 
-
 export interface FormDataState {
   name: string;
   target: string | number;
@@ -50,4 +50,35 @@ export interface FormDataState {
   category: string;
   maximum: string | number;
   theme: string;
+}
+
+// ##############################
+// Modal
+export interface ModalProps {
+  children: ReactNode;
+}
+
+export interface ModalContextType {
+  open: React.Dispatch<React.SetStateAction<string>>;
+  close: () => void;
+  openName: string;
+}
+
+export type OpenProps = {
+  children: React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>;
+  opens: string;
+};
+
+export interface FormContextType {
+  formData: {
+    category: string;
+    maximum: string | number;
+    name: string;
+    target: string | number;
+    theme: string;
+  };
+  updateFormData: (
+    field: keyof FormContextType['formData'],
+    value: string | number
+  ) => void;
 }
