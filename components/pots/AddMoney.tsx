@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import Modal from '@/components/ui/Modal/Modal';
 import { Pot } from '@prisma/client';
 import { useState } from 'react';
-import ProgressBarWithPreviewv1 from '../ui/ProgressBarWithPreviewv1';
+import ProgressBarWithPreview from '../ui/ProgressBarWithPreview';
 
 function AddMoney({ pot }: { pot: Pot }) {
   const { name, theme, target, total } = pot;
@@ -38,14 +38,13 @@ function AddMoney({ pot }: { pot: Pot }) {
             inputAmount={inputAmount}
             theme={theme ?? '#f2cdac'}
           /> */}
-          <ProgressBarWithPreviewv1
+          <ProgressBarWithPreview
             name="add-moneypot"
             currentTotal={total}
             target={target}
             inputAmount={inputAmount}
             theme={theme ?? '#f2cdac'}
           />
-         
         </div>
         <Modal.Amount
           title="Amount to Add"
