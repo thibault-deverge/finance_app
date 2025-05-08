@@ -1,16 +1,27 @@
 'use client';
 import SideNavigation from '@/components/ui/SideNavigation';
-import { ReactNode, useState } from 'react';
+import { Spinner } from '@/components/ui/Spinner';
+import { ReactNode, Suspense, useState } from 'react';
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
     <main
-      className={`transition-grid-cols grid min-h-screen grid-cols-2 duration-300 ease-in-out ${isVisible ? 'xl:grid-cols-[300px_1fr]' : 'xl:grid-cols-[64px_1fr]'}`}
+      className={`grid min-h-screen grid-cols-1 overflow-auto transition-all duration-300 ease-in-out ${
+        isVisible ? 'xl:grid-cols-[300px_1fr]' : 'xl:grid-cols-[64px_1fr]'
+      }`}
     >
       <SideNavigation isVisible={isVisible} setIsVisible={setIsVisible} />
-      {children}
+      <Suspense
+        fallback={
+          <div className="flex w-full items-center justify-center p-8">
+            <Spinner />
+          </div>
+        }
+      >
+        <div className="w-full overflow-auto">{children}</div>
+      </Suspense>
     </main>
   );
 }

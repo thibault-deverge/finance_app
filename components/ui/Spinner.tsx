@@ -1,5 +1,7 @@
 export function Spinner() {
   return (
-    <div className="spinner flex h-full items-center justify-center"></div>
+    <div className="flex h-full w-full items-center justify-center">
+      <div className="spinner"></div>
+    </div>
   );
 }
