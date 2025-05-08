@@ -1,13 +1,13 @@
 'use client';
 import { addMoneyToPot } from '@/actions/pots';
 import { Button } from '@/components/ui/button';
-import Modal from '@/components/ui/Modal/Modal';
+import Modal from '@/components/modal/Modal';
 import { Pot } from '@prisma/client';
 import { useState } from 'react';
 import ProgressBarWithPreview from '../ui/ProgressBarWithPreview';
 
 function AddMoney({ pot }: { pot: Pot }) {
-  const { name, theme, target, total } = pot;
+  const { name, theme, target, total,id } = pot;
   const [inputAmount, setInputAmount] = useState(0);
 
   // Fonction qui sera transmise à InputAmount pour mettre à jour la valeur d'entrée
@@ -32,12 +32,6 @@ function AddMoney({ pot }: { pot: Pot }) {
           </h5>
         </div>
         <div className="mb-7 flex flex-col gap-3">
-          {/* <ProgressBarWithPreview
-            currentTotal={total}
-            target={target}
-            inputAmount={inputAmount}
-            theme={theme ?? '#f2cdac'}
-          /> */}
           <ProgressBarWithPreview
             name="add-moneypot"
             currentTotal={total}
@@ -49,6 +43,7 @@ function AddMoney({ pot }: { pot: Pot }) {
         <Modal.Amount
           title="Amount to Add"
           name="addMoneyPot"
+          id={id}
           onAmountChange={handleAmountChange}
         />
         <Button

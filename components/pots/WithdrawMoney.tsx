@@ -1,7 +1,7 @@
 'use client';
 import { addMoneyToPot } from '@/actions/pots';
 import { Button } from '@/components/ui/button';
-import Modal from '@/components/ui/Modal/Modal';
+import Modal from '@/components/modal/Modal';
 import { Pot } from '@prisma/client';
 import { useState } from 'react';
 import ProgressBarWithPreview from '../ui/ProgressBarWithPreview';
@@ -42,7 +42,7 @@ function WithdrawMoney({ pot }: { pot: Pot }) {
         </div>
         <Modal.Amount
           title="Amount to Withdraw"
-          name="addMoneyPot"
+          name="withdrawMoneyPot"
           onAmountChange={handleAmountChange}
         />
         <Button

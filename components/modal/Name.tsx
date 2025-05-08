@@ -1,6 +1,6 @@
 'use client';
-import PotInputName from '@/components/ui/Modal/PotInputName';
-import { useFormContext } from '@/components/ui/Modal/Window';
+import PotInputName from '@/components/modal/PotInputName';
+import { useFormContext } from '@/components/modal/Window';
 
 function Name({ title }: { title: string }) {
   const { formData, updateFormData } = useFormContext();

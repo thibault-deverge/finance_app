@@ -1,7 +1,7 @@
 'use client';
 
 import { deletePot, updatePot } from '@/actions/pots';
-import Modal from '@/components/ui/Modal//Modal';
+import Modal from '@/components/modal/Modal';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,

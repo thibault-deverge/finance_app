@@ -1,6 +1,6 @@
 'use client';
-import BudgetSelectCategory from '@/components/ui/Modal/BudgetSelectCategory';
-import { useFormContext } from '@/components/ui/Modal/Window';
+import BudgetSelectCategory from '@/components/modal/BudgetSelectCategory';
+import { useFormContext } from '@/components/modal/Window';
 
 function Category({ title }: { title: string }) {
   const { formData, updateFormData } = useFormContext();

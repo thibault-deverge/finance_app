@@ -6,10 +6,12 @@ function InputAmount({
   title,
   name,
   value,
+
   onChange,
 }: {
   title: string;
   name: string;
+
   value: number | string;
   onChange: (value: number) => void;
 }) {

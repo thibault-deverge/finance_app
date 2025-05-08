@@ -1,5 +1,5 @@
 'use client';
-import Modal from '@/components/ui/Modal/Modal';
+import Modal from '@/components/modal/Modal';
 import { createPot } from '@/actions/pots';
 import { Button } from '@/components/ui/button';
 import { Pot } from '@prisma/client';

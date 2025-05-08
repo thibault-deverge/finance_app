@@ -1,6 +1,6 @@
 'use client';
 
-import Modal from '@/components/ui/Modal/Modal';
+import Modal from '@/components/modal/Modal';
 import {
   DropdownMenu,
   DropdownMenuContent,

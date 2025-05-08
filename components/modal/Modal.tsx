@@ -1,13 +1,13 @@
 'use client';
-import Theme from '@/components/ui/Modal/GenericSelectTheme';
-import Category from '@/components/ui/Modal/Category';
-import Amount from '@/components/ui/Modal/Amount';
-import Description from '@/components/ui/Modal/Description';
-import Header from '@/components/ui/Modal/Header';
-import Name from '@/components/ui/Modal/Name';
-import Open from '@/components/ui/Modal/Open';
-import Target from '@/components/ui/Modal/Target';
-import Window from '@/components/ui/Modal/Window';
+import Theme from '@/components/modal/GenericSelectTheme';
+import Category from '@/components/modal/Category';
+import Amount from '@/components/modal/Amount';
+import Description from '@/components/modal/Description';
+import Header from '@/components/modal/Header';
+import Name from '@/components/modal/Name';
+import Open from '@/components/modal/Open';
+import Target from '@/components/modal/Target';
+import Window from '@/components/modal/Window';
 import { ModalContextType, ModalProps } from '@/lib/type';
 import { createContext, useContext, useState } from 'react';
 

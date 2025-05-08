@@ -122,7 +122,7 @@ export async function addMoneyToPot(formData: FormData) {
   }
 
   const id = formData.get('id') as string;
-  const amount = parseFloat(formData.get('amount') as string);
+  const amount = parseFloat(formData.get('total') as string);
 
   // Validation
   if (!id) throw new Error('Pot ID required');

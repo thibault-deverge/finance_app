@@ -1,6 +1,6 @@
 'use client';
-import InputAmount from '@/components/ui/Modal/InputAmount';
-import { useFormContext } from '@/components/ui/Modal/Window';
+import InputAmount from '@/components/modal/InputAmount';
+import { useFormContext } from '@/components/modal/Window';
 
 function Target({ title, name }: { title: string; name: string }) {
   const { formData, updateFormData } = useFormContext();

@@ -1,7 +1,7 @@
 'use client';
 import { createBudget } from '@/actions/budgets';
 import { Button } from '@/components/ui/button';
-import Modal from '@/components/ui/Modal/Modal';
+import Modal from '@/components/modal/Modal';
 
 function AddBudget() {
   return (
@@ -21,7 +21,7 @@ function AddBudget() {
           you monitor spending."
         />
         <Modal.Category title="Budget Category" />
-        <Modal.Amount title="Maximum Spending" name="budget"/>
+        <Modal.Amount title="Maximum Spending" name="budget" />
         <Modal.Theme title="Theme" />
 
         <Button
