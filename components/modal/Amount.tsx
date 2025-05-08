@@ -10,7 +10,7 @@ function Amount({
 }: {
   title: string;
   name: string;
-  id: string;
+  id?: string;
   onAmountChange?: (value: number) => void;
 }) {
   const { formData, updateFormData } = useFormContext();
@@ -19,9 +19,10 @@ function Amount({
     updateFormData('maximum', value);
   };
 
-  const handleChangePotUpdate = (value: number) => {
+  const handleChangePot = (value: number) => {
     updateFormData('total', value);
-    updateFormData('id', id);
+    updateFormData('id', id ?? '');
+
     // Propagez le changement au parent si nécessaire
     if (onAmountChange) onAmountChange(value);
   };
@@ -36,22 +37,12 @@ function Amount({
       />
     );
   }
-  if (name === 'addMoneyPot') {
+  if (name === 'addMoneyPot' || 'withdrawMoneyPot') {
     return (
       <InputAmount
         title={title}
         value={Number(formData.total) || 0}
-        onChange={handleChangePotUpdate}
-        name={name}
-      />
-    );
-  }
-  if (name === 'withdrawMoneyPot') {
-    return (
-      <InputAmount
-        title={title}
-        value={Number(formData.total) || 0}
-        onChange={handleChangePotUpdate}
+        onChange={handleChangePot}
         name={name}
       />
     );
