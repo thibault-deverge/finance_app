@@ -6,7 +6,6 @@ import Title from '@/components/ui/Title';
 import { Budget, Transaction } from '@prisma/client';
 import { BudgetCategory, TransactionsByCategory } from '@/lib/type';
 
-
 function Budgets({
   budgets,
   transactions,
@@ -32,7 +31,7 @@ function Budgets({
   );
 
   return (
-    <section className="col-span-full h-screen px-4 py-6 xl:col-span-1 xl:h-screen xl:overflow-y-auto">
+    <section className="col-span-full h-screen px-4 py-6 md:p-10 xl:col-span-1 xl:h-screen xl:overflow-y-auto">
       <header className="mb-8.5 flex items-center justify-between">
         <Title name="Budgets" />
         <AddBudget />
@@ -40,9 +39,15 @@ function Budgets({
       <div className="grid grid-cols-1 gap-6">
         <div className="flex flex-col gap-8 rounded-xl bg-white pt-8">
           <BudgetPieChart budgets={budgets} transactions={transactions} />
-          <SummarySpending  budgets={budgets} transactionsByCategory={transactionsByCategory}/>
+          <SummarySpending
+            budgets={budgets}
+            transactionsByCategory={transactionsByCategory}
+          />
         </div>
-        <BudgetList budgets={budgets} transactionsByCategory={transactionsByCategory}/>
+        <BudgetList
+          budgets={budgets}
+          transactionsByCategory={transactionsByCategory}
+        />
       </div>
     </section>
   );

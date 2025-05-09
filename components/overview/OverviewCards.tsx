@@ -1,23 +1,23 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CardProps } from '@/lib/type';
-import { Balance } from '@prisma/client';
 import { formatAmount } from '@/lib/utils';
+import { Balance } from '@prisma/client';
 
 function OverviewCards({ balance }: { balance: Balance[] }) {
   return (
     <div className="col-span-full flex w-full flex-col justify-between gap-6 md:flex-row">
       <SummaryCard
-        title="current"
+        title="Current"
         amount={balance[0].current}
         isFirstCard={true}
       />
       <SummaryCard
-        title="income"
+        title="Income"
         amount={balance[0].income}
         isFirstCard={false}
       />
       <SummaryCard
-        title="expenses"
+        title="Expenses"
         amount={balance[0].expenses}
         isFirstCard={false}
       />

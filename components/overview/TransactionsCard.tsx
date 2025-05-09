@@ -12,7 +12,7 @@ function TransactionsCard({ transactions }: { transactions: Transaction[] }) {
       date: formatDateToShortString(transaction.date),
     }));
   return (
-    <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
+    <section className="col-span-full flex flex-col justify-between rounded-lg bg-white p-8 shadow-sm">
       <CardHeader title="Transactions" href="/transactions" />
       <ul className="list-none space-y-1">
         {transactions.length > 0 &&
@@ -44,7 +44,9 @@ function TransactionListItem({ transaction }: { transaction: Transaction }) {
         <p
           className={`text-preset-4-bold ${amount > 0 ? 'text-green' : 'text-grey-900'}`}
         >
-          ${amount}
+          {amount > 0
+            ? `+$${amount.toFixed(2)}`
+            : `-$${Math.abs(amount).toFixed(2)}`}
         </p>
         <p className="text-preset-5 text-grey-500">{date}</p>
       </div>

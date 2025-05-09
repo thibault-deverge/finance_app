@@ -26,7 +26,7 @@ function BudgetPieChart({
   const totalCurrent = getTotalCurrent(transactions);
   const totalMaximum = getTotalMaximum(budgets);
 
-  const innerPieOuterRadius = 80;
+  const innerPieOuterRadius = 90;
   const innerPieInnerRadius = innerPieOuterRadius - 15; // Épaisseur de 15px
   const outerPieOuterRadius = innerPieOuterRadius + 30; // Épaisseur de 30px
   const outerPieInnerRadius = innerPieOuterRadius;
@@ -37,7 +37,7 @@ function BudgetPieChart({
   }));
 
   return (
-    <ResponsiveContainer width="100%" height={250}>
+    <ResponsiveContainer width="100%" height={250} className="mb-8">
       <PieChart>
         {/* Anneau extérieur */}
         <Pie
@@ -88,10 +88,13 @@ function BudgetPieChart({
                 <g>
                   <text
                     x={cx}
-                    y={cy - 10}
+                    y={cy - 14}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    style={{ fontSize: '24px', fontWeight: 'bold' }}
+                    style={{
+                      fontSize: '24px',
+                      fontWeight: 'bold',
+                    }}
                   >
                     ${totalCurrent}
                   </text>

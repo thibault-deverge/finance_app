@@ -29,7 +29,7 @@ export default async function Page({ searchParams }: PageProps) {
   const totalPages = Math.ceil(totalCount / TRANSACTION_PER_PAGE);
 
   return (
-    <section className="col-span-full flex h-screen flex-col gap-8 overflow-y-auto px-4 py-6 md:px-10 md:py-8 xl:col-span-1">
+    <section className="col-span-full flex h-screen flex-col gap-8 overflow-y-auto px-4 py-6 md:p-10 md:px-10 md:py-8 xl:col-span-1">
       <Title name="Transactions" />
       <section className="flex flex-col gap-6 bg-white px-5 py-6 md:px-8 md:py-8">
         <TransactionsSection transactions={transactions} />

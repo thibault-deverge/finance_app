@@ -9,7 +9,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <main
       className={`grid min-h-screen grid-cols-1 overflow-auto transition-all duration-300 ease-in-out ${
-        isVisible ? 'xl:grid-cols-[300px_1fr]' : 'xl:grid-cols-[64px_1fr]'
+        isVisible ? 'xl:grid-cols-[300px_1fr]' : 'xl:grid-cols-[84px_1fr]'
       }`}
     >
       <SideNavigation isVisible={isVisible} setIsVisible={setIsVisible} />
@@ -20,7 +20,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           </div>
         }
       >
-        <div className="w-full overflow-auto">{children}</div>
+        <div className="mb-28 w-full overflow-auto xl:mb-0">{children}</div>
       </Suspense>
     </main>
   );

@@ -59,7 +59,7 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
         <div className="fixed h-full">
           <div className="flex flex-col">
             <div
-              className={`px-4 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+              className={`px-4 transition-opacity duration-300 xl:px-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
             >
               <Image
                 src={'/images/logo/logo-large.svg'}
@@ -90,11 +90,15 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
             isVisible={isVisible}
             setIsVisible={setIsVisible}
           />
+          {/* <BtnLogout>Logout</BtnLogout> */}
         </div>
       </aside>
 
       {/* Navigation en bas pour tablette/mobile */}
-      <nav className="fixed right-0 bottom-0 left-0 z-50 w-full bg-gray-900 pt-2 text-white shadow-lg xl:hidden">
+      <nav
+        id="mobile-navbar"
+        className="fixed right-0 bottom-0 left-0 z-50 w-full bg-gray-900 pt-2 text-white shadow-lg xl:hidden"
+      >
         <ul className="flex w-full justify-around">
           {navLinks.map((link) => (
             <MobileNavigationLink
@@ -111,10 +115,10 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
 
 function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
   return (
-    <div className="absolute bottom-16 px-4">
+    <div className="absolute bottom-20 px-4 xl:px-8">
       <button
         onClick={() => setIsVisible(!isVisible)}
-        className="hover:text-grey-300 flex h-10 cursor-pointer items-center gap-2 transition-colors duration-300"
+        className="hover:text-grey-300 flex h-10 cursor-pointer items-center gap-4 transition-colors duration-300"
         aria-label={isVisible ? 'Minimize menu' : 'Expand menu'}
       >
         <div className="flex h-6 w-6 items-center justify-center">
@@ -125,12 +129,11 @@ function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
           />
         </div>
         <span
-          className={`transition-opacity duration-300 ${isVisible ? 'max-w-24 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
+          className={`transition-opacity duration-300 ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
         >
-          Minimize
+          Minimize Menu
         </span>
       </button>
-      {/* <BtnLogout>Logout</BtnLogout> */}
     </div>
   );
 }
@@ -148,7 +151,7 @@ function NavigationLink({
 
   return (
     <li
-      className={`text-preset-3 mb-0 px-4 whitespace-nowrap transition-all duration-300 ease-in-out ${
+      className={`text-preset-3 mb-0 px-4 whitespace-nowrap transition-all duration-300 ease-in-out xl:px-8 ${
         isVisible ? 'w-[276px]' : 'w-16'
       }`}
     >

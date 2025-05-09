@@ -1,11 +1,11 @@
-import { CardMiniType, CardType } from "@/lib/type";
-
+import { CardMiniType, CardType } from '@/lib/type';
 
 const classMap: Record<CardType, string> = {
-  pots: 'relative flex max-h-13 flex-col gap-2 rounded-lg pl-4 bg-white',
-  budgets: 'relative flex max-h-13 flex-col gap-2 rounded-lg pl-4 bg-white',
+  pots: 'relative w-full  flex max-h-13 flex-col gap-2 rounded-lg pl-4 bg-white',
+  budgets:
+    'relative w-full  flex max-h-13 flex-col gap-2 rounded-lg pl-4 bg-white',
   recurringBills:
-    'relative flex justify-between max-h-13 gap-2 rounded-lg py-4 px-5 bg-beige-100',
+    'relative w-full  flex justify-between max-h-13 gap-2 rounded-lg py-4 px-5 bg-beige-100',
 };
 
 const CardMini = ({ title, amount, color, type }: CardMiniType) => {

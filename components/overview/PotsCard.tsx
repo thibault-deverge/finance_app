@@ -1,19 +1,18 @@
 import CardHeader from '@/components/ui/CardHeader';
 import CardMini from '@/components/ui/CardMini';
-import data from '../../data/data.json';
-import { v4 as uuidv4 } from 'uuid';
+import { getTotalSaved } from '@/lib/utilsPots';
+import { Pot } from '@prisma/client';
+import { Card } from '../ui/card';
 
-const MAX_DISPLAY = 4;
-const { pots: allPots } = data;
+function PotsCard({ pots }: { pots: Pot[] }) {
+  const MAX_DISPLAY = 4;
+  const total = getTotalSaved(pots);
+  const displayedPots = pots
+    .sort((a, b) => b.total - a.total)
+    .slice(0, MAX_DISPLAY);
 
-const displayedPots = allPots.slice(0, MAX_DISPLAY).map((transaction) => ({
-  ...transaction,
-  id: uuidv4(),
-}));
-
-function PotsCard() {
   return (
-    <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
+    <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8 shadow-sm">
       <CardHeader title="Pots" href="/pots" />
 
       <div className="flex flex-col gap-5 md:flex-row">
@@ -28,7 +27,7 @@ function PotsCard() {
 
           <div className="flex flex-col justify-between gap-2">
             <p className="text-preset-4 text-grey-500">Total Saved</p>
-            <p className="text-preset-1 text-grey-900">$850</p>
+            <p className="text-preset-1 text-grey-900">${total}</p>
           </div>
         </div>
 
@@ -39,7 +38,7 @@ function PotsCard() {
                 key={pot.id}
                 title={pot.name}
                 amount={pot.total}
-                color={pot.theme}
+                color={pot.theme ?? '#f8f4f0'}
                 type="pots"
               />
             ))}
