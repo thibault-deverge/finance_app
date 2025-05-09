@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Transaction } from '@prisma/client';
 import { formatAmountSign, formatDateToShortString } from '@/lib/utils';
+import { AVATAR_DEFAULT } from '@/lib/constants';
 
 type Props = {
   transaction: Transaction;
@@ -14,7 +15,7 @@ function TransactionDesktopRow({ transaction }: Props) {
     <tr className="border-grey-100 text-preset-4 [&:not(:last-child)]:border-b">
       <td className="flex items-center gap-4 py-8">
         <img
-          src={avatar || '/images/avatar/avatar-default.png'}
+          src={avatar || AVATAR_DEFAULT}
           alt={`Avatar of ${name}`}
           className="h-8 w-8 rounded-full"
         />

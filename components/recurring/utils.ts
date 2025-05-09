@@ -1,5 +1,7 @@
 import { Transaction } from '@prisma/client';
 import { formatAmount, getMonthlyLabel } from '@/lib/utils';
+import { AVATAR_DEFAULT } from '@/lib/constants';
+
 import { RecurringBillView } from '@/components/recurring/type';
 
 export function mapToRecurringBillView(tx: Transaction): RecurringBillView {
@@ -24,7 +26,7 @@ export function mapToRecurringBillView(tx: Transaction): RecurringBillView {
 
   return {
     id: tx.id,
-    avatar: tx.avatar || '/images/avatar/avatar-default.png',
+    avatar: tx.avatar || AVATAR_DEFAULT,
     name: tx.name,
     label: getMonthlyLabel(day),
     iconSrc,

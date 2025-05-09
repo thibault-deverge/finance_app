@@ -44,6 +44,21 @@ function Window({
       initialData && 'category' in initialData ? initialData.category : '',
     maximum: initialData && 'maximum' in initialData ? initialData.maximum : '',
     theme: initialData?.theme || '',
+    amount:
+      initialData && 'amount' in initialData
+        ? (initialData.amount as string | number)
+        : '',
+    date:
+      initialData && 'date' in initialData
+        ? typeof initialData.date === 'string' ||
+          initialData.date instanceof Date
+          ? new Date(initialData.date).toISOString().slice(0, 10)
+          : ''
+        : '',
+    recurring:
+      initialData && 'recurring' in initialData
+        ? Boolean(initialData.recurring)
+        : false,
   });
 
   const updateFormData = (
@@ -98,7 +113,7 @@ function Window({
         onClick={(e) => e.stopPropagation()}
       >
         <FormContext.Provider value={{ formData, updateFormData }}>
-          <form action={actionWithClose}>
+          <form action={actionWithClose} encType="multipart/form-data">
             {children}
 
             {/* Champs cachés pour transmettre les données d'état */}
@@ -114,6 +129,17 @@ function Window({
             />
             <input type="hidden" name="theme" value={formData.theme} />
             <input type="hidden" name="total" value={formData.total} />
+            <input
+              type="hidden"
+              name="amount"
+              value={String(formData.amount)}
+            />
+            <input type="hidden" name="date" value={formData.date} />
+            <input
+              type="hidden"
+              name="recurring"
+              value={String(formData.recurring)}
+            />
           </form>
         </FormContext.Provider>
       </div>

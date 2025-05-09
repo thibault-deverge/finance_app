@@ -8,17 +8,17 @@ function OverviewCards({ balance }: { balance: Balance[] }) {
     <div className="col-span-full flex w-full flex-col justify-between gap-6 md:flex-row">
       <SummaryCard
         title="Current"
-        amount={balance[0].current}
+        amount={balance[0]?.current || 0}
         isFirstCard={true}
       />
       <SummaryCard
         title="Income"
-        amount={balance[0].income}
+        amount={balance[0]?.income || 0}
         isFirstCard={false}
       />
       <SummaryCard
         title="Expenses"
-        amount={balance[0].expenses}
+        amount={balance[0]?.expenses || 0}
         isFirstCard={false}
       />
     </div>

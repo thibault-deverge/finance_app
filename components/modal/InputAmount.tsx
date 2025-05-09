@@ -6,11 +6,15 @@ function InputAmount({
   title,
   name,
   value,
+  min = 0,
+  max = 10000,
 
   onChange,
 }: {
   title: string;
   name: string;
+  min?: number;
+  max?: number;
 
   value: number | string;
   onChange: (value: number) => void;
@@ -35,8 +39,8 @@ function InputAmount({
               ? '0'
               : 'e.g. 2000'
         }
-        min={0}
-        max={10000}
+        min={min}
+        max={max}
         value={value === 0 ? '' : value}
         onChange={handleInputChange}
       >
