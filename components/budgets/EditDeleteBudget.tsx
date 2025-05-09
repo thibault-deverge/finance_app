@@ -1,15 +1,19 @@
 'use client';
 
+import { deleteBudget, updateBudget } from '@/actions/budgets';
+import DeleteButton from '@/components/button/DeleteButton';
+import EditButton from '@/components/button/EditButton';
 import Modal from '@/components/modal/Modal';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
+import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Budget } from '@prisma/client';
-import { deleteBudget, updateBudget } from '@/actions/budgets';
+import { Suspense } from 'react';
 
 function EditDeleteBudget({ budget }: { budget: Budget }) {
   return (
@@ -54,14 +58,9 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
         <Modal.Category title="Budget Category" />
         <Modal.Amount title="Maximum Spending" name="budget" />
         <Modal.Theme title="Theme" />
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          className="w-full cursor-pointer py-6"
-        >
-          Save Changes
-        </Button>
+        <Suspense fallback={<SpinnerMini />}>
+          <EditButton />
+        </Suspense>
       </Modal.Window>
       <Modal.Window
         name="delete-budget"
@@ -69,20 +68,15 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
         formAction={deleteBudget}
       >
         <Modal.Header title={`Delete '${budget.category}'`} />
-        <Modal.Description description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever." />
-        <Button
-          type="submit"
-          variant="destructive"
-          size="lg"
-          className="mb-5 w-full cursor-pointer py-6"
-        >
-          Yes,Confirm Deletion
-        </Button>
+        <Modal.Description description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever." />
+        <Suspense fallback={<SpinnerMini />}>
+          <DeleteButton />
+        </Suspense>
         <Button
           type="button"
           variant="outline"
           size="lg"
-          className="w-full cursor-pointer border-0 py-6"
+          className="w-full cursor-pointer border-0 py-6 shadow-sm"
         >
           No Go Back
         </Button>

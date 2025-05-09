@@ -20,7 +20,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           </div>
         }
       >
-        <div className="mb-28 w-full overflow-auto xl:mb-0">{children}</div>
+        <div className="mb-18 w-full overflow-auto xl:mb-0">{children}</div>
       </Suspense>
     </main>
   );

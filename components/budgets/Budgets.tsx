@@ -36,8 +36,8 @@ function Budgets({
         <Title name="Budgets" />
         <AddBudget />
       </header>
-      <div className="grid grid-cols-1 gap-6">
-        <div className="flex flex-col gap-8 rounded-xl bg-white pt-8">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        <div className="flex h-fit flex-col gap-8 rounded-xl bg-white pt-8">
           <BudgetPieChart budgets={budgets} transactions={transactions} />
           <SummarySpending
             budgets={budgets}

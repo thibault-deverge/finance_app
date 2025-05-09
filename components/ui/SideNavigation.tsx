@@ -121,7 +121,7 @@ function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
         className="hover:text-grey-300 flex h-10 cursor-pointer items-center gap-4 transition-colors duration-300"
         aria-label={isVisible ? 'Minimize menu' : 'Expand menu'}
       >
-        <div className="flex h-6 w-6 items-center justify-center">
+        <div className="text-grey-300 hover:text-grey-100 flex h-6 w-6 items-center justify-center">
           <img
             src="/images/icons/icon-minimize-menu.svg"
             alt="toggle menu icon"
@@ -129,7 +129,7 @@ function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
           />
         </div>
         <span
-          className={`transition-opacity duration-300 ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
+          className={`text-grey-300 hover:text-grey-100 z-10 whitespace-nowrap transition-all duration-300 ease-in-out ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
         >
           Minimize Menu
         </span>
@@ -177,7 +177,7 @@ function NavigationLink({
           />
         </div>
         <span
-          className={`z-10 whitespace-nowrap transition-all duration-300 ease-in-out ${
+          className={` ${isActive ? 'text-grey-900' : 'text-grey-300 hover:text-grey-100'} z-10 whitespace-nowrap transition-all duration-300 ease-in-out ${
             isVisible ? 'w-auto opacity-100' : 'w-0 overflow-hidden opacity-0'
           }`}
         >

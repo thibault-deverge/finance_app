@@ -1,8 +1,11 @@
 'use client';
-import Modal from '@/components/modal/Modal';
 import { createPot } from '@/actions/pots';
+import Modal from '@/components/modal/Modal';
 import { Button } from '@/components/ui/button';
 import { Pot } from '@prisma/client';
+import { Suspense } from 'react';
+import AddButton from '../button/AddButton';
+import { SpinnerMini } from '../ui/SpinnerMini';
 
 function AddPot({ pots }: { pots: Pot[] }) {
   return (
@@ -22,14 +25,9 @@ function AddPot({ pots }: { pots: Pot[] }) {
         <Modal.Target title="Target" name="pot" />
         <Modal.Theme title="Theme" />
 
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          className="w-full cursor-pointer py-6"
-        >
-          Add Pot
-        </Button>
+        <Suspense fallback={<SpinnerMini />}>
+          <AddButton type="add-pot" />
+        </Suspense>
       </Modal.Window>
     </Modal>
   );

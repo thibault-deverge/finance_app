@@ -1,7 +1,10 @@
 'use client';
 import { createBudget } from '@/actions/budgets';
-import { Button } from '@/components/ui/button';
+import AddButton from '@/components/button/AddButton';
 import Modal from '@/components/modal/Modal';
+import { Button } from '@/components/ui/button';
+import { SpinnerMini } from '@/components/ui/SpinnerMini';
+import { Suspense } from 'react';
 
 function AddBudget() {
   return (
@@ -23,15 +26,9 @@ function AddBudget() {
         <Modal.Category title="Budget Category" />
         <Modal.Amount title="Maximum Spending" name="budget" />
         <Modal.Theme title="Theme" />
-
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          className="w-full cursor-pointer py-6"
-        >
-          Add Budget
-        </Button>
+        <Suspense fallback={<SpinnerMini />}>
+          <AddButton type="add-budget"/>
+        </Suspense>
       </Modal.Window>
     </Modal>
   );

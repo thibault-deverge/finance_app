@@ -1,10 +1,13 @@
 'use client';
-import Modal from '@/components/modal/Modal';
-import ProgressBarWithPreview from '../ui/ProgressBarWithPreview';
 import { addMoneyToPot } from '@/actions/pots';
+import Modal from '@/components/modal/Modal';
 import { Button } from '@/components/ui/button';
 import { Pot } from '@prisma/client';
 import { useState } from 'react';
+import ProgressBarWithPreview from '../ui/ProgressBarWithPreview';
+
+
+
 
 function AddMoney({ pot }: { pot: Pot }) {
   const { name, theme, target, total, id } = pot;

@@ -10,6 +10,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Pot } from '@prisma/client';
+import { Suspense } from 'react';
+import DeleteButton from '@/components/button/DeleteButton';
+import EditButton from '@/components/button/EditButton';
+import { SpinnerMini } from '@/components/ui/SpinnerMini';
 
 function EditDeletePots({ pot }: { pot: Pot }) {
   return (
@@ -50,26 +54,16 @@ function EditDeletePots({ pot }: { pot: Pot }) {
         <Modal.Name title="Pot Name" />
         <Modal.Amount title="Target" name="pot" />
         <Modal.Theme title="Theme" />
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          className="w-full cursor-pointer py-6"
-        >
-          Save Changes
-        </Button>
+        <Suspense fallback={<SpinnerMini />}>
+          <EditButton />
+        </Suspense>
       </Modal.Window>
       <Modal.Window name="delete-pot" initialData={pot} formAction={deletePot}>
         <Modal.Header title={`Delete '${pot.name}'`} />
         <Modal.Description description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever." />
-        <Button
-          type="submit"
-          variant="destructive"
-          size="lg"
-          className="mb-5 w-full cursor-pointer py-6"
-        >
-          Yes,Confirm Deletion
-        </Button>
+        <Suspense fallback={<SpinnerMini />}>
+          <DeleteButton />
+        </Suspense>
         <Button
           type="button"
           variant="outline"
