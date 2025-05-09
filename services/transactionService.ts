@@ -1,12 +1,12 @@
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
-import { TRANSACTION_PER_PAGE } from '@/lib/constants';
 
 type TypeOptions = {
   search: string;
   category?: string;
   sortBy: string;
   page: number;
+  itemPerPage?: number;
   onlyRecurringBills?: boolean;
 };
 
@@ -20,7 +20,8 @@ const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
 };
 
 export async function getTransactions(options: TypeOptions) {
-  const { search, category, sortBy, page, onlyRecurringBills } = options;
+  const { search, category, sortBy, page, itemPerPage, onlyRecurringBills } =
+    options;
 
   try {
     const where: Prisma.TransactionWhereInput = {};
@@ -38,12 +39,17 @@ export async function getTransactions(options: TypeOptions) {
       where.recurring = true;
     }
 
-    const transactions = await prisma.transaction.findMany({
+    const findArgs: Prisma.TransactionFindManyArgs = {
       where,
       orderBy,
-      take: TRANSACTION_PER_PAGE,
-      skip: (page - 1) * TRANSACTION_PER_PAGE,
-    });
+    }
+
+    if (!onlyRecurringBills && itemPerPage) {
+      findArgs.take = itemPerPage
+      findArgs.skip = (page - 1) * itemPerPage
+    }
+
+    const transactions = await prisma.transaction.findMany(findArgs);
     const totalCount = await prisma.transaction.count({ where });
 
     return { transactions, totalCount };

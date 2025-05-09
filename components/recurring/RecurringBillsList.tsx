@@ -1,47 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import { Transaction } from '@prisma/client';
+import RecurringBillsMobileRow from './RecurringBillsMobileRow';
+import RecurringBillsDesktopRow from './RecurringBillsDesktopRow';
+import { RecurringBillView } from './type';
 
 type RecurringBillsListProps = {
-  transactions: Transaction[];
+  bills: RecurringBillView[];
 };
 
-function RecurringBillsList({ transactions }: RecurringBillsListProps) {
+function RecurringBillsList({ bills }: RecurringBillsListProps) {
   return (
     <>
+      {/* Mobile view */}
       <div className="md:hidden">
-        {transactions.map((transaction) => {
-          const { id, avatar, name, amount, date, category } = transaction;
-
-          return (
-            <div
-              key={id}
-              className="border-grey-100 flex flex-col gap-1 border-b py-5"
-            >
-              <div className="flex items-center gap-4">
-                <img
-                  src={avatar || '/image/avatar/avatar-default.png'}
-                  alt={name}
-                  className="h-8 w-8 rounded-full"
-                />
-                <span className="text-preset-4-bold">{name}</span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1">
-                  <span className="text-preset-5 text-green">Monthly-1st </span>
-                  <img
-                    src="/images/icons/icon-bill-due.svg"
-                    alt="Bill due"
-                    className="h-3 w-3 rounded-full"
-                  />
-                </div>
-                <span className="text-preset-4-bold">$250.00</span>
-              </div>
-            </div>
-          );
+        {bills.map((bill) => {
+          return <RecurringBillsMobileRow key={bill.id} bill={bill} />;
         })}
       </div>
 
+      {/* Desktop view */}
       <table className="hidden md:table">
         <thead>
           <tr className="text-grey-500 text-preset-4 border-grey-100 border-b text-left">
@@ -51,7 +27,11 @@ function RecurringBillsList({ transactions }: RecurringBillsListProps) {
           </tr>
         </thead>
 
-        <tbody></tbody>
+        <tbody>
+          {bills.map((bill) => {
+            return <RecurringBillsDesktopRow key={bill.id} bill={bill} />;
+          })}
+        </tbody>
       </table>
     </>
   );
