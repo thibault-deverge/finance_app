@@ -15,7 +15,7 @@ import DeleteButton from '@/components/button/DeleteButton';
 import EditButton from '@/components/button/EditButton';
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
 
-function EditDeletePots({ pot }: { pot: Pot }) {
+function EditDeletePots({ pot }: { pot?: Pot }) {
   return (
     <Modal>
       <DropdownMenu>
@@ -59,7 +59,7 @@ function EditDeletePots({ pot }: { pot: Pot }) {
         </Suspense>
       </Modal.Window>
       <Modal.Window name="delete-pot" initialData={pot} formAction={deletePot}>
-        <Modal.Header title={`Delete '${pot.name}'`} />
+        <Modal.Header title={`Delete '${pot?.name}'`} />
         <Modal.Description description="Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever." />
         <Suspense fallback={<SpinnerMini />}>
           <DeleteButton />

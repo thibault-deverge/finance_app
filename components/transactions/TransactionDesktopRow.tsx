@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { Transaction } from '@prisma/client';
 import { formatAmountSign, formatDateToShortString } from '@/lib/utils';
+import { Transaction } from '@prisma/client';
 
 type Props = {
   transaction: Transaction;
@@ -29,6 +29,7 @@ function TransactionDesktopRow({ transaction }: Props) {
       <td className={`text-preset-4-bold text-right ${amountColor}`}>
         {formatAmountSign(amount)}
       </td>
+      
     </tr>
   );
 }
