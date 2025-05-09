@@ -1,5 +1,5 @@
 'use client';
-import { useModal } from '@/components/ui/Modal/Modal';
+import { useModal } from '@/components/modal/Modal';
 
 function Header({ title }: { title: string }) {
   const { close } = useModal();

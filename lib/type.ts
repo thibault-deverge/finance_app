@@ -44,6 +44,7 @@ export type BudgetCategory =
 export type TransactionsByCategory = Record<string, Transaction[]>;
 
 export interface FormDataState {
+  id: string;
   name: string;
   target: string | number;
   total: string | number;
@@ -71,6 +72,7 @@ export type OpenProps = {
 
 export interface FormContextType {
   formData: {
+    id: string;
     category: string;
     maximum: string | number;
     name: string;

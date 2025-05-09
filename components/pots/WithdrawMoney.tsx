@@ -1,13 +1,13 @@
 'use client';
-import { addMoneyToPot } from '@/actions/pots';
+import Modal from '@/components/modal/Modal';
+import ProgressBarWithPreview from '../ui/ProgressBarWithPreview';
+import { withdrawMoneyFromPot } from '@/actions/pots';
 import { Button } from '@/components/ui/button';
-import Modal from '@/components/ui/Modal/Modal';
 import { Pot } from '@prisma/client';
 import { useState } from 'react';
-import ProgressBarWithPreviewv1 from '../ui/ProgressBarWithPreviewv1';
 
 function WithdrawMoney({ pot }: { pot: Pot }) {
-  const { name, theme, target, total } = pot;
+  const { name, theme, target, total, id } = pot;
   const [inputAmount, setInputAmount] = useState(0);
 
   // Fonction qui sera transmise à InputAmount pour mettre à jour la valeur d'entrée
@@ -22,7 +22,7 @@ function WithdrawMoney({ pot }: { pot: Pot }) {
           Withdraw
         </Button>
       </Modal.Open>
-      <Modal.Window name="add-moneypot" formAction={addMoneyToPot}>
+      <Modal.Window name="add-moneypot" formAction={withdrawMoneyFromPot}>
         <Modal.Header title={`Withdraw from ‘${name}’`} />
         <Modal.Description description="Withdraw from your pot to put money back in your main balance. This will reduce the amount you have in this pot." />
         <div className="mb-6 flex items-center justify-between">
@@ -32,8 +32,7 @@ function WithdrawMoney({ pot }: { pot: Pot }) {
           </h5>
         </div>
         <div className="mb-7 flex flex-col gap-3">
-        
-          <ProgressBarWithPreviewv1
+          <ProgressBarWithPreview
             name="withdraw-moneypot"
             currentTotal={total}
             target={target}
@@ -43,8 +42,9 @@ function WithdrawMoney({ pot }: { pot: Pot }) {
         </div>
         <Modal.Amount
           title="Amount to Withdraw"
-          name="addMoneyPot"
+          name="withdrawMoneyPot"
           onAmountChange={handleAmountChange}
+          id={id}
         />
         <Button
           type="submit"

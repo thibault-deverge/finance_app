@@ -61,7 +61,7 @@ function BudgetSelectTheme({
       <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger className="w-full px-5 py-5 hover:cursor-pointer">
-          <SelectValue placeholder="Select a category" />
+          <SelectValue placeholder="Select a theme" />
         </SelectTrigger>
         <SelectContent className="max-h-72 overflow-auto bg-white">
           <SelectGroup>

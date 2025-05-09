@@ -39,7 +39,7 @@ const recurring = getFinancialSummaryForCurrentMonth(data);
 
 function RecurringBills() {
   return (
-    <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8">
+    <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8 shadow-sm">
       <CardHeader title="Recurring Bills" href="/recurring-bills" />
       {recurring &&
         recurring.map((item) => (

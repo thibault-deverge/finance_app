@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useModal } from '@/components/ui/Modal/Modal';
+import { useModal } from '@/components/modal/Modal';
 import { OpenProps } from '@/lib/type';
 
 function Open({ children, opens: opensWindowName }: OpenProps) {

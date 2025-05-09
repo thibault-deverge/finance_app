@@ -1,6 +1,6 @@
 'use client';
-import GenericSelectTheme from '@/components/ui/Modal/ModalSelectColor';
-import { useFormContext } from '@/components/ui/Modal/Window';
+import GenericSelectTheme from '@/components/modal/ModalSelectColor';
+import { useFormContext } from '@/components/modal/Window';
 
 function Theme({ title }: { title: string }) {
   const { formData, updateFormData } = useFormContext();

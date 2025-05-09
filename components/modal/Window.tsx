@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import { Budget, Pot } from '@prisma/client';
-import { useModal } from '@/components/ui/Modal/Modal';
+import { useModal } from '@/components/modal/Modal';
 import { FormContextType, FormDataState } from '@/lib/type';
 
 // Create a context
@@ -37,6 +37,7 @@ function Window({
 
   const [formData, setFormData] = useState<FormDataState>({
     name: initialData && 'name' in initialData ? initialData.name : '',
+    id: initialData && 'id' in initialData ? initialData.id : '',
     target: initialData && 'target' in initialData ? initialData.target : '',
     total: initialData && 'total' in initialData ? initialData.total : '',
     category:
@@ -105,6 +106,7 @@ function Window({
             <input type="hidden" name="category" value={formData.category} />
             <input type="hidden" name="name" value={formData.name} />
             <input type="hidden" name="target" value={formData.target} />
+            <input type="hidden" name="id" value={formData.id} />
             <input
               type="hidden"
               name="maximum"

@@ -1,14 +1,16 @@
 'use client';
-import InputAmount from '@/components/ui/Modal/InputAmount';
-import { useFormContext } from '@/components/ui/Modal/Window';
+import InputAmount from '@/components/modal/InputAmount';
+import { useFormContext } from '@/components/modal/Window';
 
 function Amount({
   title,
   name,
+  id,
   onAmountChange,
 }: {
   title: string;
   name: string;
+  id?: string;
   onAmountChange?: (value: number) => void;
 }) {
   const { formData, updateFormData } = useFormContext();
@@ -18,10 +20,9 @@ function Amount({
   };
 
   const handleChangePot = (value: number) => {
-    updateFormData('target', value);
-  };
-  const handleChangePotAdd = (value: number) => {
     updateFormData('total', value);
+    updateFormData('id', id ?? '');
+
     // Propagez le changement au parent si nécessaire
     if (onAmountChange) onAmountChange(value);
   };
@@ -36,27 +37,27 @@ function Amount({
       />
     );
   }
-  if (name === 'addMoneyPot' || 'withdraw-moneyPot') {
+  if (name === 'addMoneyPot' || 'withdrawMoneyPot') {
     return (
       <InputAmount
         title={title}
         value={Number(formData.total) || 0}
-        onChange={handleChangePotAdd}
-        name={name}
-      />
-    );
-  }
-
-  if (name === 'pot') {
-    return (
-      <InputAmount
-        title={title}
-        value={Number(formData.target) || 0}
         onChange={handleChangePot}
         name={name}
       />
     );
   }
+
+  // if (name === 'pot') {
+  //   return (
+  //     <InputAmount
+  //       title={title}
+  //       value={Number(formData.target) || 0}
+  //       onChange={handleChangePot}
+  //       name={name}
+  //     />
+  //   );
+  // }
 
   return null;
 }

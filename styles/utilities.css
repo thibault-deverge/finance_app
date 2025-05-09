@@ -2,14 +2,11 @@
   --grey-900: #201f24;
   --beige-100: #f8f4f0;
 }
-body {
-  overflow: hidden; /* Hide scrollbars */
-}
+
 @layer components {
   .spinner {
-    margin: 3.2rem auto 1.6rem;
     width: 60px;
-    aspect-ratio: 1;
+    height: 60px;
     border-radius: 50%;
     border: 8px solid var(--grey-900);
     border-right-color: var(--beige-100);
@@ -44,6 +41,7 @@ body {
 }
 
 .no-spinner {
+  appearance: textfield; /* Standard */
   -moz-appearance: textfield; /* Firefox */
 }
 
