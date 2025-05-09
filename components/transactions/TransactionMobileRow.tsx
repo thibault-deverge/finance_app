@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Transaction } from '@prisma/client';
 import { formatAmountSign, formatDateToShortString } from '@/lib/utils';
+import { AVATAR_DEFAULT } from '@/lib/constants';
 
 type Props = {
   transaction: Transaction;
@@ -15,7 +16,7 @@ function TransactionMobileRow({ transaction }: Props) {
       <div className="my-4 flex items-center gap-3">
         <div>
           <img
-            src={avatar || '/images/avatar/avatar-default.png'}
+            src={avatar || AVATAR_DEFAULT}
             alt={`avatar of ${name}`}
             className="h-8 w-8 rounded-full"
           />

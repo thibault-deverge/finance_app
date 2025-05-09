@@ -1,15 +1,19 @@
 'use client';
+import { createContext, useContext, useState } from 'react';
+import { ModalContextType, ModalProps } from '@/lib/type';
+
 import Theme from '@/components/modal/GenericSelectTheme';
 import Category from '@/components/modal/Category';
 import Amount from '@/components/modal/Amount';
 import Description from '@/components/modal/Description';
 import Header from '@/components/modal/Header';
 import Name from '@/components/modal/Name';
+import DateField from '@/components/modal/Date';
 import Open from '@/components/modal/Open';
 import Target from '@/components/modal/Target';
 import Window from '@/components/modal/Window';
-import { ModalContextType, ModalProps } from '@/lib/type';
-import { createContext, useContext, useState } from 'react';
+import Avatar from '@/components/modal/Avatar';
+import Recurring from '@/components/modal/Recurring';
 
 // Create a context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -45,5 +49,8 @@ Modal.Name = Name;
 Modal.Amount = Amount;
 Modal.Target = Target;
 Modal.Theme = Theme;
+Modal.Date = DateField;
+Modal.Avatar = Avatar;
+Modal.Recurring = Recurring;
 
 export default Modal;
