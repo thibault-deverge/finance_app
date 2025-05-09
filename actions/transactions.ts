@@ -134,3 +134,50 @@ export async function createTransaction(formData: FormData) {
   revalidatePath('/transactions');
   redirect('/transactions');
 }
+
+export async function updateTransaction(formData: FormData) {
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error('Not authenticated');
+
+  const id = formData.get('id') as string;
+  const name = formData.get('name') as string;
+  const amount = parseFloat(formData.get('amount') as string);
+  const category = formData.get('category') as string;
+  const date = formData.get('date') as string;
+  const recurring = formData.get('recurring') === 'true';
+
+  if (!id || !name || isNaN(amount)) {
+    throw new Error('Invalid data');
+  }
+
+  await prisma.transaction.update({
+    where: { id, userId },
+    data: {
+      name,
+      amount,
+      category,
+      date,
+      recurring,
+    },
+  });
+
+  revalidatePath('/transactions');
+}
+
+export async function deleteTransaction(formData: FormData) {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error('Unauthorized');
+
+  const id = formData.get('id') as string;
+
+  await prisma.transaction.delete({
+    where: {
+      id,
+      userId: session.user.id,
+    },
+  });
+
+  revalidatePath('/transactions'); // adapte selon ta route
+}
