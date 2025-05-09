@@ -11,6 +11,7 @@ type PageProps = {
     sortBy?: string;
     category?: string;
     page?: number;
+    itemPerPage?: number;
   };
 };
 
@@ -25,6 +26,7 @@ export default async function Page({ searchParams }: PageProps) {
     sortBy,
     category,
     page,
+    itemPerPage: TRANSACTION_PER_PAGE,
   });
   const totalPages = Math.ceil(totalCount / TRANSACTION_PER_PAGE);
 

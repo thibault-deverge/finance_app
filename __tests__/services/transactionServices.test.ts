@@ -44,6 +44,7 @@ describe('getTransactions', () => {
       category: 'all',
       sortBy: 'latest',
       page: 1,
+      itemPerPage: TRANSACTION_PER_PAGE,
     });
 
     expect(result.transactions).toBe(fakeTransactions);
@@ -69,6 +70,7 @@ describe('getTransactions', () => {
       category: 'all',
       sortBy: 'latest',
       page: 2,
+      itemPerPage: TRANSACTION_PER_PAGE,
     });
 
     expect(prisma.transaction.findMany).toHaveBeenCalledWith({
@@ -97,6 +99,7 @@ describe('getTransactions', () => {
       category: 'bills',
       sortBy: 'latest',
       page: 1,
+      itemPerPage: TRANSACTION_PER_PAGE,
     });
 
     const expectedWhere = { category: 'bills' };
@@ -123,6 +126,7 @@ describe('getTransactions', () => {
       category: 'all',
       sortBy: 'highest',
       page: 1,
+      itemPerPage: TRANSACTION_PER_PAGE,
     });
 
     expect(prisma.transaction.findMany).toHaveBeenCalledWith({
@@ -147,6 +151,7 @@ describe('getTransactions', () => {
       category: 'all',
       sortBy: 'not-a-valid-key',
       page: 1,
+      itemPerPage: TRANSACTION_PER_PAGE,
     });
 
     expect(prisma.transaction.findMany).toHaveBeenCalledWith({
@@ -174,6 +179,7 @@ describe('getTransactions', () => {
         category: 'all',
         sortBy: 'latest',
         page: 1,
+        itemPerPage: TRANSACTION_PER_PAGE,
       })
     ).rejects.toThrow('Failed to fetch transactions');
 

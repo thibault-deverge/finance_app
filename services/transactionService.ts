@@ -1,25 +1,27 @@
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
-import { TRANSACTION_PER_PAGE } from '@/lib/constants';
 
 type TypeOptions = {
   search: string;
-  category: string;
+  category?: string;
   sortBy: string;
   page: number;
+  itemPerPage?: number;
+  onlyRecurringBills?: boolean;
+};
+
+const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
+  latest: { date: 'desc' },
+  oldest: { date: 'asc' },
+  atoz: { name: 'asc' },
+  ztoa: { name: 'desc' },
+  highest: { amount: 'desc' },
+  lowest: { amount: 'asc' },
 };
 
 export async function getTransactions(options: TypeOptions) {
-  const { search, category, sortBy, page } = options;
-
-  const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
-    latest: { date: 'desc' },
-    oldest: { date: 'asc' },
-    atoz: { name: 'asc' },
-    ztoa: { name: 'desc' },
-    highest: { amount: 'desc' },
-    lowest: { amount: 'asc' },
-  };
+  const { search, category, sortBy, page, itemPerPage, onlyRecurringBills } =
+    options;
 
   try {
     const where: Prisma.TransactionWhereInput = {};
@@ -33,12 +35,21 @@ export async function getTransactions(options: TypeOptions) {
       where.category = category;
     }
 
-    const transactions = await prisma.transaction.findMany({
+    if (onlyRecurringBills) {
+      where.recurring = true;
+    }
+
+    const findArgs: Prisma.TransactionFindManyArgs = {
       where,
       orderBy,
-      take: TRANSACTION_PER_PAGE,
-      skip: (page - 1) * TRANSACTION_PER_PAGE,
-    });
+    }
+
+    if (!onlyRecurringBills && itemPerPage) {
+      findArgs.take = itemPerPage
+      findArgs.skip = (page - 1) * itemPerPage
+    }
+
+    const transactions = await prisma.transaction.findMany(findArgs);
     const totalCount = await prisma.transaction.count({ where });
 
     return { transactions, totalCount };
