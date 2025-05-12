@@ -37,7 +37,7 @@ export default async function Page({ searchParams }: PageProps) {
         <Title name="Transactions" />
         <AddTransaction />
       </div>
-      <section className="flex flex-col gap-6 bg-white px-5 py-6 md:px-8 md:py-8">
+      <section className="flex flex-col gap-6 rounded-xl bg-white px-5 py-6 md:px-8 md:py-8">
         <TransactionsSection transactions={transactions} />
         <PaginationControls totalPages={totalPages} />
       </section>
