@@ -7,7 +7,9 @@ type BtnOauthProps = {
 };
 
 function BtnOauth({ children, provider }: BtnOauthProps) {
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     signIn(provider, {
       redirectTo: '/',
     });
@@ -18,7 +20,7 @@ function BtnOauth({ children, provider }: BtnOauthProps) {
       type="submit"
       variant="primary"
       className="[&>*]:hover-bg-grey-500 flex cursor-pointer items-center gap-3 py-6"
-      onClick={handleClick}
+      onClick={(e) => handleClick(e)}
     >
       {children}
     </Button>

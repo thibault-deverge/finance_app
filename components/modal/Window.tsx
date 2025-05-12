@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { Budget, Pot } from '@prisma/client';
+import { Budget, Pot, Transaction } from '@prisma/client';
 import { useModal } from '@/components/modal/Modal';
 import { FormContextType, FormDataState } from '@/lib/type';
 
@@ -30,7 +30,7 @@ function Window({
 }: {
   children: ReactNode;
   name: string;
-  initialData?: Budget | Pot;
+  initialData?: Budget | Pot | Transaction;
   formAction?: (formData: FormData) => Promise<void>;
 }) {
   const { openName, close } = useModal();

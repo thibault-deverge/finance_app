@@ -55,7 +55,12 @@ function LoginForm() {
                 Email
               </FormLabel>
               <FormControl>
-                <Input className="border-beige-500" placeholder="" {...field} />
+                <Input
+                  className="border-beige-500"
+                  placeholder=""
+                  {...field}
+                  value="johndoe@finance.org"
+                />
               </FormControl>
               <FormMessage className="w-full text-red-800" />
             </FormItem>
@@ -78,10 +83,11 @@ function LoginForm() {
                       type={showPassword ? 'text' : 'password'}
                       className="border-beige-500"
                       {...field}
+                      value="pass1234"
                     />
                     <button
                       type="button"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 transform cursor-pointer"
+                      className="absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}

@@ -3,6 +3,8 @@ import { Transaction } from '@prisma/client';
 import { formatAmountSign, formatDateToShortString } from '@/lib/utils';
 import { AVATAR_DEFAULT } from '@/lib/constants';
 
+import EditDeleteTransaction from '@/components/transactions/EditDeleteTransaction';
+
 type Props = {
   transaction: Transaction;
 };
@@ -34,6 +36,10 @@ function TransactionMobileRow({ transaction }: Props) {
           <span className="text-preset-5 text-grey-500">
             {formatDateToShortString(date)}
           </span>
+        </div>
+
+        <div>
+          <EditDeleteTransaction transaction={transaction} />
         </div>
       </div>
     </>
