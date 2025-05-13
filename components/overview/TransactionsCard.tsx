@@ -36,7 +36,7 @@ function TransactionListItem({ transaction }: { transaction: Transaction }) {
     <li className="flex justify-between border-b border-gray-300 py-5 last:border-b-0">
       <div className="flex items-center gap-4">
         <img
-          className="h-10 rounded-full"
+          className="h-10 w-10 rounded-full"
           src={avatar || AVATAR_DEFAULT}
           alt={name}
           referrerPolicy="no-referrer"
