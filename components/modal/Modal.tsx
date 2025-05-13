@@ -13,7 +13,7 @@ import Open from '@/components/modal/Open';
 import Target from '@/components/modal/Target';
 import Window from '@/components/modal/Window';
 import Avatar from '@/components/modal/Avatar';
-import Recurring from '@/components/modal/Recurring';
+import RecurringCheckbox from './Recurring';
 
 // Create a context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -51,6 +51,6 @@ Modal.Target = Target;
 Modal.Theme = Theme;
 Modal.Date = DateField;
 Modal.Avatar = Avatar;
-Modal.Recurring = Recurring;
+Modal.Recurring = RecurringCheckbox;
 
 export default Modal;

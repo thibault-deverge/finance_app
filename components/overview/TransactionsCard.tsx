@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import CardHeader from '@/components/ui/CardHeader';
 import { Transaction } from '@prisma/client';
 import { formatDateToShortString } from '@/lib/utils';
+import { AVATAR_DEFAULT } from '@/lib/constants';
+
+import CardHeader from '@/components/ui/CardHeader';
 
 function TransactionsCard({ transactions }: { transactions: Transaction[] }) {
   const MAX_DISPLAY = 5;
@@ -44,8 +46,8 @@ function TransactionListItem({ transaction }: { transaction: Transaction }) {
     <li className="flex justify-between border-b border-gray-300 py-5 last:border-b-0">
       <div className="flex items-center gap-4">
         <img
-          className="h-10 rounded-full"
-          src={avatar || ''}
+          className="h-10 w-10 rounded-full"
+          src={avatar || AVATAR_DEFAULT}
           alt={name}
           referrerPolicy="no-referrer"
         />
