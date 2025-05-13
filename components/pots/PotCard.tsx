@@ -32,7 +32,6 @@ function PotCard({ pot }: { pot: Pot }) {
             className="bg-beige-100 h-5 w-full rounded-md"
             value={percentage}
             indicatorColor={theme ?? '#f2cdac'}
-            innerPadding={4}
           />
           <div className="flex justify-between">
             <p className="text-preset-5-bold text-grey-500">{percentage}%</p>

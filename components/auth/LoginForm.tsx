@@ -38,9 +38,14 @@ function LoginForm() {
     const res = await signIn('credentials', {
       email,
       password,
-      redirectTo: '/',
+      redirect: false,
     });
-    if (res?.error) form.setError('root', { message: 'Invalid credentials.' });
+
+    if (res?.error) {
+      form.setError('root', { message: 'Invalid credentials.' });
+    } else {
+      window.location.href = '/';
+    }
   };
 
   return (
