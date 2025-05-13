@@ -221,7 +221,7 @@ function MobileNavigationLink({
             className="h-5 w-5"
           />
         </div>
-        <span className="text-xs">{link.name}</span>
+        <span className="hidden text-xs">{link.name}</span>
       </Link>
     </li>
   );

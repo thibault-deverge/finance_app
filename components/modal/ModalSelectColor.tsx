@@ -26,15 +26,7 @@ const themeColors = [
   { color: 'orange', label: 'Orange', value: '#BE6C49' },
   { color: 'cyan', label: 'Cyan', value: '#82C9D7' },
 ];
-function ColorSelectItem({
-  color,
-  label,
-  value,
-}: {
-  color: string;
-  label: string;
-  value: string;
-}) {
+function ColorSelectItem({ label, value }: { label: string; value: string }) {
   return (
     <SelectItem value={value}>
       <div className="flex items-center gap-2">
@@ -70,7 +62,6 @@ function BudgetSelectTheme({
               themeColors.map(({ color, label, value }) => (
                 <ColorSelectItem
                   key={color}
-                  color={color}
                   label={label}
                   value={value}
                 />

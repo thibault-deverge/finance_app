@@ -25,7 +25,7 @@ function LogoutButton({ isVisible }: { isVisible?: boolean }) {
       <Button
         onClick={() => setOpen(true)}
         style={{ paddingLeft: '4px' }}
-        className={`z-10 pl-2 whitespace-nowrap text-gray-300 transition-all duration-300 ease-in-out hover:cursor-pointer hover:text-gray-100 ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
+        className={`z-10 flex flex-col pl-2 whitespace-nowrap text-gray-300 transition-all duration-300 ease-in-out hover:cursor-pointer hover:text-gray-100 xl:flex-row ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
       >
         <LogOut
           size={20}
@@ -35,7 +35,7 @@ function LogoutButton({ isVisible }: { isVisible?: boolean }) {
             height: '20px',
           }}
         />
-        <p className="z-50 ml-2 hidden whitespace-nowrap opacity-100 transition-all duration-300 ease-in-out md:block">
+        <p className="text-grey-300 hover:text-grey-100 z-50 ml-2 hidden whitespace-nowrap opacity-100 transition-all duration-300 ease-in-out xl:block">
           Logout
         </p>
       </Button>
