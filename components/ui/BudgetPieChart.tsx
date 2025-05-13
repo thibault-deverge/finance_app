@@ -1,7 +1,14 @@
 'use client';
 import { Budget, Transaction } from '@prisma/client';
 import { getTotalCurrent, getTotalMaximum } from '@/lib/utilsBudgets';
-import { Cell, Label, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import {
+  Cell,
+  Label,
+  LabelProps,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+} from 'recharts';
 
 interface PieChartViewBox {
   cx: number;
@@ -13,8 +20,6 @@ interface PieChartViewBox {
   width: number;
   height: number;
 }
-
-// const { budgets: allBudgets } = data;
 
 function BudgetPieChart({
   budgets,
@@ -79,7 +84,7 @@ function BudgetPieChart({
           ))}
 
           <Label
-            content={(props: any) => {
+            content={(props: LabelProps) => {
               const viewBox = props.viewBox as PieChartViewBox;
               const cx = viewBox?.cx || 0;
               const cy = viewBox?.cy || 0;

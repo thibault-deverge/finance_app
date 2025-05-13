@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import RecurringBillsMobileRow from './RecurringBillsMobileRow';
 import RecurringBillsDesktopRow from './RecurringBillsDesktopRow';
 import { RecurringBillView } from './type';

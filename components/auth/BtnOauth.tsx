@@ -7,7 +7,7 @@ type BtnOauthProps = {
 };
 
 function BtnOauth({ children, provider }: BtnOauthProps) {
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     signIn(provider, {

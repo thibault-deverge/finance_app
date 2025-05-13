@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import CardHeader from '@/components/ui/CardHeader';
 import { Transaction } from '@prisma/client';
 import { formatDateToShortString } from '@/lib/utils';

@@ -7,13 +7,13 @@ import Title from '@/components/ui/Title';
 import AddTransaction from '@/components/transactions/AddTransaction';
 
 type PageProps = {
-  searchParams: {
+  searchParams: Promise<{
     search?: string;
     sortBy?: string;
     category?: string;
     page?: number;
     itemPerPage?: number;
-  };
+  }>;
 };
 
 export default async function Page({ searchParams }: PageProps) {
