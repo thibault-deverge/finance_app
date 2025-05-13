@@ -37,13 +37,15 @@ function LoginForm() {
     const res = await signIn('credentials', {
       email,
       password,
-      redirect: false, // Utilisez 'redirect: false' au lieu de 'redirectTo'
+
+      redirect: false,
+
     });
 
     if (res?.error) {
       form.setError('root', { message: 'Invalid credentials.' });
     } else {
-      // Si l'authentification réussit, redirigez manuellement
+
       window.location.href = '/';
     }
   };
