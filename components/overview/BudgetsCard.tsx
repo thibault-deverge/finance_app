@@ -14,6 +14,15 @@ function BudgetsCard({
   const MAX_DISPLAY = 4;
   const displayedBudget = budgets.slice(0, MAX_DISPLAY);
 
+  if (budgets.length === 0) {
+    return (
+      <section className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white px-5 py-6 shadow-sm md:px-8 md:py-8">
+        <h2 className="text-lg font-semibold text-gray-500">
+          No budgets found
+        </h2>
+      </section>
+    );
+  }
   return (
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8 shadow-sm">
       <CardHeader title="Budgets" href="/budgets" />

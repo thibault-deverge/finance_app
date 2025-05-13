@@ -11,6 +11,13 @@ function PotsCard({ pots }: { pots: Pot[] }) {
     .sort((a, b) => b.total - a.total)
     .slice(0, MAX_DISPLAY);
 
+  if (pots.length === 0) {
+    return (
+      <section className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white px-5 py-6 shadow-sm md:px-8 md:py-8">
+        <h2 className="text-lg font-semibold text-gray-500">No pots found</h2>
+      </section>
+    );
+  }
   return (
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8 shadow-sm">
       <CardHeader title="Pots" href="/pots" />

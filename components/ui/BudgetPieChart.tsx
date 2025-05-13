@@ -42,7 +42,7 @@ function BudgetPieChart({
   }));
 
   return (
-    <ResponsiveContainer width="100%" height={250} className="mb-8">
+    <ResponsiveContainer width="100%" height="auto" className="mb-8">
       <PieChart>
         {/* Anneau extérieur */}
         <Pie

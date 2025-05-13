@@ -9,7 +9,7 @@ function BudgetList({
   budgets: Budget[];
   transactionsByCategory: TransactionsByCategory;
 }) {
-  return budgets.length > 0 ? (
+  return (
     <ul className="flex flex-col gap-6">
       {budgets.map((budget) => (
         <BudgetCard
@@ -19,8 +19,6 @@ function BudgetList({
         />
       ))}
     </ul>
-  ) : (
-    <p>No Budgets</p>
   );
 }
 

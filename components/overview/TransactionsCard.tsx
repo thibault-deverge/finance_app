@@ -12,6 +12,16 @@ function TransactionsCard({ transactions }: { transactions: Transaction[] }) {
       ...transaction,
       date: formatDateToShortString(transaction.date),
     }));
+
+  if (transactions.length === 0) {
+    return (
+      <section className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white px-5 py-6 shadow-sm md:px-8 md:py-8">
+        <h2 className="text-lg font-semibold text-gray-500">
+          No transactions found
+        </h2>
+      </section>
+    );
+  }
   return (
     <section className="col-span-full flex flex-col justify-between rounded-lg bg-white p-8 shadow-sm">
       <CardHeader title="Transactions" href="/transactions" />
