@@ -1,8 +1,10 @@
 'use client';
 
+import { LogOut } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Button } from './button';
 
 type NavLink = {
   name: string;
@@ -90,7 +92,6 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
             isVisible={isVisible}
             setIsVisible={setIsVisible}
           />
-          {/* <BtnLogout>Logout</BtnLogout> */}
         </div>
       </aside>
 
@@ -114,6 +115,10 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
 }
 
 function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
+  const href = 'http://localhost:3000/api/auth/signout';
+  function handleLogout() {
+    console.log('logout');
+  }
   return (
     <div className="absolute bottom-20 px-4 xl:px-8">
       <button
@@ -134,6 +139,24 @@ function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
           Minimize Menu
         </span>
       </button>
+      <Button
+        onClick={handleLogout}
+        className={`pl-[6px] text-grey-300 z-10 whitespace-nowrap transition-all duration-300 ease-in-out ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
+      >
+        <Link href={href} className="flex items-center gap-3">
+          <LogOut
+            size={20}
+            style={{
+              transform: 'rotate(180deg)',
+              width: '20px',
+              height: '20px',
+            }}
+          />
+          <p className="text-grey-300 hover:text-grey-100 z-10 max-w-32 text-base whitespace-nowrap opacity-100 transition-all duration-300 ease-in-out">
+            Logout
+          </p>
+        </Link>
+      </Button>
     </div>
   );
 }
