@@ -1,10 +1,11 @@
-import CardMini from '@/components/ui/CardMini';
-import EditDeleteBudget from './EditDeleteBudget';
-import LatestSpending from './LatestSpending';
-import { getAllTransactions, getSpent } from '@/lib/utilsBudgets';
 import { Budget } from '@prisma/client';
-import { Progress } from '@/components/ui/progress';
+import { getAllTransactions, getSpent } from '@/lib/utilsBudgets';
 import { TransactionsByCategory } from '@/lib/type';
+
+import CardMini from '@/components/ui/CardMini';
+import EditDeleteBudget from '@/components/budgets/EditDeleteBudget';
+import LatestSpending from '@/components/budgets/LatestSpending';
+import { Progress } from '@/components/ui/progress';
 
 function BudgetCard({
   budget,
@@ -36,7 +37,6 @@ function BudgetCard({
           className="bg-beige-100 h-8 w-full rounded-md" // rounded-md équivaut à environ 4px
           value={percentage}
           indicatorColor={theme ?? '#f2cdac'}
-          innerPadding={4}
         />
       </div>
       <div className="flex items-center justify-between">

@@ -13,7 +13,6 @@ type PageProps = {
 };
 
 export default async function Page({ searchParams }: PageProps) {
-  console.log('searchParams', searchParams);
   const search = (await searchParams).search || '';
   const sortBy = (await searchParams).sortBy || 'latest';
 

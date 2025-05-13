@@ -62,7 +62,9 @@ function BudgetSelectTheme({
             <SelectLabel>Categories</SelectLabel>
             {themeColors.length > 0 &&
               themeColors.map(({ color, label, value }) => (
+
                 <ColorSelectItem key={color} label={label} value={value} />
+
               ))}
           </SelectGroup>
         </SelectContent>
