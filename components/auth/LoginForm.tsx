@@ -1,12 +1,6 @@
 'use client';
-import { z } from 'zod';
-import { useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { authSchema } from '@/lib/schemas';
-
 import BtnOauth from '@/components/auth/BtnOauth';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -16,10 +10,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
+import { authSchema } from '@/lib/schemas';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FaGithub } from 'react-icons/fa';
+import { z } from 'zod';
 
 type FormFields = z.infer<typeof authSchema>;
 
@@ -38,9 +37,15 @@ function LoginForm() {
     const res = await signIn('credentials', {
       email,
       password,
-      redirectTo: '/',
+      redirect: false, // Utilisez 'redirect: false' au lieu de 'redirectTo'
     });
-    if (res?.error) form.setError('root', { message: 'Invalid credentials.' });
+
+    if (res?.error) {
+      form.setError('root', { message: 'Invalid credentials.' });
+    } else {
+      // Si l'authentification réussit, redirigez manuellement
+      window.location.href = '/';
+    }
   };
 
   return (

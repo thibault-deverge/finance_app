@@ -1,55 +1,63 @@
 import CardHeader from '@/components/ui/CardHeader';
 import CardMini from '@/components/ui/CardMini';
-import data from '../../data/data.json';
-import { v4 as uuidv4 } from 'uuid';
-import {
-  calculateFinancialSummary,
-  FinancialData,
-  FinancialDataResult,
-} from '@/lib/utils';
+import { formatAmount } from '@/lib/utils';
+import { Transaction } from '@prisma/client';
 
-function getFinancialSummaryForCurrentMonth(
-  data: FinancialData
-): FinancialDataResult {
-  const summary = calculateFinancialSummary(data);
-  return [
-    {
-      id: uuidv4(),
-      title: 'Paid Bills',
-      amount: Number(summary.paidBills.toFixed(2)),
-      theme: '#277C78',
-    },
-    {
-      id: uuidv4(),
-      title: 'Total Upcoming',
-      amount: Number(summary.totalUpcoming.toFixed(2)),
-      theme: '#F2CDAC',
-    },
-    {
-      id: uuidv4(),
-      title: 'Due Soon',
-      amount: Number(summary.dueSoon.toFixed(2)),
-      theme: '#82C9D7',
-    },
-  ];
-}
+function RecurringBills({ transactions }: { transactions: Transaction[] }) {
+  if (transactions.length === 0) {
+    return (
+      <section className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white px-5 py-6 shadow-sm md:px-8 md:py-8">
+        <h2 className="text-lg font-semibold text-gray-500">
+          No recurring bills found
+        </h2>
+      </section>
+    );
+  }
+  const now = new Date();
+  const oneWeekLater = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-const recurring = getFinancialSummaryForCurrentMonth(data);
+  // 1) Calculez la "dueDate" pour le mois en cours
+  const withDue = transactions.map((tx) => {
+    const day = new Date(tx.date).getUTCDate();
+    const due = new Date(now.getFullYear(), now.getMonth(), day);
+    return { ...tx, due };
+  });
 
-function RecurringBills() {
+  // 2) Classez-en trois catégories
+  const paid = withDue.filter(({ due }) => due < now);
+  const upcoming = withDue.filter(({ due }) => due >= now);
+  const dueSoon = upcoming.filter(({ due }) => due < oneWeekLater);
+
+  // 3) Calculez compte et somme (valeurs absolues)
+  const paidSum = paid.reduce((acc, tx) => acc + Math.abs(tx.amount), 0);
+  const upcomingSum = upcoming.reduce(
+    (acc, tx) => acc + Math.abs(tx.amount),
+    0
+  );
+  const dueSoonSum = dueSoon.reduce((acc, tx) => acc + Math.abs(tx.amount), 0);
+
   return (
     <section className="col-span-full flex flex-col justify-between gap-6 rounded-lg bg-white p-8 shadow-sm">
       <CardHeader title="Recurring Bills" href="/recurring-bills" />
-      {recurring &&
-        recurring.map((item) => (
-          <CardMini
-            key={item.id}
-            title={item.title}
-            amount={item.amount ?? 0}
-            color={item.theme}
-            type="recurringBills"
-          />
-        ))}
+
+      <CardMini
+        title="Paid Bills"
+        amount={formatAmount(paidSum)}
+        color="#277C78"
+        type="recurringBills"
+      />
+      <CardMini
+        title="Total Upcoming"
+        amount={formatAmount(upcomingSum)}
+        color="#F2CDAC"
+        type="recurringBills"
+      />
+      <CardMini
+        title="Due Soon"
+        amount={formatAmount(dueSoonSum)}
+        color="#82C9D7"
+        type="recurringBills"
+      />
     </section>
   );
 }

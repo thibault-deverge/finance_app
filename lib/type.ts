@@ -15,7 +15,7 @@ export type CardType = 'pots' | 'budgets' | 'recurringBills';
 
 export type CardMiniType = {
   title: string;
-  amount: number;
+  amount: string | number;
   color: string;
   type: CardType;
 };
