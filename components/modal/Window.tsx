@@ -35,35 +35,51 @@ function Window({
 }) {
   const { openName, close } = useModal();
 
-  const [formData, setFormData] = useState<FormDataState>({
-    name: initialData && 'name' in initialData ? initialData.name : '',
-    id: initialData && 'id' in initialData ? initialData.id : '',
-    target: initialData && 'target' in initialData ? initialData.target : '',
-    total: initialData && 'total' in initialData ? initialData.total : '',
-    category:
-      initialData && 'category' in initialData ? initialData.category : '',
-    maximum: initialData && 'maximum' in initialData ? initialData.maximum : '',
-    theme: initialData?.theme || '',
-    amount:
-      initialData && 'amount' in initialData
-        ? (initialData.amount as string | number)
-        : '',
-    date:
-      initialData && 'date' in initialData
-        ? typeof initialData.date === 'string' ||
-          initialData.date instanceof Date
-          ? new Date(initialData.date).toISOString().slice(0, 10)
-          : ''
-        : '',
-    recurring:
-      initialData && 'recurring' in initialData
-        ? Boolean(initialData.recurring)
-        : false,
+  const [formData, setFormData] = useState<FormDataState>(() => {
+    // Valeurs par défaut
+    const defaults: FormDataState = {
+      name: '',
+      id: '',
+      target: '',
+      total: '',
+      category: '',
+      maximum: '',
+      theme: '',
+      amount: '',
+      date: '',
+      recurring: false,
+    };
+
+    // Si pas de données initiales, retourner les valeurs par défaut
+    if (!initialData) return defaults;
+
+    // Extraire les valeurs de initialData si elles existent
+    return {
+      ...defaults,
+      ...Object.entries(initialData).reduce((acc, [key, value]) => {
+        if (key in defaults) {
+          // Traitement spécial pour la date
+          if (key === 'date' && value) {
+            return {
+              ...acc,
+              date: new Date(value as string | Date).toISOString().slice(0, 10),
+            };
+          }
+          // Traitement spécial pour recurring (convertir en boolean)
+          if (key === 'recurring') {
+            return { ...acc, recurring: Boolean(value) };
+          }
+          // Pour les autres clés, utiliser la valeur telle quelle
+          return { ...acc, [key]: value };
+        }
+        return acc;
+      }, {}),
+    };
   });
 
   const updateFormData = (
     field: keyof typeof formData,
-    value: string | number
+    value: string | number | boolean
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
@@ -102,18 +118,18 @@ function Window({
   if (name !== openName) return null;
 
   return (
-    <div className="fixed inset-0 z-20 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
         className="absolute inset-0 bg-black/30 backdrop-blur-sm"
         onClick={close}
       />
 
       <div
-        className="relative z-10 w-full max-w-[35rem] rounded-2xl bg-white p-8 shadow-xl"
+        className="relative z-50 w-full max-w-[35rem] rounded-2xl bg-white p-8 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <FormContext.Provider value={{ formData, updateFormData }}>
-          <form action={actionWithClose} encType="multipart/form-data">
+          <form action={actionWithClose}>
             {children}
 
             {/* Champs cachés pour transmettre les données d'état */}

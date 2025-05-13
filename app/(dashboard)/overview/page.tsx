@@ -10,7 +10,7 @@ async function Page() {
   const balance = await getAllBalances();
   const pots = await getPots();
 
-  console.log('Balance:', balance);
+  // console.log('Balance:', balance);
 
   return (
     <Overview

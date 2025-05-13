@@ -27,6 +27,10 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<FormFields>({
     resolver: zodResolver(authSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
   const onSubmit = async (data: z.infer<typeof authSchema>) => {
@@ -55,12 +59,7 @@ function LoginForm() {
                 Email
               </FormLabel>
               <FormControl>
-                <Input
-                  className="border-beige-500"
-                  placeholder=""
-                  {...field}
-                  value="johndoe@finance.org"
-                />
+                <Input className="border-beige-500" placeholder="" {...field} />
               </FormControl>
               <FormMessage className="w-full text-red-800" />
             </FormItem>
@@ -83,7 +82,6 @@ function LoginForm() {
                       type={showPassword ? 'text' : 'password'}
                       className="border-beige-500"
                       {...field}
-                      value="pass1234"
                     />
                     <button
                       type="button"
