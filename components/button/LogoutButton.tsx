@@ -63,7 +63,7 @@ function LogoutButton({ isVisible }: { isVisible?: boolean }) {
               Are you sure you want to logout from the application?
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="flex flex-row gap-2 sm:justify-end">
+          <DialogFooter className="flex flex-row justify-end gap-2">
             <Button
               className="cursor-pointer"
               variant="outline"
