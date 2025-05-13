@@ -35,7 +35,7 @@ function LogoutButton({ isVisible }: { isVisible?: boolean }) {
             height: '20px',
           }}
         />
-        <p className="z-50 ml-2 hidden whitespace-nowrap opacity-100 transition-all duration-300 ease-in-out xl:block">
+        <p className="text-grey-300 hover:text-grey-100 z-50 ml-2 hidden whitespace-nowrap opacity-100 transition-all duration-300 ease-in-out xl:block">
           Logout
         </p>
       </Button>
