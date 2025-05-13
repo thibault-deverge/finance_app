@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import Image from 'next/image';
@@ -221,7 +222,7 @@ function MobileNavigationLink({
             className="h-5 w-5"
           />
         </div>
-        <span className="text-xs">{link.name}</span>
+        {/* <span className="text-xs">{link.name}</span> */}
       </Link>
     </li>
   );

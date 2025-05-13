@@ -7,7 +7,6 @@ import {
   FinancialData,
   FinancialDataResult,
 } from '@/lib/utils';
-const MAX_DISPLAY = 3;
 
 function getFinancialSummaryForCurrentMonth(
   data: FinancialData

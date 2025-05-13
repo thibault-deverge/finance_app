@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 interface ProgressProps
   extends React.ComponentProps<typeof ProgressPrimitive.Root> {
   indicatorColor?: string;
-  innerPadding?: number;
   classNamePrimitive?: string;
 }
 
@@ -17,7 +16,6 @@ function Progress({
   classNamePrimitive,
   value,
   indicatorColor,
-  innerPadding = 0,
   ...props
 }: ProgressProps) {
   return (

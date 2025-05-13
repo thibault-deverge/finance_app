@@ -1,9 +1,9 @@
-import EditDeletePots from './EditDeletePots';
 import { Pot } from '@prisma/client';
+
 import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
-import AddMoney from './AddMoney';
-import WithdrawMoney from './WithdrawMoney';
+import EditDeletePots from '@/components/pots/EditDeletePots';
+import AddMoney from '@/components/pots/AddMoney';
+import WithdrawMoney from '@/components/pots/WithdrawMoney';
 
 function PotCard({ pot }: { pot: Pot }) {
   const { name, theme, target, total } = pot;
@@ -29,7 +29,7 @@ function PotCard({ pot }: { pot: Pot }) {
         </div>
         <div className="flex flex-col gap-3">
           <Progress
-            className="bg-beige-100 h-5 w-full rounded-md" // rounded-md équivaut à environ 4px
+            className="bg-beige-100 h-5 w-full rounded-md"
             value={percentage}
             indicatorColor={theme ?? '#f2cdac'}
             innerPadding={4}
@@ -41,9 +41,6 @@ function PotCard({ pot }: { pot: Pot }) {
         </div>
         <div className="flex gap-4">
           <AddMoney pot={pot} />
-          {/* <Button variant="oauth" className="flex-1">
-            + Add Money
-          </Button> */}
           <WithdrawMoney pot={pot} />
         </div>
       </div>

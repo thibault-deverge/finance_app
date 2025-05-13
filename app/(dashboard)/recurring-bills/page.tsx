@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { getTransactions } from '@/actions/transactions';
 
 import Title from '@/components/ui/Title';
@@ -7,13 +6,14 @@ import TotalBillsCard from '@/components/recurring/TotalBillsCard';
 import SummaryBillsCard from '@/components/recurring/SummaryBillsCard';
 
 type PageProps = {
-  searchParams: {
+  searchParams: Promise<{
     search?: string;
     sortBy?: string;
-  };
+  }>;
 };
 
 export default async function Page({ searchParams }: PageProps) {
+  console.log('searchParams', searchParams);
   const search = (await searchParams).search || '';
   const sortBy = (await searchParams).sortBy || 'latest';
 

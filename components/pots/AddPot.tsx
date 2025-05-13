@@ -1,13 +1,13 @@
 'use client';
-import { createPot } from '@/actions/pots';
-import Modal from '@/components/modal/Modal';
-import { Button } from '@/components/ui/button';
-import { Pot } from '@prisma/client';
 import { Suspense } from 'react';
-import AddButton from '../button/AddButton';
-import { SpinnerMini } from '../ui/SpinnerMini';
+import { createPot } from '@/actions/pots';
 
-function AddPot({ pots }: { pots: Pot[] }) {
+import Modal from '@/components/modal/Modal';
+import AddButton from '@/components/button/AddButton';
+import { Button } from '@/components/ui/button';
+import { SpinnerMini } from '@/components/ui/SpinnerMini';
+
+function AddPot() {
   return (
     <Modal>
       <Modal.Open opens="add-pot">

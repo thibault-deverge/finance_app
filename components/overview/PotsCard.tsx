@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import CardHeader from '@/components/ui/CardHeader';
 import CardMini from '@/components/ui/CardMini';
 import { getTotalSaved } from '@/lib/utilsPots';
 import { Pot } from '@prisma/client';
-import { Card } from '../ui/card';
 
 function PotsCard({ pots }: { pots: Pot[] }) {
   const MAX_DISPLAY = 4;

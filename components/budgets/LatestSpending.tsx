@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useState } from 'react';
-import SpendingCard from './SpendingCard';
 import { Transaction } from '@prisma/client';
+
+import SpendingCard from '@/components/budgets/SpendingCard';
 
 function LatestSpending({
   allTransactions,
