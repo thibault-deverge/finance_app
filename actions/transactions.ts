@@ -1,27 +1,42 @@
+'use server';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
+import { uploadAvatarImage } from '@/lib/upload';
 
 type TypeOptions = {
   search: string;
-  category: string;
+  category?: string;
   sortBy: string;
+  page: number;
+  itemPerPage?: number;
+  onlyRecurringBills?: boolean;
+};
+
+const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
+  latest: { date: 'desc' },
+  oldest: { date: 'asc' },
+  atoz: { name: 'asc' },
+  ztoa: { name: 'desc' },
+  highest: { amount: 'desc' },
+  lowest: { amount: 'asc' },
 };
 
 export async function getTransactions(options: TypeOptions) {
-  const { search, category, sortBy } = options;
+  const session = await auth();
+  if (!session?.user?.id) {
+    return { transactions: [], totalCount: 0 };
+  }
+  const userId = session.user.id;
 
-  const sortMap: Record<string, Prisma.TransactionOrderByWithRelationInput> = {
-    latest: { createdAt: 'desc' },
-    oldest: { createdAt: 'asc' },
-    atoz: { name: 'asc' },
-    ztoa: { name: 'desc' },
-    highest: { amount: 'desc' },
-    lowest: { amount: 'asc' },
-  };
+  const { search, category, sortBy, page, itemPerPage, onlyRecurringBills } =
+    options;
 
   try {
-    const where: Prisma.TransactionWhereInput = {};
+    const where: Prisma.TransactionWhereInput = { userId };
     const orderBy = sortMap[sortBy] ?? sortMap.latest;
 
     if (search) {
@@ -32,8 +47,24 @@ export async function getTransactions(options: TypeOptions) {
       where.category = category;
     }
 
-    const transactions = await prisma.transaction.findMany({ where, orderBy });
-    return transactions;
+    if (onlyRecurringBills) {
+      where.recurring = true;
+    }
+
+    const findArgs: Prisma.TransactionFindManyArgs = {
+      where,
+      orderBy,
+    };
+
+    if (!onlyRecurringBills && itemPerPage) {
+      findArgs.take = itemPerPage;
+      findArgs.skip = (page - 1) * itemPerPage;
+    }
+
+    const transactions = await prisma.transaction.findMany(findArgs);
+    const totalCount = await prisma.transaction.count({ where });
+
+    return { transactions, totalCount };
   } catch (error) {
     console.error('[getTransaction Error]', error);
     throw new Error('Failed to fetch transactions');
@@ -54,4 +85,99 @@ export async function getAllTransactions() {
       createdAt: 'desc',
     },
   });
+}
+
+export async function createTransaction(formData: FormData) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error('You must be logged in to add a transaction.');
+  }
+
+  const avatarFile = formData.get('avatar') as File | null;
+  let avatarUrl: string | null = null;
+
+  if (avatarFile && avatarFile.size > 0) {
+    avatarUrl = await uploadAvatarImage(avatarFile);
+  }
+
+  const name = (formData.get('name') as string)?.trim();
+  if (!name) throw new Error('Transaction name is required.');
+
+  const amountStr = formData.get('amount') as string;
+  if (!amountStr) throw new Error('Amount is required.');
+  const amount = parseFloat(amountStr);
+  if (isNaN(amount)) throw new Error('Amount must be a number.');
+
+  const category = (formData.get('category') as string)?.trim();
+  if (!category) throw new Error('Category is required.');
+
+  const dateStr = (formData.get('date') as string)?.trim();
+  if (!dateStr || isNaN(Date.parse(dateStr))) {
+    throw new Error('A valid date is required.');
+  }
+
+  const recurringStr = formData.get('recurring') as string | null;
+  const recurring = recurringStr === 'true';
+
+  await prisma.transaction.create({
+    data: {
+      name,
+      amount,
+      category,
+      date: dateStr,
+      userId: session.user.id,
+      recurring,
+      avatar: avatarUrl,
+    },
+  });
+
+  revalidatePath('/transactions');
+  redirect('/transactions');
+}
+
+export async function updateTransaction(formData: FormData) {
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error('Not authenticated');
+
+  const id = formData.get('id') as string;
+  const name = formData.get('name') as string;
+  const amount = parseFloat(formData.get('amount') as string);
+  const category = formData.get('category') as string;
+  const date = formData.get('date') as string;
+  const recurring = formData.get('recurring') === 'true';
+
+  if (!id || !name || isNaN(amount)) {
+    throw new Error('Invalid data');
+  }
+
+  await prisma.transaction.update({
+    where: { id, userId },
+    data: {
+      name,
+      amount,
+      category,
+      date,
+      recurring,
+    },
+  });
+
+  revalidatePath('/transactions');
+}
+
+export async function deleteTransaction(formData: FormData) {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error('Unauthorized');
+
+  const id = formData.get('id') as string;
+
+  await prisma.transaction.delete({
+    where: {
+      id,
+      userId: session.user.id,
+    },
+  });
+
+  revalidatePath('/transactions'); // adapte selon ta route
 }

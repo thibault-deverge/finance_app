@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { getTransactions } from '@/services/transactionService';
+import { getTransactions } from '@/actions/transactions';
 
 import Title from '@/components/ui/Title';
 import RecurringBillsSection from '@/components/recurring/RecurringBillsSection';

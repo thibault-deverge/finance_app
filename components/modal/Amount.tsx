@@ -27,6 +27,19 @@ function Amount({
     if (onAmountChange) onAmountChange(value);
   };
 
+  if (name === 'amount') {
+    return (
+      <InputAmount
+        title={title}
+        name="amount"
+        value={Number(formData.amount) || 0}
+        onChange={(v) => updateFormData('amount', v)}
+        min={-10000000}
+        max={10000000}
+      />
+    );
+  }
+
   if (name === 'budget') {
     return (
       <InputAmount
@@ -47,17 +60,6 @@ function Amount({
       />
     );
   }
-
-  // if (name === 'pot') {
-  //   return (
-  //     <InputAmount
-  //       title={title}
-  //       value={Number(formData.target) || 0}
-  //       onChange={handleChangePot}
-  //       name={name}
-  //     />
-  //   );
-  // }
 
   return null;
 }

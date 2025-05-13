@@ -51,6 +51,9 @@ export interface FormDataState {
   category: string;
   maximum: string | number;
   theme: string;
+  amount: number | string;
+  date: string;
+  recurring: boolean;
 }
 
 // ##############################
@@ -71,17 +74,9 @@ export type OpenProps = {
 };
 
 export interface FormContextType {
-  formData: {
-    id: string;
-    category: string;
-    maximum: string | number;
-    name: string;
-    target: string | number;
-    theme: string;
-    total: string | number;
-  };
+  formData: FormDataState;
   updateFormData: (
-    field: keyof FormContextType['formData'],
-    value: string | number
+    field: keyof FormDataState,
+    value: string | number | boolean
   ) => void;
 }
