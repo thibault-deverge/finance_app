@@ -1,20 +1,31 @@
-import Link from 'next/link';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { LogOut } from 'lucide-react';
+import { useState } from 'react';
 import { Button } from '../ui/button';
+import { signOut } from 'next-auth/react';
 
 function LogoutButton({ isVisible }: { isVisible?: boolean }) {
-  const href = 'http://localhost:3000/api/auth/signout';
+  const [open, setOpen] = useState(false);
+
   function handleLogout() {
-    console.log('logout');
+    signOut({
+      callbackUrl: '/',
+    });
   }
+
   return (
-    <Button
-      onClick={handleLogout}
-      className={`text-grey-300 z-10 pl-[6px] whitespace-nowrap transition-all duration-300 ease-in-out ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
-    >
-      <Link
-        href={href}
-        className="text-grey-300 hover:text-grey-100 flex items-center gap-3 transition-all duration-300"
+    <>
+      <Button
+        onClick={() => setOpen(true)}
+        style={{ paddingLeft: '4px' }}
+        className={`z-10 pl-2 whitespace-nowrap text-gray-300 transition-all duration-300 ease-in-out hover:cursor-pointer hover:text-gray-100 ${isVisible ? 'max-w-32 opacity-100' : 'max-w-0 overflow-hidden opacity-0'}`}
       >
         <LogOut
           size={20}
@@ -24,11 +35,53 @@ function LogoutButton({ isVisible }: { isVisible?: boolean }) {
             height: '20px',
           }}
         />
-        <p className="z-10 max-w-32 text-base whitespace-nowrap opacity-100 transition-all duration-300 ease-in-out">
+        <p className="z-50 ml-2 hidden whitespace-nowrap opacity-100 transition-all duration-300 ease-in-out md:block">
           Logout
         </p>
-      </Link>
-    </Button>
+      </Button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-[35rem] rounded-2xl border-none bg-white p-8 shadow-xl">
+          <DialogHeader>
+            <DialogTitle
+              style={{
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                marginBottom: '20px',
+              }}
+              className="text-grey-900"
+            >
+              Logout
+            </DialogTitle>
+            <DialogDescription
+              className="text-grey-500"
+              style={{
+                fontSize: '0.875rem',
+                marginBottom: '20px',
+              }}
+            >
+              Are you sure you want to logout from the application?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex flex-row gap-2 sm:justify-end">
+            <Button
+              className="cursor-pointer"
+              variant="outline"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              className="cursor-pointer"
+              variant="destructive"
+              onClick={handleLogout}
+            >
+              Confirm
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 

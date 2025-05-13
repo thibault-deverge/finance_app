@@ -68,8 +68,8 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
                 width={122}
                 height={22}
                 quality={80}
-                loading="lazy"
                 className="mb-12"
+                loading="eager"
               />
             </div>
 
@@ -97,7 +97,7 @@ function SideNavigation({ isVisible, setIsVisible }: IsNavVisible) {
       {/* Navigation en bas pour tablette/mobile */}
       <nav
         id="mobile-navbar"
-        className="fixed right-0 bottom-0 left-0 z-50 flex w-full items-center bg-gray-900 pt-2 text-white shadow-lg xl:hidden"
+        className="fixed right-0 bottom-0 left-0 z-50 flex w-full items-center bg-gray-900 px-4 pt-2 text-white shadow-lg xl:hidden"
       >
         <ul className="flex w-full justify-around">
           {navLinks.map((link) => (
