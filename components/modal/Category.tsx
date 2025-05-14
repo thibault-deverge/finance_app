@@ -1,5 +1,5 @@
 'use client';
-import BudgetSelectCategory from '@/components/modal/BudgetSelectCategory';
+import SelectCategory from '@/components/modal/SelectCategory';
 import { useFormContext } from '@/components/modal/Window';
 
 function Category({ title }: { title: string }) {
@@ -11,7 +11,7 @@ function Category({ title }: { title: string }) {
   };
   return (
     <>
-      <BudgetSelectCategory
+      <SelectCategory
         title={title}
         value={formData.category}
         onChange={handleChange}

@@ -43,30 +43,29 @@ export const budgetSchema = z.object({
   theme: z.string().min(1, { message: 'Please select a theme' }),
 });
 
-
-
 // Schéma Pot pour la validation coter client
 export const potSchema = z.object({
-  name: z.string().min(1, { message: 'Le nom du pot est requis' }),
+  name: z.string().min(1, { message: 'The pot name is required' }),
   target: z.string().refine(
     (value) => {
       const num = Number(value);
       return !isNaN(num) && num >= 0;
     },
-    { message: "L'objectif doit être un nombre positif" }
+    { message: 'The target should be a positive number' }
   ),
-  theme: z.string().min(1, { message: 'Veuillez choisir un thème' }),
+  theme: z.string().min(1, { message: 'Please select a theme' }),
 });
 
 // Schéma Transaction pour la validation coter client
 export const transactionSchema = z.object({
-  category: z.string().min(1, { message: 'La catégorie est requise' }),
+  name: z.string().min(1, { message: 'Transaction name is required' }),
+  category: z.string().min(1, { message: 'Category is required' }),
   amount: z.string().refine(
     (value) => {
       const num = Number(value);
       return !isNaN(num);
     },
-    { message: 'Le montant doit être un nombre valide' }
+    { message: 'Amount must be a valid number' }
   ),
-  date: z.string().min(1, { message: 'La date est requise' }),
+  date: z.string().min(1, { message: 'The date is required' }),
 });

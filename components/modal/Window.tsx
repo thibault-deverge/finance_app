@@ -6,10 +6,10 @@ import {
   useEffect,
   useState,
 } from 'react';
+import toast from 'react-hot-toast';
 import { Budget, Pot, Transaction } from '@prisma/client';
 import { useModal } from '@/components/modal/Modal';
 import { FormContextType, FormDataState } from '@/lib/type';
-import toast from 'react-hot-toast';
 import { z, ZodObject, ZodError } from 'zod';
 
 // Create a context
@@ -59,28 +59,37 @@ function Window({
     // Si pas de données initiales, retourner les valeurs par défaut
     if (!initialData) return defaults;
 
+    // Log pour débogage
+    // console.log('initialData:', initialData);
+
     // Extraire les valeurs de initialData si elles existent
-    return {
-      ...defaults,
-      ...Object.entries(initialData).reduce((acc, [key, value]) => {
-        if (key in defaults) {
-          // Traitement spécial pour la date
-          if (key === 'date' && value) {
-            return {
-              ...acc,
-              date: new Date(value as string | Date).toISOString().slice(0, 10),
-            };
-          }
-          // Traitement spécial pour recurring (convertir en boolean)
-          if (key === 'recurring') {
-            return { ...acc, recurring: Boolean(value) };
-          }
-          // Pour les autres clés, utiliser la valeur telle quelle
-          return { ...acc, [key]: value };
+    // Approche simplifiée pour éviter les problèmes de fusion d'objets
+    const result = { ...defaults };
+
+    // Parcourir les clés de defaults pour chercher les valeurs correspondantes dans initialData
+    Object.keys(defaults).forEach((key) => {
+      if (key in initialData) {
+        const value = initialData[key as keyof typeof initialData];
+
+        // Traitement spécial pour la date
+        if (key === 'date' && value) {
+          result.date = new Date(value as string | Date)
+            .toISOString()
+            .slice(0, 10);
         }
-        return acc;
-      }, {}),
-    };
+        // Traitement spécial pour recurring (convertir en boolean)
+        else if (key === 'recurring') {
+          result.recurring = Boolean(value);
+        }
+        // Pour les autres clés, utiliser la valeur telle quelle
+        else {
+          (result as Record<string, unknown>)[key] = value;
+        }
+      }
+    });
+
+    // console.log('Formulaire initialisé avec:', result);
+    return result;
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   // Ajout d'un état pour suivre si le formulaire a été soumis
@@ -127,6 +136,16 @@ function Window({
     }
   }, [name, openName]);
 
+  // Déterminer le message de succès en fonction du nom du modal
+  const getSuccessMessage = (modalName: string) => {
+    if (modalName === 'add-budget') return 'Budget successfully added';
+    if (modalName === 'add-pot') return 'Pot successfully added';
+    if (modalName === 'add-transaction')
+      return 'Transaction successfully added';
+    return 'Operation successful';
+  };
+
+  // Function pour valider et soumettre le formulaire
   const handleSubmit = async (formData: FormData) => {
     // Marquer le formulaire comme soumis
     setIsSubmitted(true);
@@ -222,22 +241,13 @@ function Window({
     }
   };
 
-  // Déterminer le message de succès en fonction du nom du modal
-  const getSuccessMessage = (modalName: string) => {
-    if (modalName === 'add-budget') return 'Budget successfully added';
-    if (modalName === 'add-pot') return 'Pot successfully added';
-    if (modalName === 'add-transaction')
-      return 'Transaction successfully added';
-    return 'Operation successful';
-  };
-
   if (name !== openName) return null;
 
-  // Créer un contexte étendu avec les erreurs
+  // Créer un contexte étendu avec les erreurs et l'état de soumission
   const contextValue = {
     formData,
     updateFormData,
-    errors,
+    errors: isSubmitted ? errors : {}, // Ne fournir les erreurs que si le formulaire a été soumis
     isSubmitted,
   };
 

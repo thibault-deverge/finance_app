@@ -3,7 +3,7 @@
 import { deleteBudget, updateBudget } from '@/actions/budgets';
 import DeleteButton from '@/components/button/DeleteButton';
 import EditButton from '@/components/button/EditButton';
-import Modal from '@/components/modal/Modal';
+import Modal, { useModal } from '@/components/modal/Modal';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -14,6 +14,7 @@ import {
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Budget } from '@prisma/client';
 import { Suspense } from 'react';
+import CancelButton from '../button/CancelButton';
 
 function EditDeleteBudget({ budget }: { budget: Budget }) {
   return (
@@ -72,14 +73,7 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
         <Suspense fallback={<SpinnerMini />}>
           <DeleteButton />
         </Suspense>
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className="w-full cursor-pointer border-0 py-6 shadow-sm"
-        >
-          No Go Back
-        </Button>
+        <CancelButton />
       </Modal.Window>
     </Modal>
   );

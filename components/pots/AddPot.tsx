@@ -6,6 +6,7 @@ import Modal from '@/components/modal/Modal';
 import AddButton from '@/components/button/AddButton';
 import { Button } from '@/components/ui/button';
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
+import { potSchema } from '@/lib/schemas';
 
 function AddPot() {
   return (
@@ -18,7 +19,11 @@ function AddPot() {
           + Add New Pot
         </Button>
       </Modal.Open>
-      <Modal.Window name="add-pot" formAction={createPot}>
+      <Modal.Window
+        name="add-pot"
+        formAction={createPot}
+        validationSchema={potSchema}
+      >
         <Modal.Header title="Add New Pot" />
         <Modal.Description description="Create a pot to set savings targets. These can help keep you on track as you save for special purchases." />
         <Modal.Name title="Pot Name" />

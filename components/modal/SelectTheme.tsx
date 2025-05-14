@@ -41,7 +41,7 @@ function ColorSelectItem({ label, value }: { label: string; value: string }) {
   );
 }
 
-function BudgetSelectTheme({
+function SelectTheme({
   title,
   value,
   onChange,
@@ -54,7 +54,13 @@ function BudgetSelectTheme({
 }) {
   return (
     <div className="mb-5">
-      <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
+      <div className="mb-2 flex items-start gap-1">
+        <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
+        <span className="leading-none text-red-500" aria-hidden="true">
+          *
+        </span>
+      </div>
+
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger
           className={`w-full px-5 py-5 hover:cursor-pointer ${error ? 'border-red-500 ring-1 ring-red-500' : ''}`}
@@ -75,4 +81,4 @@ function BudgetSelectTheme({
   );
 }
 
-export default BudgetSelectTheme;
+export default SelectTheme;

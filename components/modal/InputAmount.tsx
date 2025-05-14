@@ -26,9 +26,18 @@ function InputAmount({
   };
   return (
     <div className="mb-4">
-      <Label className="text-preset-5-bold text-grey-500 mb-2" htmlFor="number">
-        {title}
-      </Label>
+      <div className="mb-2 flex items-start gap-1">
+        <Label
+          className="text-preset-5-bold text-grey-500 mb-2"
+          htmlFor="number"
+        >
+          {title}
+        </Label>
+        <span className="leading-none text-red-500" aria-hidden="true">
+          *
+        </span>
+      </div>
+
       <Input
         className={`no-spinner items-center px-8 py-2.25 ${
           error ? 'border-red-500 ring-1 ring-red-500' : 'border-gray-200'

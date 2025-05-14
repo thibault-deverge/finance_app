@@ -14,6 +14,7 @@ import { Suspense } from 'react';
 import DeleteButton from '@/components/button/DeleteButton';
 import EditButton from '@/components/button/EditButton';
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
+import CancelButton from '../button/CancelButton';
 
 function EditDeletePots({ pot }: { pot?: Pot }) {
   return (
@@ -52,7 +53,7 @@ function EditDeletePots({ pot }: { pot?: Pot }) {
         <Modal.Header title="Edit Pot" />
         <Modal.Description description="If your saving targets change, feel free to update your pots." />
         <Modal.Name title="Pot Name" />
-        <Modal.Amount title="Target" name="pot" />
+        <Modal.Target title="Target" name="pot" />
         <Modal.Theme title="Theme" />
         <Suspense fallback={<SpinnerMini />}>
           <EditButton />
@@ -64,14 +65,7 @@ function EditDeletePots({ pot }: { pot?: Pot }) {
         <Suspense fallback={<SpinnerMini />}>
           <DeleteButton />
         </Suspense>
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className="w-full cursor-pointer border-0 py-6"
-        >
-          No Go Back
-        </Button>
+        <CancelButton />
       </Modal.Window>
     </Modal>
   );

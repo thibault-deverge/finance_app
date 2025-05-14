@@ -1,9 +1,10 @@
 'use client';
-import GenericSelectTheme from '@/components/modal/ModalSelectColor';
+import GenericSelectTheme from '@/components/modal/SelectTheme';
 import { useFormContext } from '@/components/modal/Window';
 
 function Theme({ title }: { title: string }) {
   const { formData, updateFormData, errors } = useFormContext();
+  console.log(formData);
   const error = errors?.theme;
   const handleChange = (value: string) => {
     updateFormData('theme', value);
