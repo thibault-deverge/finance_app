@@ -3,8 +3,7 @@
 import { deleteBudget, updateBudget } from '@/actions/budgets';
 import DeleteButton from '@/components/button/DeleteButton';
 import EditButton from '@/components/button/EditButton';
-import Modal, { useModal } from '@/components/modal/Modal';
-import { Button } from '@/components/ui/button';
+import Modal from '@/components/modal/Modal';
 import {
   DropdownMenu,
   DropdownMenuContent,

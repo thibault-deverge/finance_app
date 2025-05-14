@@ -17,7 +17,7 @@ function Progress({
   classNamePrimitive,
   value,
   indicatorColor,
-  innerPadding = 0,
+  innerPadding = 3,
   ...props
 }: ProgressProps) {
   return (
