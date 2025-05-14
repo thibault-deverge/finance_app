@@ -41,20 +41,30 @@ function ColorSelectItem({ label, value }: { label: string; value: string }) {
   );
 }
 
-function BudgetSelectTheme({
+function SelectTheme({
   title,
   value,
   onChange,
+  error,
 }: {
   title: string;
   value: string;
   onChange: (value: string) => void;
+  error?: string;
 }) {
   return (
     <div className="mb-5">
-      <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
+      <div className="mb-2 flex items-start gap-1">
+        <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
+        <span className="leading-none text-red-500" aria-hidden="true">
+          *
+        </span>
+      </div>
+
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="w-full px-5 py-5 hover:cursor-pointer">
+        <SelectTrigger
+          className={`w-full px-5 py-5 hover:cursor-pointer ${error ? 'border-red-500 ring-1 ring-red-500' : ''}`}
+        >
           <SelectValue placeholder="Select a theme" />
         </SelectTrigger>
         <SelectContent className="max-h-72 overflow-auto bg-white">
@@ -62,9 +72,7 @@ function BudgetSelectTheme({
             <SelectLabel>Categories</SelectLabel>
             {themeColors.length > 0 &&
               themeColors.map(({ color, label, value }) => (
-
                 <ColorSelectItem key={color} label={label} value={value} />
-
               ))}
           </SelectGroup>
         </SelectContent>
@@ -73,4 +81,4 @@ function BudgetSelectTheme({
   );
 }
 
-export default BudgetSelectTheme;
+export default SelectTheme;

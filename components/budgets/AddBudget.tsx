@@ -4,6 +4,7 @@ import AddButton from '@/components/button/AddButton';
 import Modal from '@/components/modal/Modal';
 import { Button } from '@/components/ui/button';
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
+import { budgetSchema } from '@/lib/schemas';
 import { Suspense } from 'react';
 
 function AddBudget() {
@@ -17,7 +18,11 @@ function AddBudget() {
           + Add New Budget
         </Button>
       </Modal.Open>
-      <Modal.Window name="add-budget" formAction={createBudget}>
+      <Modal.Window
+        name="add-budget"
+        formAction={createBudget}
+        validationSchema={budgetSchema}
+      >
         <Modal.Header title="Add New Budget" />
         <Modal.Description
           description="Choose a category to set a spending budget. These categories can help
@@ -27,7 +32,7 @@ function AddBudget() {
         <Modal.Amount title="Maximum Spending" name="budget" />
         <Modal.Theme title="Theme" />
         <Suspense fallback={<SpinnerMini />}>
-          <AddButton type="add-budget"/>
+          <AddButton type="add-budget" />
         </Suspense>
       </Modal.Window>
     </Modal>

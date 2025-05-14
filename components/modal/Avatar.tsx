@@ -45,7 +45,7 @@ export default function AvatarInput() {
         className="cursor-pointer"
         onChange={handleChange}
       />
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+      {error && <p className="m text-sm text-red-500">{error}</p>}
     </div>
   );
 }

@@ -13,8 +13,13 @@ function Amount({
   id?: string;
   onAmountChange?: (value: number) => void;
 }) {
-  const { formData, updateFormData } = useFormContext();
-
+  const { formData, updateFormData, errors } = useFormContext();
+  const error =
+    name === 'budget'
+      ? errors?.maximum
+      : name === 'amount'
+        ? errors?.amount
+        : null;
   const handleChangeBudget = (value: number) => {
     updateFormData('maximum', value);
   };
@@ -29,35 +34,51 @@ function Amount({
 
   if (name === 'amount') {
     return (
-      <InputAmount
-        title={title}
-        name="amount"
-        value={Number(formData.amount) || 0}
-        onChange={(v) => updateFormData('amount', v)}
-        min={-10000000}
-        max={10000000}
-      />
+      <>
+        <InputAmount
+          title={title}
+          name="amount"
+          value={Number(formData.amount) || 0}
+          onChange={(v) => updateFormData('amount', v)}
+          min={-10000000}
+          max={10000000}
+          error={error || ''}
+        />
+        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
+      </>
     );
   }
 
   if (name === 'budget') {
     return (
-      <InputAmount
-        title={title}
-        value={Number(formData.maximum) || 0}
-        onChange={handleChangeBudget}
-        name={name}
-      />
+      <>
+        <InputAmount
+          title={title}
+          value={Number(formData.maximum) || 0}
+          onChange={handleChangeBudget}
+          name={name}
+          min={0}
+          max={10000000}
+          error={error || ''}
+        />
+        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
+      </>
     );
   }
   if (name === 'addMoneyPot' || 'withdrawMoneyPot') {
     return (
-      <InputAmount
-        title={title}
-        value={Number(formData.total) || 0}
-        onChange={handleChangePot}
-        name={name}
-      />
+      <>
+        <InputAmount
+          title={title}
+          value={Number(formData.total) || 0}
+          onChange={handleChangePot}
+          name={name}
+          min={0}
+          max={10000000}
+          error={error || ''}
+        />
+        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
+      </>
     );
   }
 

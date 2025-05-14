@@ -6,6 +6,7 @@ import Modal from '@/components/modal/Modal';
 import AddButton from '@/components/button/AddButton';
 import { Button } from '@/components/ui/button';
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
+import { transactionSchema } from '@/lib/schemas';
 
 function AddTransaction() {
   return (
@@ -18,7 +19,11 @@ function AddTransaction() {
           + Add Transactions
         </Button>
       </Modal.Open>
-      <Modal.Window name="add-transaction" formAction={createTransaction}>
+      <Modal.Window
+        name="add-transaction"
+        formAction={createTransaction}
+        validationSchema={transactionSchema}
+      >
         <Modal.Header title="Add New Transaction" />
         <Modal.Description description="Fill in the details below to record a new transaction in your ledger." />
         <Modal.Avatar />

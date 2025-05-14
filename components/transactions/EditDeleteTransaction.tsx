@@ -14,6 +14,8 @@ import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Button } from '@/components/ui/button';
 import { EllipsisVertical } from 'lucide-react';
 import { updateTransaction, deleteTransaction } from '@/actions/transactions';
+import CancelButton from '../button/CancelButton';
+import EditButton from '../button/EditButton';
 
 type Props = {
   transaction: Transaction;
@@ -62,7 +64,10 @@ export default function EditDeleteTransaction({ transaction }: Props) {
         formAction={updateTransaction}
       >
         <Modal.Header title="Edit Transaction" />
-        <Modal.Description description="Modify transaction details below." />
+        <Modal.Description
+          
+          description="Modify transaction details below."
+        />
         <Modal.Name title="Name" />
         <Modal.Amount title="Amount" name="amount" />
         <Modal.Category title="Category" />
@@ -70,9 +75,7 @@ export default function EditDeleteTransaction({ transaction }: Props) {
         <Modal.Recurring title="Recurring" />
 
         <Suspense fallback={<SpinnerMini />}>
-          <Button type="submit" className="w-full cursor-pointer py-6">
-            Update
-          </Button>
+          <EditButton />
         </Suspense>
       </Modal.Window>
 
@@ -93,14 +96,7 @@ export default function EditDeleteTransaction({ transaction }: Props) {
             Yes, delete it
           </Button>
         </Suspense>
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className="w-full cursor-pointer border-0 py-6"
-        >
-          Cancel
-        </Button>
+        <CancelButton />
       </Modal.Window>
     </Modal>
   );

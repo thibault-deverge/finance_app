@@ -2,15 +2,17 @@
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
-function PotInputName({
+function InputName({
   title,
   value,
   onChange,
   maxLength = 30,
+  error,
 }: {
   title: string;
   value: string;
   maxLength: number;
+  error?: string;
   onChange: (value: string) => void;
 }) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,9 +27,10 @@ function PotInputName({
     <div className="flex flex-col">
       <Label className="text-preset-5-bold text-grey-500 mb-2" htmlFor="name">
         {title}
+        <span className="text-red-500">*</span>
       </Label>
       <Input
-        className="no-spinner items-center px-4 py-2.25"
+        className={`no-spinner items-center px-4 py-2.25 ${error ? 'border-red-500 ring-1 ring-red-500' : ''}`}
         type="string"
         id="name"
         placeholder="e.g. Rainy Days"
@@ -42,4 +45,4 @@ function PotInputName({
   );
 }
 
-export default PotInputName;
+export default InputName;

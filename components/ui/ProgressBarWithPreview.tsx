@@ -50,6 +50,7 @@ function ProgressBarWithPreview({
             className="bg-beige-100 h-5 w-full"
             value={safeCurrentPercentage}
             indicatorColor={theme}
+            innerPadding={4}
             classNamePrimitive="rounded-l-lg"
           />
 
@@ -110,6 +111,7 @@ function ProgressBarWithPreview({
             className="bg-beige-100 h-5 w-full"
             value={showPreview ? safeNewPercentage : safeCurrentPercentage}
             indicatorColor={theme}
+            innerPadding={4}
             classNamePrimitive="rounded-l-lg"
           />
 
