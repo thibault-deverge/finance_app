@@ -79,4 +79,5 @@ export interface FormContextType {
     field: keyof FormDataState,
     value: string | number | boolean
   ) => void;
+  errors?: Record<string, string>; // Ajout des erreurs
 }

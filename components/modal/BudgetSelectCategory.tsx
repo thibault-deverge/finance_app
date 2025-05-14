@@ -15,9 +15,11 @@ function BudgetSelectCategory({
   title,
   value,
   onChange,
+  error,
 }: {
   title: string;
   value: string;
+  error?: string;
   onChange: (value: string) => void;
 }) {
   const categoryAll = getAllCategories();
@@ -26,7 +28,9 @@ function BudgetSelectCategory({
     <div className="mb-4">
       <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="w-full px-5 py-5 hover:cursor-pointer">
+        <SelectTrigger
+          className={`w-full px-5 py-5 hover:cursor-pointer ${error ? 'border-red-500 ring-1 ring-red-500' : ''}`}
+        >
           <SelectValue placeholder="Select a category" />
         </SelectTrigger>
         <SelectContent className="bg-white">

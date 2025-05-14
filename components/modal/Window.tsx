@@ -9,6 +9,8 @@ import {
 import { Budget, Pot, Transaction } from '@prisma/client';
 import { useModal } from '@/components/modal/Modal';
 import { FormContextType, FormDataState } from '@/lib/type';
+import toast from 'react-hot-toast';
+import { z, ZodObject, ZodError } from 'zod';
 
 // Create a context
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -22,17 +24,21 @@ export function useFormContext() {
   return context;
 }
 
+type WindowProps = {
+  children: ReactNode;
+  name: string;
+  initialData?: Budget | Pot | Transaction;
+  formAction?: (formData: FormData) => Promise<void>;
+  validationSchema?: z.ZodSchema<unknown>;
+};
+
 function Window({
   children,
   name,
   initialData,
   formAction,
-}: {
-  children: ReactNode;
-  name: string;
-  initialData?: Budget | Pot | Transaction;
-  formAction?: (formData: FormData) => Promise<void>;
-}) {
+  validationSchema,
+}: WindowProps) {
   const { openName, close } = useModal();
 
   const [formData, setFormData] = useState<FormDataState>(() => {
@@ -76,12 +82,23 @@ function Window({
       }, {}),
     };
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  // Ajout d'un état pour suivre si le formulaire a été soumis
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const updateFormData = (
     field: keyof typeof formData,
     value: string | number | boolean
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    // Effacer l'erreur pour ce champ lorsqu'il change, mais seulement si le formulaire a déjà été soumis
+    if (isSubmitted && errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
   };
 
   useEffect(() => {
@@ -102,20 +119,127 @@ function Window({
     };
   }, [close, name, openName]);
 
-  // Function pour fermer le modal après l'action serveur
-  const actionWithClose = formAction
-    ? async (formData: FormData) => {
-        // Ajouter l'ID si disponible (pour edit/delete)
-        if (initialData?.id && !formData.has('id')) {
-          formData.append('id', initialData.id);
-        }
+  // Réinitialiser isSubmitted quand la modal change ou se ferme
+  useEffect(() => {
+    if (name !== openName) {
+      setIsSubmitted(false);
+      setErrors({});
+    }
+  }, [name, openName]);
 
-        await formAction(formData);
-        close();
+  const handleSubmit = async (formData: FormData) => {
+    // Marquer le formulaire comme soumis
+    setIsSubmitted(true);
+
+    // Ajouter l'ID si disponible (pour edit/delete)
+    if (initialData?.id && !formData.has('id')) {
+      formData.append('id', initialData.id);
+    }
+
+    // Si un schéma de validation est fourni, l'utiliser
+    if (validationSchema instanceof ZodObject) {
+      try {
+        // Extraire les données pertinentes du formData pour la validation
+        const dataToValidate = Object.fromEntries(
+          Object.keys(validationSchema.shape || {}).map((key) => [
+            key,
+            formData.get(key)?.toString() || '',
+          ])
+        );
+
+        // Valider les données
+        validationSchema.parse(dataToValidate);
+
+        // Si la validation réussit, soumettre le formulaire
+        if (formAction) {
+          try {
+            await formAction(formData);
+            toast.success(getSuccessMessage(name));
+            close();
+          } catch (error) {
+            // Vérifier si c'est une erreur de redirection Next.js
+            if (
+              error instanceof Error &&
+              error.message.includes('NEXT_REDIRECT')
+            ) {
+              // Ce n'est pas une vraie erreur, c'est juste Next.js qui redirige
+              toast.success(getSuccessMessage(name));
+              // Fermer la modal avant que la redirection ne se produise
+              close();
+              // La redirection sera gérée automatiquement par Next.js
+            } else {
+              // C'est une vraie erreur
+              toast.error('An error has occurred');
+              console.error(error);
+            }
+          }
+        }
+      } catch (error) {
+        if (error instanceof ZodError) {
+          // Transformer les erreurs Zod en format utilisable
+          const formattedErrors: Record<string, string> = {};
+          error.errors.forEach((err) => {
+            const field = err.path[0]?.toString();
+            if (field) {
+              formattedErrors[field] = err.message;
+            }
+          });
+          setErrors(formattedErrors);
+
+          // Afficher un toast d'erreur
+          toast.error('Please correct any errors in the form');
+        } else {
+          // Erreur inattendue
+          toast.error('An error has occurred');
+          console.error(error);
+        }
       }
-    : undefined;
+    } else {
+      // Si pas de validation, soumettre directement
+      if (formAction) {
+        try {
+          await formAction(formData);
+          toast.success(getSuccessMessage(name));
+          close();
+        } catch (error) {
+          // Vérifier si c'est une erreur de redirection Next.js
+          if (
+            error instanceof Error &&
+            error.message.includes('NEXT_REDIRECT')
+          ) {
+            // Ce n'est pas une vraie erreur, c'est juste Next.js qui redirige
+            toast.success(getSuccessMessage(name));
+            // Fermer la modal avant que la redirection ne se produise
+            close();
+            // La redirection sera gérée automatiquement par Next.js
+          } else {
+            // C'est une vraie erreur
+            toast.error('An error has occurred');
+            console.error(error);
+          }
+        }
+      }
+    }
+  };
+
+  // Déterminer le message de succès en fonction du nom du modal
+  const getSuccessMessage = (modalName: string) => {
+    if (modalName === 'add-budget') return 'Budget successfully added';
+    if (modalName === 'add-pot') return 'Pot successfully added';
+    if (modalName === 'add-transaction')
+      return 'Transaction successfully added';
+    return 'Operation successful';
+  };
 
   if (name !== openName) return null;
+
+  // Créer un contexte étendu avec les erreurs
+  const contextValue = {
+    formData,
+    updateFormData,
+    errors,
+    isSubmitted,
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -128,8 +252,8 @@ function Window({
         className="relative z-50 w-full max-w-[35rem] rounded-2xl bg-white p-8 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <FormContext.Provider value={{ formData, updateFormData }}>
-          <form action={actionWithClose}>
+        <FormContext.Provider value={contextValue as FormContextType}>
+          <form action={handleSubmit}>
             {children}
 
             {/* Champs cachés pour transmettre les données d'état */}

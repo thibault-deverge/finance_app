@@ -45,16 +45,20 @@ function BudgetSelectTheme({
   title,
   value,
   onChange,
+  error,
 }: {
   title: string;
   value: string;
   onChange: (value: string) => void;
+  error?: string;
 }) {
   return (
     <div className="mb-5">
       <Label className="text-preset-5-bold text-grey-500 mb-2">{title}</Label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="w-full px-5 py-5 hover:cursor-pointer">
+        <SelectTrigger
+          className={`w-full px-5 py-5 hover:cursor-pointer ${error ? 'border-red-500 ring-1 ring-red-500' : ''}`}
+        >
           <SelectValue placeholder="Select a theme" />
         </SelectTrigger>
         <SelectContent className="max-h-72 overflow-auto bg-white">
@@ -62,9 +66,7 @@ function BudgetSelectTheme({
             <SelectLabel>Categories</SelectLabel>
             {themeColors.length > 0 &&
               themeColors.map(({ color, label, value }) => (
-
                 <ColorSelectItem key={color} label={label} value={value} />
-
               ))}
           </SelectGroup>
         </SelectContent>
