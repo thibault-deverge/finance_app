@@ -4,7 +4,9 @@ import { formatAmount } from '@/lib/utils';
 import { Transaction } from '@prisma/client';
 
 function RecurringBills({ transactions }: { transactions: Transaction[] }) {
-  if (transactions.length === 0) {
+  const recurringTransactions = transactions.filter((tx) => tx.recurring);
+
+  if (recurringTransactions.length === 0) {
     return (
       <section className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white px-5 py-6 shadow-sm md:px-8 md:py-8">
         <h2 className="text-lg font-semibold text-gray-500">
@@ -17,7 +19,7 @@ function RecurringBills({ transactions }: { transactions: Transaction[] }) {
   const oneWeekLater = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   // 1) Calculez la "dueDate" pour le mois en cours
-  const withDue = transactions.map((tx) => {
+  const withDue = recurringTransactions.map((tx) => {
     const day = new Date(tx.date).getUTCDate();
     const due = new Date(now.getFullYear(), now.getMonth(), day);
     return { ...tx, due };

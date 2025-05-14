@@ -35,7 +35,7 @@ function Overview({
 
         <div className="flex flex-1 flex-col gap-8 xl:h-full">
           <BudgetsCard budgets={budgets} transactions={transactions} />
-          <RecurringBills transactions={transactions}/>
+          <RecurringBills transactions={transactions} />
         </div>
       </div>
     </section>
