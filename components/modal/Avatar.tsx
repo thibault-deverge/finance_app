@@ -1,11 +1,12 @@
-// components/modal/AvatarInput.tsx
 'use client';
 
 import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
-const MAX_AVATAR_SIZE = 1024 * 1024; // 2 MB
+
+const MAX_AVATAR_SIZE = 1 * 1024 * 1024;
+
 
 export default function AvatarInput() {
   const [error, setError] = useState<string>('');
@@ -24,6 +25,7 @@ export default function AvatarInput() {
     }
 
     if (file.size > MAX_AVATAR_SIZE) {
+      console.log('error');
       setError('File must be smaller than 1 MB.');
       e.target.value = '';
       return;
@@ -45,7 +47,7 @@ export default function AvatarInput() {
         className="cursor-pointer"
         onChange={handleChange}
       />
-      {error && <p className="m text-sm text-red-500">{error}</p>}
+      {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
     </div>
   );
 }

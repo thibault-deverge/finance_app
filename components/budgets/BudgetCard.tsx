@@ -14,11 +14,11 @@ function BudgetCard({
   budget: Budget;
   transactionsByCategory: TransactionsByCategory;
 }) {
+
   const { category, maximum, theme } = budget;
   const spent = getSpent(category, transactionsByCategory);
   const percentage = parseFloat(((spent / maximum) * 100).toFixed(2));
   const allTransactions = getAllTransactions(category, transactionsByCategory);
-
   return (
     <li className="flex flex-col gap-5 rounded-xl bg-white px-5 py-7">
       <div className="flex justify-between">
