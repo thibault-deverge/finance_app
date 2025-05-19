@@ -13,11 +13,10 @@ type PageProps = {
 };
 
 export default async function Page({ searchParams }: PageProps) {
-  const search = (await searchParams).search || '';
   const sortBy = (await searchParams).sortBy || 'latest';
 
   const { transactions } = await getTransactions({
-    search,
+    search: '',
     sortBy,
     category: 'all',
     page: 1,

@@ -19,15 +19,9 @@ function RecurringBillsSection({ transactions }: RecurringBillsProps) {
   const sortedTxs = useSortedBills(transactions, sortBy);
   const bills = sortedTxs.map(mapToRecurringBillView);
 
-  if (transactions.length === 0) {
-    return (
-      <section className="flex h-screen flex-col items-center justify-center gap-6 bg-white px-5 py-6 md:px-8 md:py-8 xl:flex-grow">
-        <h2 className="text-xl font-semibold text-gray-800">
-          No recurring bills found
-        </h2>
-      </section>
-    );
-  }
+  const filteredBills = bills.filter((tx) =>
+    tx.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <section className="flex flex-col gap-6 bg-white px-5 py-6 md:px-8 md:py-8 xl:flex-grow">
@@ -49,7 +43,15 @@ function RecurringBillsSection({ transactions }: RecurringBillsProps) {
           />
         </div>
 
-        <RecurringBillsList bills={bills} />
+        {transactions.length === 0 ? (
+          <section className="flex h-screen flex-col items-center justify-center gap-6 bg-white px-5 py-6 md:px-8 md:py-8 xl:flex-grow">
+            <h2 className="text-xl font-semibold text-gray-800">
+              No recurring bills found
+            </h2>
+          </section>
+        ) : (
+          <RecurringBillsList bills={filteredBills} />
+        )}
       </div>
     </section>
   );
