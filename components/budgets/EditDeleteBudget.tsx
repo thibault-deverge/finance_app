@@ -14,6 +14,7 @@ import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Budget } from '@prisma/client';
 import { Suspense } from 'react';
 import CancelButton from '../button/CancelButton';
+import { budgetSchema } from '@/lib/schemas';
 
 function EditDeleteBudget({ budget }: { budget: Budget }) {
   return (
@@ -66,6 +67,7 @@ function EditDeleteBudget({ budget }: { budget: Budget }) {
         name="delete-budget"
         initialData={budget}
         formAction={deleteBudget}
+        validationSchema={budgetSchema}
       >
         <Modal.Header title={`Delete '${budget.category}'`} />
         <Modal.Description description="Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever." />

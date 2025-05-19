@@ -16,6 +16,7 @@ import { EllipsisVertical } from 'lucide-react';
 import { updateTransaction, deleteTransaction } from '@/actions/transactions';
 import CancelButton from '../button/CancelButton';
 import EditButton from '../button/EditButton';
+import { transactionSchema } from '@/lib/schemas';
 
 type Props = {
   transaction: Transaction;
@@ -62,6 +63,7 @@ export default function EditDeleteTransaction({ transaction }: Props) {
         name="edit-transaction"
         initialData={transaction}
         formAction={updateTransaction}
+        validationSchema={transactionSchema}
       >
         <Modal.Header title="Edit Transaction" />
         <Modal.Description

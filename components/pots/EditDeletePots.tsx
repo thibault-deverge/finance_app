@@ -14,6 +14,7 @@ import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Pot } from '@prisma/client';
 import { Suspense } from 'react';
 import CancelButton from '../button/CancelButton';
+import { potSchema } from '@/lib/schemas';
 
 function EditDeletePots({ pot }: { pot?: Pot }) {
   return (
@@ -48,7 +49,12 @@ function EditDeletePots({ pot }: { pot?: Pot }) {
           </Modal.Open>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Modal.Window name="edit-pot" initialData={pot} formAction={updatePot}>
+      <Modal.Window
+        name="edit-pot"
+        initialData={pot}
+        formAction={updatePot}
+        validationSchema={potSchema}
+      >
         <Modal.Header title="Edit Pot" />
         <Modal.Description description="If your saving targets change, feel free to update your pots." />
         <Modal.Name title="Pot Name" />

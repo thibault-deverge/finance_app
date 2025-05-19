@@ -148,10 +148,6 @@ export async function updateTransaction(formData: FormData) {
   const date = formData.get('date') as string;
   const recurring = formData.get('recurring') === 'true';
 
-  if (!id || !name || isNaN(amount)) {
-    throw new Error('Invalid data');
-  }
-
   await prisma.transaction.update({
     where: { id, userId },
     data: {
