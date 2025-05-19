@@ -32,10 +32,14 @@ export function getSpent(
 
 export function getAllTransactions(
   category: string,
-  transactionsByCategory: TransactionsByCategory
+  transactionsByCategory: Record<string, any[]>
 ) {
+  if (!transactionsByCategory[category]) {
+    return [];
+  }
+
   return [...transactionsByCategory[category]].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime() // Du plus ancien au plus récent
   );
 }
 
