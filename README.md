@@ -10,6 +10,10 @@ A full-stack Personal Finance application built with Next.js 15 (App Router), Ty
 
 [https://your-app-domain.com](https://your-app-domain.com)
 
+Test user already filled to try all functionnalities:
+mail: johndoe@finance.org
+password: pass1234
+
 ---
 
 ## 🚀 Overview

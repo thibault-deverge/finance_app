@@ -27,8 +27,8 @@ function LoginForm() {
   const form = useForm<FormFields>({
     resolver: zodResolver(authSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'johndoe@finance.org',
+      password: 'pass1234',
     },
   });
 
@@ -39,13 +39,11 @@ function LoginForm() {
       password,
 
       redirect: false,
-
     });
 
     if (res?.error) {
       form.setError('root', { message: 'Invalid credentials.' });
     } else {
-
       window.location.href = '/';
     }
   };
