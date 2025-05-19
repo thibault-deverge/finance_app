@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
-const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2 MB
+const MAX_AVATAR_SIZE = 1024 * 1024; // 2 MB
 
 export default function AvatarInput() {
   const [error, setError] = useState<string>('');
