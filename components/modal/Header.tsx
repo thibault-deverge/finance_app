@@ -7,7 +7,7 @@ function Header({ title }: { title: string }) {
 
   return (
     <header className="mb-5 flex items-center justify-between">
-      <h2 className="text-preset-1 text-grey-900">{title}</h2>
+      <h2 className="text-preset-1 text-grey-900 text-left">{title}</h2>
       <button type="button" className="cursor-pointer" onClick={close}>
         <img src="/images/icons/icon-close-modal.svg" alt="icon close modal" />
       </button>

@@ -14,7 +14,6 @@ function BudgetCard({
   budget: Budget;
   transactionsByCategory: TransactionsByCategory;
 }) {
-
   const { category, maximum, theme } = budget;
   const spent = getSpent(category, transactionsByCategory);
   const percentage = parseFloat(((spent / maximum) * 100).toFixed(2));

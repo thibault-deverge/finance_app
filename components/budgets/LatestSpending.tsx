@@ -18,12 +18,11 @@ function LatestSpending({
       </div>
     );
   }
-
+ 
   // Filtrer uniquement les transactions avec des montants négatifs (dépenses)
   const expenseTransactions = allTransactions.filter(
     (transaction) => transaction.amount < 0
   );
-
   // Trier les transactions par date décroissante
   const sortedTransactions = [...expenseTransactions].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
