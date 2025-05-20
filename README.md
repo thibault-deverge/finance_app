@@ -8,7 +8,7 @@ A full-stack Personal Finance application built with Next.js 15 (App Router), Ty
 
 ## 🔗 Live Demo
 
-[https://your-app-domain.com](https://your-app-domain.com)
+[https://finance-app-peach-five.vercel.app](https://finance-app-peach-five.vercel.app)
 
 Test user already filled to try all functionnalities:
 mail: johndoe@finance.org
