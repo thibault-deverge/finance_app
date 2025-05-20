@@ -53,6 +53,7 @@ function InputAmount({
         }
         min={min}
         max={max}
+        step={0.01}
         value={value === 0 ? '' : value}
         onChange={handleInputChange}
         required
