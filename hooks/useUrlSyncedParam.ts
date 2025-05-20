@@ -6,23 +6,32 @@ import { useDebounce } from '@/hooks/useDebounce';
 export function useUrlSyncedParam(
   key: string,
   defaultValue: string,
-  debounceTime: number = 0
-): [string, (value: string) => void] {
+  debounceMs: number = 0
+): [string, (v: string) => void] {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [value, setValue] = useState(searchParams.get(key) || defaultValue);
+  const [value, setValue] = useState(searchParams.get(key) ?? defaultValue);
 
-  const debounced = useDebounce(value, debounceTime);
+  const debounced = useDebounce(value, debounceMs);
+  const hasParam = searchParams.has(key);
 
   useEffect(() => {
-    const current = searchParams.get(key) || '';
+    const current = searchParams.get(key) ?? '';
+
+    if (!hasParam && debounced === defaultValue) {
+      return;
+    }
+
     if (debounced !== current) {
       const params = new URLSearchParams(searchParams.toString());
       if (debounced) params.set(key, debounced);
       else params.delete(key);
       router.push(`?${params.toString()}`);
     }
-  }, [debounced, key, router, searchParams]);
+  }, [debounced, defaultValue, hasParam, key, router, searchParams]);
 
-  return [value, setValue];
+  // wrapper pour que setValue n'accepte que string
+  const setParam = (newValue: string) => setValue(newValue);
+
+  return [value, setParam];
 }

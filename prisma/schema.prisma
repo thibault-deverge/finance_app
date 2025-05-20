@@ -98,7 +98,7 @@ model Balance {
 model Transaction {
   id        String   @id @default(cuid())
   avatar    String?
-  name      String
+  name      String   @db.Citext
   category  String
   date      String
   amount    Float
