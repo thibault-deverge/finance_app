@@ -1,22 +1,22 @@
 'use client';
 
-import { Suspense } from 'react';
-import { Transaction } from '@prisma/client';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
 import Modal from '@/components/modal/Modal';
+import CancelButton from '@/components/button/CancelButton';
+import DeleteButton from '@/components/button/DeleteButton';
+import EditButton from '@/components/button/EditButton';
+import { Transaction } from '@prisma/client';
+import { Suspense } from 'react';
+
+import { deleteTransaction, updateTransaction } from '@/actions/transactions';
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
-import { Button } from '@/components/ui/button';
-import { EllipsisVertical } from 'lucide-react';
-import { updateTransaction, deleteTransaction } from '@/actions/transactions';
-import CancelButton from '../button/CancelButton';
-import EditButton from '../button/EditButton';
 import { transactionSchema } from '@/lib/schemas';
+import { EllipsisVertical } from 'lucide-react';
 
 type Props = {
   transaction: Transaction;
@@ -66,10 +66,7 @@ export default function EditDeleteTransaction({ transaction }: Props) {
         validationSchema={transactionSchema}
       >
         <Modal.Header title="Edit Transaction" />
-        <Modal.Description
-          
-          description="Modify transaction details below."
-        />
+        <Modal.Description description="Modify transaction details below." />
         <Modal.Name title="Name" />
         <Modal.Amount title="Amount" name="amount" />
         <Modal.Category title="Category" />
@@ -90,13 +87,7 @@ export default function EditDeleteTransaction({ transaction }: Props) {
         <Modal.Header title={`Delete '${transaction.name}'`} />
         <Modal.Description description="Are you sure you want to delete this transaction? This cannot be undone." />
         <Suspense fallback={<SpinnerMini />}>
-          <Button
-            type="submit"
-            variant="destructive"
-            className="w-full cursor-pointer py-6"
-          >
-            Yes, delete it
-          </Button>
+          <DeleteButton />
         </Suspense>
         <CancelButton />
       </Modal.Window>

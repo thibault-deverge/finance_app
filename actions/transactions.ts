@@ -1,11 +1,11 @@
 'use server';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { Prisma } from '@prisma/client';
-import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 import { uploadAvatarImage } from '@/lib/upload';
+import { Prisma } from '@prisma/client';
+import { updateBalance } from './balance';
 
 type TypeOptions = {
   search: string;
@@ -93,6 +93,9 @@ export async function createTransaction(formData: FormData) {
     throw new Error('You must be logged in to add a transaction.');
   }
 
+  // Stocker l'ID de l'utilisateur dans une variable pour éviter les erreurs TypeScript
+  const userId = session.user.id;
+
   const avatarFile = formData.get('avatar') as File | null;
   let avatarUrl: string | null = null;
 
@@ -119,19 +122,24 @@ export async function createTransaction(formData: FormData) {
   const recurringStr = formData.get('recurring') as string | null;
   const recurring = recurringStr === 'true';
 
-  await prisma.transaction.create({
-    data: {
-      name,
-      amount,
-      category,
-      date: dateStr,
-      userId: session.user.id,
-      recurring,
-      avatar: avatarUrl,
-    },
-  });
+  await prisma.$transaction(async (tx) => {
+    // Créer la transaction
+    await tx.transaction.create({
+      data: {
+        name,
+        amount,
+        category,
+        date: dateStr,
+        userId: userId,
+        recurring,
+        avatar: avatarUrl,
+      },
+    });
 
-  revalidatePath('/transactions');
+    // Mettre à jour la balance avec le nouveau montant
+    // Pour une nouvelle transaction, l'ancien montant est 0 (valeur par défaut)
+    await updateBalance(userId, amount, 0);
+  });
   redirect('/transactions');
 }
 
@@ -143,37 +151,72 @@ export async function updateTransaction(formData: FormData) {
 
   const id = formData.get('id') as string;
   const name = formData.get('name') as string;
-  const amount = parseFloat(formData.get('amount') as string);
+  const newAmount = parseFloat(formData.get('amount') as string);
   const category = formData.get('category') as string;
   const date = formData.get('date') as string;
   const recurring = formData.get('recurring') === 'true';
 
-  await prisma.transaction.update({
-    where: { id, userId },
-    data: {
-      name,
-      amount,
-      category,
-      date,
-      recurring,
-    },
+  await prisma.$transaction(async (tx) => {
+    // 1. Récupérer la transaction existante pour connaître l'ancien montant
+    const existingTransaction = await tx.transaction.findUnique({
+      where: { id, userId },
+      select: { amount: true },
+    });
+
+    if (!existingTransaction) {
+      throw new Error('Transaction not found');
+    }
+
+    const oldAmount = existingTransaction.amount;
+
+    // 2. Mettre à jour la transaction
+    await tx.transaction.update({
+      where: { id, userId },
+      data: {
+        name,
+        amount: newAmount,
+        category,
+        date,
+        recurring,
+      },
+    });
+
+    // 3. Mettre à jour la balance avec l'ancien et le nouveau montant
+    // Ne mettre à jour que si le montant a changé
+    if (oldAmount !== newAmount) {
+      await updateBalance(userId, newAmount, oldAmount);
+    }
   });
-
-  revalidatePath('/transactions');
+  redirect('/transactions');
 }
-
 export async function deleteTransaction(formData: FormData) {
   const session = await auth();
-  if (!session?.user?.id) throw new Error('Unauthorized');
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error('Unauthorized');
 
   const id = formData.get('id') as string;
 
-  await prisma.transaction.delete({
-    where: {
-      id,
-      userId: session.user.id,
-    },
-  });
+  await prisma.$transaction(async (tx) => {
+    // 1. Récupérer la transaction à supprimer pour connaître son montant
+    const transactionToDelete = await tx.transaction.findUnique({
+      where: { id, userId },
+      select: { amount: true },
+    });
 
-  revalidatePath('/transactions'); // adapte selon ta route
+    if (!transactionToDelete) {
+      throw new Error('Transaction not found');
+    }
+
+    const oldAmount = transactionToDelete.amount;
+
+    // 2. Supprimer la transaction
+    await tx.transaction.delete({
+      where: { id, userId },
+    });
+
+    // 3. Mettre à jour la balance - nouveau montant = 0, ancien montant = montant de la transaction supprimée
+    await updateBalance(userId, 0, oldAmount);
+  });
+  redirect('/transactions');
 }

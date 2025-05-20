@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import GitHubProvider from 'next-auth/providers/github';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/prisma';
-import { authSchema } from './schemas';
+import { authSchema } from '@/lib/schemas';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -44,7 +44,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ session, token }) {
       if (token && session.user) {
-        // Utiliser sub comme ID utilisateur
+        // Use sub as the user ID
         session.user.id = token.sub as string;
       }
       return session;

@@ -1,7 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CardProps } from '@/lib/type';
 import { formatAmount } from '@/lib/utils';
 import { Balance } from '@prisma/client';
+
+export type CardProps = {
+  title: string;
+  amount: number;
+  isFirstCard: boolean;
+};
+export type TitleProps = {
+  name: string;
+};
 
 function OverviewCards({ balance }: { balance: Balance[] }) {
   return (

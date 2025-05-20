@@ -1,6 +1,6 @@
-import RecurringBillsMobileRow from './RecurringBillsMobileRow';
-import RecurringBillsDesktopRow from './RecurringBillsDesktopRow';
-import { RecurringBillView } from './type';
+import RecurringBillsMobileRow from '@/components/recurring/RecurringBillsMobileRow';
+import RecurringBillsDesktopRow from '@/components/recurring/RecurringBillsDesktopRow';
+import { RecurringBillView } from '@/components/recurring/type';
 
 type RecurringBillsListProps = {
   bills: RecurringBillView[];

@@ -2,6 +2,7 @@
 import BudgetPieChart from '@/components/ui/BudgetPieChart';
 import CardHeader from '@/components/ui/CardHeader';
 import CardMini from '@/components/ui/CardMini';
+import { MAX_DISPLAY_BUDGETCARD } from '@/lib/constants';
 import { Budget, Transaction } from '@prisma/client';
 
 function BudgetsCard({
@@ -11,8 +12,7 @@ function BudgetsCard({
   budgets: Budget[];
   transactions: Transaction[];
 }) {
-  const MAX_DISPLAY = 4;
-  const displayedBudget = budgets.slice(0, MAX_DISPLAY);
+  const displayedBudget = budgets.slice(0, MAX_DISPLAY_BUDGETCARD);
 
   if (budgets.length === 0) {
     return (

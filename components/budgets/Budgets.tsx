@@ -4,7 +4,26 @@ import BudgetList from '@/components/budgets/BudgetList';
 import SummarySpending from '@/components/budgets/SummarySpending';
 import Title from '@/components/ui/Title';
 import { Budget, Transaction } from '@prisma/client';
-import { BudgetCategory, TransactionsByCategory } from '@/lib/type';
+import { TransactionsByCategory } from '@/lib/type';
+
+export type BudgetTransaction = {
+  category: BudgetCategory;
+  date: string; // ISO 8601 format
+  amount: number;
+  name: string;
+};
+
+export type BudgetCategory =
+  | 'Entertainment'
+  | 'Dine Out'
+  | 'General'
+  | 'Bills'
+  | 'Education'
+  | 'Groceries'
+  | 'Lifestyle'
+  | 'Personal Care'
+  | 'Shopping'
+  | 'Transportation';
 
 function Budgets({
   budgets,
@@ -29,7 +48,7 @@ function Budgets({
     },
     {} as TransactionsByCategory
   );
- 
+
   return (
     <section className="col-span-full h-screen px-4 py-6 md:p-10 xl:col-span-1 xl:h-screen xl:overflow-y-auto">
       <header className="mb-8.5 flex items-center justify-between">

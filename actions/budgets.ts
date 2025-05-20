@@ -1,5 +1,4 @@
 'use server';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -44,7 +43,6 @@ export async function createBudget(formData: FormData) {
     },
   });
 
-  revalidatePath('/budgets');
   redirect('/budgets');
 }
 
@@ -83,7 +81,6 @@ export async function updateBudget(formData: FormData) {
     },
   });
 
-  revalidatePath('/budgets');
   redirect('/budgets');
 }
 
@@ -110,5 +107,5 @@ export async function deleteBudget(formData: FormData) {
     where: { id },
   });
 
-  revalidatePath('/budgets');
+  redirect('/budgets');
 }

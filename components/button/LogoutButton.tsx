@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import { LogOut } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { signOut } from 'next-auth/react';
 
 function LogoutButton({ isVisible }: { isVisible?: boolean }) {

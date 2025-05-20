@@ -1,7 +1,7 @@
 import { Budget } from '@prisma/client';
 import { getSpent } from '@/lib/utilsBudgets';
 import React from 'react';
-import CardMiniBudget from './CardMiniBudgets';
+import CardMiniBudget from '@/components/budgets//CardMiniBudgets';
 import { TransactionsByCategory } from '@/lib/type';
 
 function SummarySpending({

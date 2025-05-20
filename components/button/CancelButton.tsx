@@ -1,8 +1,8 @@
-import { useModal } from "../modal/Modal";
-import { Button } from "../ui/button";
+import { useModal } from '@/components/modal/Modal';
+import { Button } from '@/components/ui/button';
 
 function CancelButton() {
-    const { close } = useModal();
+  const { close } = useModal();
   return (
     <Button
       type="button"

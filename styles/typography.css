@@ -1,47 +1,5 @@
 /* Police variable */
-/*
-@font-face {
-  font-family: "PublicSans";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/PublicSans-VariableFont_wght.ttf") format("truetype");
-}
 
-@font-face {
-  font-family: "PublicSans";
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/PublicSans-Italic-VariableFont_wght.ttf") format("truetype");
-}
-*/
-/* Polices statiques */
-/* 
-@font-face {
-  font-family: "PublicSans";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/static/PublicSans-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PublicSans";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("/fonts/static/PublicSans-Bold.ttf") format("truetype");
-}
-
-body {
-  font-family: "PublicSans", serif;
-  font-optical-sizing: auto;
-  font-size: var(--preset-4);
-  font-weight: var(--medium);
-  letter-spacing: 0.88px;
-}
-*/
 
 :root {
   /* font-weight*/

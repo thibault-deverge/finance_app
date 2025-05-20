@@ -1,7 +1,11 @@
 'use client';
 import React from 'react';
 import { useModal } from '@/components/modal/Modal';
-import { OpenProps } from '@/lib/type';
+
+export type OpenProps = {
+  children: React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>;
+  opens: string;
+};
 
 function Open({ children, opens: opensWindowName }: OpenProps) {
   const { open } = useModal();

@@ -1,8 +1,8 @@
 'use client';
-import SideNavigation from '@/components/ui/SideNavigation';
 import { Spinner } from '@/components/ui/Spinner';
 import { ReactNode, Suspense, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
+import SideNavigation from '@/components/ui/SideNavigation';
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const [isVisible, setIsVisible] = useState(true);
@@ -44,7 +44,6 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           />
           {children}
         </div>
-        <></>
       </Suspense>
     </main>
   );

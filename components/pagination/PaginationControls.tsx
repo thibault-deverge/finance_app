@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { getPaginationPages } from './getPaginationPage';
+import { getPaginationPages } from '@/components/pagination/getPaginationPage';
 
 import PageButton from '@/components/pagination/PageButton';
 import PageDots from '@/components/pagination/PageDots';

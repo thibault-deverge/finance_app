@@ -1,6 +1,6 @@
 import Title from '@/components/ui/Title';
-import AddPot from './AddPot';
-import PotList from './PotList';
+import AddPot from '@/components/pots/AddPot';
+import PotList from '@/components/pots/PotList';
 import { Pot } from '@prisma/client';
 
 function Pots({ pots }: { pots: Pot[] }) {

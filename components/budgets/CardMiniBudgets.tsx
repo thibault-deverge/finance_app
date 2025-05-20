@@ -1,11 +1,16 @@
-type CardMiniType = {
+type CardMiniBudgetType = {
   category: string;
   maximum: number;
   spent: number;
   theme: string;
 };
 
-function CardMiniBudget({ category, maximum, spent, theme }: CardMiniType) {
+function CardMiniBudget({
+  category,
+  maximum,
+  spent,
+  theme,
+}: CardMiniBudgetType) {
   const colorStyle = theme.startsWith('#') ? theme : theme;
   return (
     <li className="relative flex max-h-5 flex-col gap-2 rounded-lg bg-white pl-4">

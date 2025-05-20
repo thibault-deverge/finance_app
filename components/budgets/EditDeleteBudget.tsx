@@ -4,6 +4,7 @@ import { deleteBudget, updateBudget } from '@/actions/budgets';
 import DeleteButton from '@/components/button/DeleteButton';
 import EditButton from '@/components/button/EditButton';
 import Modal from '@/components/modal/Modal';
+import CancelButton from '@/components/button/CancelButton';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +14,6 @@ import {
 import { SpinnerMini } from '@/components/ui/SpinnerMini';
 import { Budget } from '@prisma/client';
 import { Suspense } from 'react';
-import CancelButton from '../button/CancelButton';
 import { budgetSchema } from '@/lib/schemas';
 
 function EditDeleteBudget({ budget }: { budget: Budget }) {

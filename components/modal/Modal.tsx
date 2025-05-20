@@ -1,6 +1,5 @@
 'use client';
-import { createContext, useContext, useState } from 'react';
-import { ModalContextType, ModalProps } from '@/lib/type';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 import Theme from '@/components/modal/GenericSelectTheme';
 import Category from '@/components/modal/Category';
@@ -14,6 +13,15 @@ import Target from '@/components/modal/Target';
 import Window from '@/components/modal/Window';
 import Avatar from '@/components/modal/Avatar';
 import RecurringCheckbox from './Recurring';
+export interface ModalProps {
+  children: ReactNode;
+}
+
+export interface ModalContextType {
+  open: React.Dispatch<React.SetStateAction<string>>;
+  close: () => void;
+  openName: string;
+}
 
 // Create a context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);

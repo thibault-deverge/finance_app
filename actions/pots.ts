@@ -1,5 +1,4 @@
 'use server';
-import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -45,7 +44,6 @@ export async function createPot(formData: FormData) {
     },
   });
 
-  revalidatePath('/pots');
   redirect('/pots');
 }
 
@@ -84,7 +82,6 @@ export async function updatePot(formData: FormData) {
     },
   });
 
-  revalidatePath('/pots');
   redirect('/pots');
 }
 
@@ -111,7 +108,7 @@ export async function deletePot(formData: FormData) {
     where: { id },
   });
 
-  revalidatePath('/pots');
+  redirect('/pots');
 }
 
 // Fonction pour ajouter de l'argent à un pot
@@ -126,7 +123,8 @@ export async function addMoneyToPot(formData: FormData) {
 
   // Validation
   if (!id) throw new Error('Pot ID required');
-  if (isNaN(amount) || amount <= 0) throw new Error('The amount must be a positive number');
+  if (isNaN(amount) || amount <= 0)
+    throw new Error('The amount must be a positive number');
 
   // Vérifier que le pot appartient à l'utilisateur
   const existingPot = await prisma.pot.findUnique({
@@ -140,7 +138,7 @@ export async function addMoneyToPot(formData: FormData) {
 
   // Calculer le nouveau total
   const newTotal = existingPot.total + amount;
-  
+
   // Option: Vérifier si l'ajout dépasse la cible
   // if (newTotal > existingPot.target) {
   //   throw new Error(`Adding this amount would exceed the target of ${existingPot.target}`);
@@ -150,11 +148,11 @@ export async function addMoneyToPot(formData: FormData) {
     where: { id },
     data: {
       total: newTotal,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
   });
 
-  revalidatePath('/pots');
+  redirect('/pots');
 }
 
 // Fonction pour retirer de l'argent d'un pot
@@ -169,7 +167,8 @@ export async function withdrawMoneyFromPot(formData: FormData) {
 
   // Validation
   if (!id) throw new Error('Pot ID required');
-  if (isNaN(amount) || amount <= 0) throw new Error('The amount must be a positive number');
+  if (isNaN(amount) || amount <= 0)
+    throw new Error('The amount must be a positive number');
 
   // Vérifier que le pot appartient à l'utilisateur
   const existingPot = await prisma.pot.findUnique({
@@ -183,7 +182,9 @@ export async function withdrawMoneyFromPot(formData: FormData) {
 
   // Vérifier si le retrait est possible
   if (amount > existingPot.total) {
-    throw new Error(`Cannot withdraw more than the current total (${existingPot.total})`);
+    throw new Error(
+      `Cannot withdraw more than the current total (${existingPot.total})`
+    );
   }
 
   // Calculer le nouveau total
@@ -193,19 +194,9 @@ export async function withdrawMoneyFromPot(formData: FormData) {
     where: { id },
     data: {
       total: newTotal,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     },
   });
 
-  revalidatePath('/pots');
+  redirect('/pots');
 }
-/*
- id: 'cm9o95ifs001ezyz33m5zdzm3',
-    name: 'Concert Ticket',
-    target: 150,
-    total: 110,
-    theme: '#626070',
-    userId: 'cm9o95j04001izyz3kszpqj4c',
-    createdAt: 2025-04-19T13:26:53.080Z,
-    updatedAt: 2025-04-19T13:26:53.080Z
-*/

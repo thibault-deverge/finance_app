@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import CardHeader from '@/components/ui/CardHeader';
 import CardMini from '@/components/ui/CardMini';
+import { MAX_DISPLAY_POTSCARD } from '@/lib/constants';
 import { getTotalSaved } from '@/lib/utilsPots';
 import { Pot } from '@prisma/client';
 
 function PotsCard({ pots }: { pots: Pot[] }) {
-  const MAX_DISPLAY = 4;
   const total = getTotalSaved(pots);
   const displayedPots = pots
     .sort((a, b) => b.total - a.total)
-    .slice(0, MAX_DISPLAY);
+    .slice(0, MAX_DISPLAY_POTSCARD);
 
   if (pots.length === 0) {
     return (

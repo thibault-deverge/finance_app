@@ -1,6 +1,6 @@
 'use client';
 import Modal from '@/components/modal/Modal';
-import ProgressBarWithPreview from '../ui/ProgressBarWithPreview';
+import ProgressBarWithPreview from '@/components/ui/ProgressBarWithPreview';
 import { withdrawMoneyFromPot } from '@/actions/pots';
 import { Button } from '@/components/ui/button';
 import { Pot } from '@prisma/client';

@@ -9,8 +9,29 @@ import {
 import toast from 'react-hot-toast';
 import { Budget, Pot, Transaction } from '@prisma/client';
 import { useModal } from '@/components/modal/Modal';
-import { FormContextType, FormDataState } from '@/lib/type';
 import { z, ZodObject, ZodError } from 'zod';
+
+export interface FormDataState {
+  id: string;
+  name: string;
+  target: string | number;
+  total: string | number;
+  category: string;
+  maximum: string | number;
+  theme: string;
+  amount: number | string;
+  date: string;
+  recurring: boolean;
+}
+
+export interface FormContextType {
+  formData: FormDataState;
+  updateFormData: (
+    field: keyof FormDataState,
+    value: string | number | boolean
+  ) => void;
+  errors?: Record<string, string>; // Ajout des erreurs
+}
 
 // Create a context
 const FormContext = createContext<FormContextType | undefined>(undefined);

@@ -1,5 +1,5 @@
 import { Pot } from '@prisma/client';
-import PotCard from './PotCard';
+import PotCard from '@/components/pots/PotCard';
 
 function PotList({ pots }: { pots: Pot[] }) {
   if (pots.length === 0) {

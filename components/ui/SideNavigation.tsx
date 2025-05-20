@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import LogoutButton from '../button/LogoutButton';
+import LogoutButton from '@/components/button/LogoutButton';
 
 type NavLink = {
   name: string;
@@ -136,6 +136,7 @@ function ToggleVisibilityButton({ isVisible, setIsVisible }: IsNavVisible) {
           Minimize Menu
         </span>
       </button>
+
       <LogoutButton isVisible={isVisible} />
     </div>
   );
@@ -222,9 +223,6 @@ function MobileNavigationLink({
             className="h-5 w-5"
           />
         </div>
-
-       
-
       </Link>
     </li>
   );

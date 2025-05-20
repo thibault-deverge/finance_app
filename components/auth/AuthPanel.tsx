@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import LoginForm from '@/components/auth/LoginForm';
 import SwitchAuth from '@/components/auth/SwitchAuth';
-import SignUpForm from './SignUpForm';
+import SignUpForm from '@/components/auth/SignUpForm';
 
 function AuthPanel() {
   const [isLogin, setIsLogin] = useState<boolean>(true);

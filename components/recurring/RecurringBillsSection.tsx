@@ -4,9 +4,9 @@ import { sortByOptions } from '@/data/transactions';
 
 import SearchInput from '@/components/filters/SearchInput';
 import FilterControls from '@/components/filters/FilterControls';
-import RecurringBillsList from './RecurringBillsList';
+import RecurringBillsList from '@/components/recurring/RecurringBillsList';
 import { useUrlSyncedParam } from '@/hooks/useUrlSyncedParam';
-import { mapToRecurringBillView } from './utils';
+import { mapToRecurringBillView } from '@/components/recurring/utils';
 import { useSortedBills } from '@/hooks/useSortedBills';
 
 type RecurringBillsProps = {

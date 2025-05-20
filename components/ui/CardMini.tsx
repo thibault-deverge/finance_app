@@ -1,4 +1,11 @@
-import { CardMiniType, CardType } from '@/lib/type';
+export type CardType = 'pots' | 'budgets' | 'recurringBills';
+
+export type CardMiniType = {
+  title: string;
+  amount: string | number;
+  color: string;
+  type: CardType;
+};
 
 const classMap: Record<CardType, string> = {
   pots: 'relative w-full  flex max-h-13 flex-col gap-2 rounded-lg pl-4 bg-white',

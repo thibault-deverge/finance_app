@@ -1,15 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import { Transaction } from '@prisma/client';
 import { formatDateToShortString } from '@/lib/utils';
-import { AVATAR_DEFAULT } from '@/lib/constants';
+import { AVATAR_DEFAULT, MAX_DISPLAY_TRANSACTIONSCARD } from '@/lib/constants';
 
 import CardHeader from '@/components/ui/CardHeader';
 
 function TransactionsCard({ transactions }: { transactions: Transaction[] }) {
-  const MAX_DISPLAY = 5;
   const displayedTransactions = transactions
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, MAX_DISPLAY)
+    .slice(0, MAX_DISPLAY_TRANSACTIONSCARD)
     .map((transaction) => ({
       ...transaction,
       date: formatDateToShortString(transaction.date),
